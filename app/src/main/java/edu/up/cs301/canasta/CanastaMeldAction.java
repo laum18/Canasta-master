@@ -9,7 +9,7 @@ import edu.up.cs301.game.GamePlayer;
  * @author Steven R. Vegdahl
  * @version 31 July 2002
  */
-public class CanastaSlapAction extends CanastaMoveAction
+public class CanastaMeldAction extends CanastaMoveAction
 {
 	private static final long serialVersionUID = 2134321631283669359L;
 
@@ -18,7 +18,7 @@ public class CanastaSlapAction extends CanastaMoveAction
      * 
      * @param player  the player making the move
      */
-    public CanastaSlapAction(GamePlayer player)
+    public CanastaMeldAction(GamePlayer player)
     {
         // initialize the source with the superclass constructor
         super(player);
@@ -27,7 +27,7 @@ public class CanastaSlapAction extends CanastaMoveAction
     /**
 	 * @return whether this action is a "slap" move
      */
-    public boolean isSlap() {
+    public boolean isMeld() {
         return true;
     }
     

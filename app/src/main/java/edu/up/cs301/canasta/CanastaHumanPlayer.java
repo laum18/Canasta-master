@@ -322,7 +322,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		else if (middleTopCardLoc.contains(x, y)) {
 			// it's on the middlel pile: we're slapping a card: send
 			// action to the game
-			game.sendAction(new CanastaSlapAction(this));
+			game.sendAction(new CanastaMeldAction(this));
 		}
 		else {
 			// illegal touch-location: flash for 1/20 second

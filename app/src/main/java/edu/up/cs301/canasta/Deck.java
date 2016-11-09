@@ -54,12 +54,13 @@ public class Deck implements Serializable {
 	 */
 	public Deck add52() {
 		// add the cards
-		for (char s : "SHDC".toCharArray()) {
-			for (char r : "KQJT98765432A".toCharArray()) {
-				this.add(Card.fromString(""+r+s));
+		for (int i = 0; i <= 1; i++) {
+			for (char s : "SHDC".toCharArray()) {
+				for (char r : "KQJT98765432A".toCharArray()) {
+					this.add(Card.fromString(""+r+s));
+				}
 			}
 		}
-		
 		// return the deck
 		return this;
 	}

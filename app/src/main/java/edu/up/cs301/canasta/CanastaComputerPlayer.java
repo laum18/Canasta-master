@@ -57,7 +57,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer
     	Card topCard = savedState.getDeck(2).peekAtTopCard();
     	if (topCard != null && topCard.getRank() == Rank.JACK) {
     		// the Jack is still there, so submit our move to the game object
-    		game.sendAction(new CanastaSlapAction(this));
+    		game.sendAction(new CanastaMeldAction(this));
     	}
     	
     	// stop the timer, since we don't want another timer-tick until it
