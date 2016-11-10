@@ -233,4 +233,16 @@ public class Deck implements Serializable {
 		rtnVal = "[" + rtnVal + " ]";
 		return rtnVal;
 	}
+
+	public void remove(Card c) {
+		cards.remove(c);
+	}
+
+	public boolean contains(Card c) {
+		if (cards.contains(c)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

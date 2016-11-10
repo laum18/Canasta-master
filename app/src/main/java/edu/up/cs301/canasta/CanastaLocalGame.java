@@ -134,7 +134,7 @@ public class CanastaLocalGame extends LocalGame {
 			return false;
 		}
 
-		if (sjma.isSlap()) {
+		/*if (sjma.isSlap()) {
 			// if we have a slap 
 			if (state.getDeck(2).size() == 0) {
 				// empty deck: return false, as move is illegal
@@ -148,8 +148,8 @@ public class CanastaLocalGame extends LocalGame {
 				// a non-Jack was slapped: give all cards to non-slapping player
 				giveMiddleCardsToPlayer(1-thisPlayerIdx);
 			}
-		}
-		else if (sjma.isPlay()) { // we have a "play" action
+		}*/
+		/*else if (sjma.isPlay()) { // we have a "play" action
 			if (thisPlayerIdx != state.toPlay()) {
 				// attempt to play when it's the other player's turn
 				return false;
@@ -163,10 +163,10 @@ public class CanastaLocalGame extends LocalGame {
 					state.setToPlay(1-thisPlayerIdx);
 				}
 			}
-		}
-		else { // some unexpected action
+		}*/
+		/*else { // some unexpected action
 			return false;
-		}
+		}*/
 
 		// return true, because the move was successful if we get her
 		return true;

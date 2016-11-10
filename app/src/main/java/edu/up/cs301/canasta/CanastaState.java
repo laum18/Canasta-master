@@ -1,6 +1,7 @@
 package edu.up.cs301.canasta;
 
 import edu.up.cs301.card.Card;
+import edu.up.cs301.card.Rank;
 import edu.up.cs301.game.infoMsg.GameState;
 
 /**
@@ -119,4 +120,54 @@ public class CanastaState extends GameState
     		piles[2].add(c);
     	}
     }
+
+
+	public boolean canMeld(Card[] cards) {
+		Rank rank = cards[0].getRank();
+		boolean r = false;
+		for (int i = 1; i < cards.length; i++) {
+			if (rank.equals(cards[i])) {
+				r = true;
+			} else {
+				r = false;
+			}
+		}
+		return r;
+	}
+
+	public void discardCard(Card c) {
+		Deck player = getDeck(toPlay);
+		Deck discard = getDeck(2);
+		player.remove(c);
+		discard.add(c);
+	}
+
+	public boolean canDiscard(Card c) {
+		Deck player = getDeck(toPlay);
+		if (player.contains(c)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void drawCard(Card c) {
+		Deck player = getDeck(toPlay);
+		Deck deck = getDeck(2);
+		deck.remove(c);
+		player.add(c);
+	}
+
+	public void Meld(Card[] c) {
+		Deck player = getDeck(toPlay);
+		Deck meld = getDeck(2);
+		for (int i = 0; i <c.length; i++) {
+			player.remove(c[i]);
+			meld.add(c[i]);
+		}
+	}
+
+
+
+
 }
