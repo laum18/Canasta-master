@@ -27,7 +27,7 @@ public class CanastaState extends GameState
 	// Note that when players receive the state, all but the top card in all piles
 	// are passed as null.
     private Deck[] piles;
-    
+    public Card[] temp;
     // whose turn is it to turn a card?
     private int toPlay;
 
@@ -151,11 +151,12 @@ public class CanastaState extends GameState
 		}
 	}
 
-	public void drawCard(Card c) {
+	public Card drawCard(Card c) {
 		Deck player = getDeck(toPlay);
 		Deck deck = getDeck(2);
 		deck.remove(c);
 		player.add(c);
+		return c;
 	}
 
 	public void Meld(Card[] c) {
