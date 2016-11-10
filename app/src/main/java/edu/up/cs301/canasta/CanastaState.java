@@ -27,9 +27,10 @@ public class CanastaState extends GameState
 	// Note that when players receive the state, all but the top card in all piles
 	// are passed as null.
     private Deck[] piles;
-    public Card[] temp;
     // whose turn is it to turn a card?
     private int toPlay;
+
+	public Card[] temp;
 
     /**
      * Constructor for objects of class SJState. Initializes for the beginning of the
@@ -107,8 +108,8 @@ public class CanastaState extends GameState
      */
     public void nullAllButTopOf2() {
     	// see if the middle deck is empty; remove top card from middle deck
-    	boolean empty2 = piles[2].size() == 0;
-    	Card c = piles[2].removeTopCard();
+    	boolean empty2 = piles[0].size() == 0;
+    	Card c = piles[0].removeTopCard();
     	
     	// set all cards in deck to null
     	for (Deck d : piles) {
@@ -117,7 +118,7 @@ public class CanastaState extends GameState
     	
     	// if middle deck had not been empty, add back the top (non-null) card
     	if (!empty2) {
-    		piles[2].add(c);
+    		piles[0].add(c);
     	}
     }
 
@@ -125,8 +126,8 @@ public class CanastaState extends GameState
 	public boolean canMeld(Card[] cards) {
 		Rank rank = cards[0].getRank();
 		boolean r = false;
-		for (int i = 1; i < cards.length; i++) {
-			if (rank.equals(cards[i])) {
+		for (int i = 1; i < cards.length - 1; i++) {
+			if (rank.equals(cards[i].getRank())) {
 				r = true;
 			} else {
 				r = false;
@@ -138,13 +139,13 @@ public class CanastaState extends GameState
 	public void discardCard(Card c) {
 		Deck player = getDeck(toPlay);
 		Deck discard = getDeck(2);
-		player.remove(c);
+		player.removeCard(c);
 		discard.add(c);
 	}
 
 	public boolean canDiscard(Card c) {
 		Deck player = getDeck(toPlay);
-		if (player.contains(c)) {
+		if (player.containsCard(c)) {
 			return true;
 		} else {
 			return false;
@@ -154,7 +155,7 @@ public class CanastaState extends GameState
 	public Card drawCard(Card c) {
 		Deck player = getDeck(toPlay);
 		Deck deck = getDeck(2);
-		deck.remove(c);
+		deck.removeCard(c);
 		player.add(c);
 		return c;
 	}
@@ -163,7 +164,7 @@ public class CanastaState extends GameState
 		Deck player = getDeck(toPlay);
 		Deck meld = getDeck(2);
 		for (int i = 0; i <c.length; i++) {
-			player.remove(c[i]);
+			player.removeCard(c[i]);
 			meld.add(c[i]);
 		}
 	}

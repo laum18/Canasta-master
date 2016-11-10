@@ -234,15 +234,19 @@ public class Deck implements Serializable {
 		return rtnVal;
 	}
 
-	public void remove(Card c) {
+	public void removeCard(Card c) {
 		cards.remove(c);
 	}
 
-	public boolean contains(Card c) {
+	public boolean containsCard(Card c) {
 		if (cards.contains(c)) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	public Card getTopCard(Deck d) {
+		return cards.remove(cards.size()-2);
 	}
 }
