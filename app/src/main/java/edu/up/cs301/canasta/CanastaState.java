@@ -8,7 +8,7 @@ import edu.up.cs301.game.infoMsg.GameState;
  * Contains the state of a Slapjack game.  Sent by the game when
  * a player wants to enquire about the state of the game.  (E.g., to display
  * it, or to help figure out its next move.)
- * 
+ *
  * @author Steven R. Vegdahl 
  * @version July 2013
  */
@@ -16,111 +16,125 @@ public class CanastaState extends GameState
 {
 	private static final long serialVersionUID = -8269749892027578792L;
 
-    ///////////////////////////////////////////////////
-    // ************** instance variables ************
-    ///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	// ************** instance variables ************
+	///////////////////////////////////////////////////
 
 	// the three piles of cards:
-    //  - 0: pile for player 0
-    //  - 1: pile for player 1
-    //  - 2: the "up" pile, where the top card
+	//  - 0: pile for player 0
+	//  - 1: pile for player 1
+	//  - 2: the "up" pile, where the top card
 	// Note that when players receive the state, all but the top card in all piles
 	// are passed as null.
-    private Deck[] piles;
-    // whose turn is it to turn a card?
-    private int toPlay;
+	private Deck[] piles;
+	// whose turn is it to draw turn a card?
+	private int toPlay;
 
 	public Card[] temp;
 
-    /**
-     * Constructor for objects of class SJState. Initializes for the beginning of the
-     * game, with a random player as the first to turn card
-     *  
-     */
-    public CanastaState() {
-    	// randomly pick the player who starts
-    	toPlay = (int)(2*Math.random());
-    	
-    	// initialize the decks as follows:
-    	// - each player deck (#0 and #1) gets half the cards, randomly
-    	//   selected
-    	// - the middle deck (#2) is empty
-    	piles = new Deck[3];
-    	piles[0] = new Deck(); // create empty deck
-    	piles[1] = new Deck(); // create empty deck
-    	piles[2] = new Deck(); // create empty deck
-    	piles[toPlay].add52(); // give all cards to player whose turn it is, in order
-    	piles[toPlay].shuffle(); // shuffle the cards
-    	// move cards to opponent, until to piles have ~same size
-    	while (piles[toPlay].size() >=
+	/**
+	 * Constructor for objects of class SJState. Initializes for the beginning of the
+	 * game, with a random player as the first to turn card
+	 *
+	 */
+
+	public CanastaState() {
+		// randomly pick the player who starts
+		toPlay = (int)(2*Math.random());
+
+		// initialize the decks as follows:
+		// - each player deck (#0 and #1) gets half the cards, randomly
+		//   selected
+		// - the middle deck (#2) is empty
+		piles = new Deck[6];
+		piles[0] = new Deck(); // create empty deck
+		piles[1] = new Deck(); // create empty deck
+		piles[2] = new Deck(); // player 0 deck
+		piles[3] = new Deck(); // player 1 deck
+		piles[4] = new Deck(); // player 2 deck
+		piles[5] = new Deck(); // player 3 deck
+		piles[toPlay].add52(); // give all cards to player whose turn it is, in order
+		piles[toPlay].shuffle(); // shuffle the cards
+		// move cards to opponent, until to piles have ~same size
+    	/*while (piles[toPlay].size() >=
     			piles[1-toPlay].size()+1) {
     		piles[toPlay].moveTopCardTo(piles[1-toPlay]);
-    	}
-    }
-    
-    /**
-     * Copy constructor for objects of class SJState. Makes a copy of the given state
-     *  
-     * @param orig  the state to be copied
-     */
-    public CanastaState(CanastaState orig) {
-    	// set index of player whose turn it is
-    	toPlay = orig.toPlay;
-    	// create new deck array, making copy of each deck
-    	piles = new Deck[3];
-    	piles[0] = new Deck(orig.piles[0]);
-    	piles[1] = new Deck(orig.piles[1]);
-    	piles[2] = new Deck(orig.piles[2]);
-    }
-    
-    /**
-     * Gives the given deck.
-     * 
-     * @return  the deck for the given player, or the middle deck if the
-     *   index is 2
-     */
-    public Deck getDeck(int num) {
-        if (num < 0 || num > 2) return null;
-        return piles[num];
-    }
-    
-    /**
-     * Tells which player's turn it is.
-     * 
-     * @return the index (0 or 1) of the player whose turn it is.
-     */
-    public int toPlay() {
-        return toPlay;
-    }
-    
-    /**
-     * change whose move it is
-     * 
-     * @param idx
-     * 		the index of the player whose move it now is
-     */
-    public void setToPlay(int idx) {
-    	toPlay = idx;
-    }
- 
-    /**
-     * Replaces all cards with null, except for the top card of deck 2
-     */
-    public void nullAllButTopOf2() {
-    	// see if the middle deck is empty; remove top card from middle deck
-    	boolean empty2 = piles[0].size() == 0;
-    	Card c = piles[0].removeTopCard();
-    	
-    	// set all cards in deck to null
-    	for (Deck d : piles) {
-    		d.nullifyDeck();
-    	}
-    	
-    	// if middle deck had not been empty, add back the top (non-null) card
-    	if (!empty2) {
-    		piles[0].add(c);
-    	}
-    }
+    	}*/
+
+		/* deals 11 cards to each player */
+		for(int i=0; i<11; i++){
+			for(int j=0; j<4; j++){
+				piles[toPlay].moveTopCardTo(piles[j+2]);
+			}
+		}
+	}
+
+	/**
+	 * Copy constructor for objects of class SJState. Makes a copy of the given state
+	 *
+	 * @param orig  the state to be copied
+	 */
+	public CanastaState(CanastaState orig) {
+		// set index of player whose turn it is
+		toPlay = orig.toPlay;
+		// create new deck array, making copy of each deck
+		piles = new Deck[6];
+		piles[0] = new Deck(orig.piles[0]);
+		piles[1] = new Deck(orig.piles[1]);
+		piles[2] = new Deck(orig.piles[2]);
+		piles[3] = new Deck(orig.piles[3]);
+		piles[4] = new Deck(orig.piles[4]);
+		piles[5] = new Deck(orig.piles[5]);
+	}
+
+	/**
+	 * Gives the given deck.
+	 *
+	 * @return  the deck for the given player, or the middle deck if the
+	 *   index is 2
+	 */
+	public Deck getDeck(int num) {
+		if (num < 0 || num > 5) return null;
+		return piles[num];
+	}
+
+	/**
+	 * Tells which player's turn it is.
+	 *
+	 * @return the index (0 or 1) of the player whose turn it is.
+	 */
+	public int toPlay() {
+		return toPlay;
+	}
+
+	/**
+	 * change whose move it is
+	 *
+	 * @param idx
+	 * 		the index of the player whose move it now is
+	 */
+	public void setToPlay(int idx) {
+		toPlay = idx;
+	}
+
+	/**
+	 * Replaces all cards with null, except for the top card of deck 2
+	 */
+	public void nullAllButTopOf2() {
+		// see if the middle deck is empty; remove top card from middle deck
+		boolean empty2 = piles[0].size() == 0;
+		Card c = piles[0].removeTopCard();
+
+		// set all cards in deck to null
+		for (Deck d : piles) {
+			d.nullifyDeck();
+		}
+
+		// if middle deck had not been empty, add back the top (non-null) card
+		if (!empty2) {
+			piles[0].add(c);
+		}
+	}
 
 
 	public boolean canMeld(Card[] cards) {
