@@ -99,14 +99,14 @@ public class CanastaLocalGame extends LocalGame {
 	 * 		the player-number of the player in question
 	 */
 	protected boolean canMove(int playerIdx) {
-		if (playerIdx < 0 || playerIdx > 1) {
+		if (playerIdx < 0 || playerIdx > 4) {
 			// if our player-number is out of range, return false
 			return false;
 		}
 		else {
 			// player can move if it's their turn, or if the middle deck is non-empty
 			// so they can slap
-			return state.getDeck(2).size() > 0 || state.toPlay() == playerIdx;
+			return state.toPlay() == playerIdx;
 		}
 	}
 
@@ -125,68 +125,55 @@ public class CanastaLocalGame extends LocalGame {
 		if (!(action instanceof CanastaMoveAction)) {
 			return false;
 		} 
-		CanastaMoveAction sjma = (CanastaMoveAction) action;
+		CanastaMoveAction canastaMA = (CanastaMoveAction) action;
 		
 		// get the index of the player making the move; return false
-		int thisPlayerIdx = getPlayerIdx(sjma.getPlayer());
+		int thisPlayerIdx = getPlayerIdx(canastaMA.getPlayer());
 		
 		if (thisPlayerIdx < 0) { // illegal player
 			return false;
 		}
 
-		/*if (sjma.isSlap()) {
-			// if we have a slap 
-			if (state.getDeck(2).size() == 0) {
-				// empty deck: return false, as move is illegal
-				return false;
+		if (canastaMA instanceof CanastaDrawDeckAction) {
+			state.drawCard(state.getDeck(0).getTopCard(state.getDeck(0)));
+			state.getDeck(thisPlayerIdx);
+			return true;
+		}
+		else if (canastaMA instanceof CanastaDiscardAction) { // we have a "play" action
+			// need to get the player's card
+			//state.
+		}
+		else if (canastaMA instanceof CanastaDrawDiscardAction) {
+			//if (state.canMeld())
+			state.drawCard(state.getDeck(1).getTopCard(state.getDeck(1)));
+			for (int i = 0; i < state.getDeck(1).size(); i++) {
+				state.getDeck(thisPlayerIdx).add(state.getDeck(1).getTopCard(state.getDeck(1)));
 			}
-			else if (state.getDeck(2).peekAtTopCard().getRank() == Rank.JACK){
-				// a Jack was slapped: give all cards to slapping player
-				giveMiddleCardsToPlayer(thisPlayerIdx);
-			}
-			else {
-				// a non-Jack was slapped: give all cards to non-slapping player
-				giveMiddleCardsToPlayer(1-thisPlayerIdx);
-			}
-		}*/
-		/*else if (sjma.isPlay()) { // we have a "play" action
-			if (thisPlayerIdx != state.toPlay()) {
-				// attempt to play when it's the other player's turn
-				return false;
-			}
-			else {
-				// it's the correct player's turn: move the top card from the
-				// player's deck to the top of the middle deck
-				state.getDeck(thisPlayerIdx).moveTopCardTo(state.getDeck(2));
-				// if the opponent has any cards, make it the opponent's move
-				if (state.getDeck(1-thisPlayerIdx).size() > 0) {
-					state.setToPlay(1-thisPlayerIdx);
-				}
-			}
-		}*/
-		/*else { // some unexpected action
-			return false;
-		}*/
+		}
+		else if (canastaMA instanceof CanastaMeldAction) {
+			// need to get cards
+			//state.canMeld()
+		}
 
 		// return true, because the move was successful if we get her
 		return true;
 	}
 	
-	/**
-	 * helper method that gives all the cards in the middle deck to
-	 * a given player; also shuffles the target deck
-	 * 
-	 * @param idx
-	 * 		the index of the player to whom the cards should be given
-	 */
-	private void giveMiddleCardsToPlayer(int idx) {
-		// illegal player: ignore
-		if (idx < 0 || idx > 1) return;
-		
-		// move all cards from the middle deck to the target deck
-		state.getDeck(2).moveAllCardsTo(state.getDeck(idx));
-		
-		// shuffle the target deck
-		state.getDeck(idx).shuffle();
-	}
+//	/**
+//	 * helper method that gives all the cards in the middle deck to
+//	 * a given player; also shuffles the target deck
+//	 *
+//	 * @param idx
+//	 * 		the index of the player to whom the cards should be given
+//	 */
+//	private void giveMiddleCardsToPlayer(int idx) {
+//		// illegal player: ignore
+//		if (idx < 0 || idx > 1) return;
+//
+//		// move all cards from the middle deck to the target deck
+//		state.getDeck(2).moveAllCardsTo(state.getDeck(idx));
+//
+//		// shuffle the target deck
+//		state.getDeck(idx).shuffle();
+//	}
 }

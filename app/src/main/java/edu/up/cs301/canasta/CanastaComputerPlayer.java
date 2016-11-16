@@ -66,12 +66,16 @@ public class CanastaComputerPlayer extends GameComputerPlayer
     }
 
     /**
-     * callback method, called when we receive a message, typicallly from
+     * callback method, called when we receive a message, typically from
      * the game
      */
     @Override
     protected void receiveInfo(GameInfo info) {
-    	
+
+		CanastaDrawDeckAction drawDeck = new CanastaDrawDeckAction(this);
+		CanastaMeldAction meld = new CanastaMeldAction(this);
+		CanastaDiscardAction discard = new CanastaDiscardAction(this);
+
     	// if we don't have a game-state, ignore
     	if (!(info instanceof CanastaState)) {
     		return;
@@ -101,7 +105,13 @@ public class CanastaComputerPlayer extends GameComputerPlayer
     		
     		// delay for up to two seconds; then play
         	sleep((int)(2000*Math.random()));
-        	
+
+			game.sendAction(drawDeck);
+			while (savedState.canMeld( )) {
+				game.sendAction(meld);
+			}
+			game.sendAction(discard);
+
         	// submit our move to the game object
         	game.sendAction(new CanastaPlayAction(this));
     	}
