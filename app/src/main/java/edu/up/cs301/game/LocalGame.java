@@ -9,6 +9,7 @@ import edu.up.cs301.game.infoMsg.BindGameInfo;
 import edu.up.cs301.game.infoMsg.GameOverInfo;
 import edu.up.cs301.game.infoMsg.IllegalMoveInfo;
 import edu.up.cs301.game.infoMsg.NotYourTurnInfo;
+import edu.up.cs301.game.infoMsg.RoundOverInfo;
 import edu.up.cs301.game.infoMsg.StartGameInfo;
 import edu.up.cs301.game.util.GameTimer;
 import edu.up.cs301.game.util.Tickable;
@@ -110,7 +111,7 @@ public abstract class LocalGame implements Game, Tickable {
 		// at this point the game is running, so set our game stage to be that of
 		// waiting for the players to tell us their names
 		gameStage = GameStage.WAITING_FOR_NAMES;
-		
+
 		// start each player, telling them each who their game and playerID are
 		for (int i = 0; i < players.length; i++) {
 			players[i].start();
@@ -280,7 +281,11 @@ public abstract class LocalGame implements Game, Tickable {
 		// The move was a legal one, so presumably the state of the game was
 		// changed. Send all players the updated state. 
 		sendAllUpdatedState();
-		
+
+		String roundMsg = checkIfRoundOver();
+		if (roundMsg != null) {
+			finishUpRound(roundMsg);
+		}
 		// determine whether there is a winner; if so, finish up the game
 		String overMsg = checkIfGameOver();
 		if (overMsg != null) {
@@ -308,6 +313,7 @@ public abstract class LocalGame implements Game, Tickable {
 	 * 			game is not over
 	 */
 	protected abstract String checkIfGameOver();
+	protected abstract String checkIfRoundOver();
 
 	/**
 	 * Finishes up the game
@@ -328,6 +334,22 @@ public abstract class LocalGame implements Game, Tickable {
 		// send all players a "game over" message
 		for (GamePlayer p : players) {
 			p.sendInfo(new GameOverInfo(msg));
+		}
+	}
+
+	private final void finishUpRound(String msg) {
+
+		// set the game-stage to ????
+		gameStage = GameStage.DURING_GAME;
+
+		// set up the array and count so that we can keep track of
+		// whether everyone has replied
+		playersFinished = new boolean[players.length];
+		playerFinishedCount = 0;
+
+		// send all players a "round over" message
+		for (GamePlayer p: players) {
+			p.sendInfo(new RoundOverInfo(msg));
 		}
 	}
 	

@@ -1,6 +1,8 @@
 package edu.up.cs301.canasta;
 
 import android.util.Log;
+
+import edu.up.cs301.card.Card;
 import edu.up.cs301.card.Rank;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
@@ -19,6 +21,48 @@ public class CanastaLocalGame extends LocalGame {
     // the game's state
     CanastaState state;
 
+	/**
+	 * checks whether the game is over; if so, returns a string giving the result
+	 *
+	 * @result
+	 * 		the end-of-game message, or null if the game is not over
+	 */
+	@Override
+	protected String checkIfGameOver() {
+		// human player and teammate are the winner
+		if (state.getTeamOneTotalScore() >= state.getGoal()) {
+			return this.playerNames[0] + "," + this.playerNames[3] + " is the winner";
+		}
+		// computer players are the winner
+		else if (state.getTeamTwoTotalScore() >= state.getGoal()){
+			return this.playerNames[2] + "," + this.playerNames[4] + " is the winner";
+		}
+		// the game is not over
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * checks whether the round is over.
+	 */
+	public String checkIfRoundOver() {
+		if (state.getDeck(0).size() == 0) {
+			state.setTeamOneTotalScore(state.getTeamOneTotalScore() + state.getTeamOneRoundScore());
+			state.setTeamTwoTotalScore(state.getTeamTwoTotalScore() + state.getTeamTwoRoundScore());
+			return "Round ended";
+		}
+		else if (state.getDeck(2).size() == 0 || state.getDeck(3).size() == 0
+				||state.getDeck(4).size() == 0 || state.getDeck(5).size() == 0) {
+			state.setTeamOneTotalScore(state.getTeamOneTotalScore() + state.getTeamOneRoundScore());
+			state.setTeamTwoTotalScore(state.getTeamTwoTotalScore() + state.getTeamTwoRoundScore());
+			return "Round ended";
+		}
+		else {
+			return null;
+		}
+	}
+
     /**
      * Constructor for the SJLocalGame.
      */
@@ -26,46 +70,6 @@ public class CanastaLocalGame extends LocalGame {
         Log.i("SJLocalGame", "creating game");
         // create the state for the beginning of the game
         state = new CanastaState();
-    }
-
-
-    /**
-     * checks whether the game is over; if so, returns a string giving the result
-     * 
-     * @result
-     * 		the end-of-game message, or null if the game is not over
-     */
-    @Override
-    protected String checkIfGameOver() {
-    	
-    	if (state.getDeck(2).size() > 0) {
-    		// there are cards in the middle pile
-    		if (state.getDeck(0).size() == 0 &&
-    				state.getDeck(1).size() == 0 &&
-    				state.getDeck(2).peekAtTopCard().getRank() != Rank.JACK) {
-    			// All the cards have ended up in the middle pile, and the top card
-    			// is not a Jack. This situation is a draw, since the only move a player
-    			// would would be to slap the top card, causing his opponent to win.
-    			return "game is a draw";
-    		}
-    		else {
-    			// there are either cards in at least two piles, or all cards are in the
-    			// middle pile with a Jack on top; return null, as the game is not over
-    			return null;
-    		}
-    	}
-    	else if (state.getDeck(0).size() <= 0) {
-    		// player 1 has all the cards
-    		return this.playerNames[1]+" is the winner";
-    	}
-    	else if (state.getDeck(1).size() <= 0) {
-    		// player 0 has all the cards
-    		return this.playerNames[0]+" is the winner";
-    	}
-    	else {
-    		// each player has some cards: no winner yet
-    		return null;
-    	}
     }
 
     /**

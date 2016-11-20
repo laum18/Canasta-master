@@ -61,12 +61,16 @@ public class CanastaMainActivity extends GameMainActivity {
 			}
 		});
 
+
 		// Create a game configuration class for SlapJack
-		GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "SlapJack", PORT_NUMBER);
+		GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "SlapJack", PORT_NUMBER);
+
 
 		// Add the default players
 		defaultConfig.addPlayer("Human", 0);
-		defaultConfig.addPlayer("Computer", 2);
+		defaultConfig.addPlayer("Computer1", 2);
+		defaultConfig.addPlayer("Computer2", 3);
+		defaultConfig.addPlayer("Computer3", 4);
 		
 		// Set the initial information for the remote player
 		defaultConfig.setRemoteData("Guest", "", 1);

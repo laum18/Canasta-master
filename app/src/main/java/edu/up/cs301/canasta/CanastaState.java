@@ -29,8 +29,14 @@ public class CanastaState extends GameState
 	private Deck[] piles;
 	// whose turn is it to draw turn a card?
 	private int toPlay;
+	private int goal;
+	private int teamOneRoundScore;
+	private int teamTwoRoundScore;
+	private int teamOneTotalScore;
+	private int teamTwoTotalScore;
 
 	public Card[] temp;
+
 
 	/**
 	 * Constructor for objects of class SJState. Initializes for the beginning of the
@@ -41,7 +47,11 @@ public class CanastaState extends GameState
 	public CanastaState() {
 		// randomly pick the player who starts
 		toPlay = (int)(2*Math.random());
-
+		teamOneRoundScore = 0;
+		teamTwoRoundScore = 0;
+		teamOneTotalScore = 0;
+		teamTwoTotalScore = 0;
+		goal = 5000;
 		// initialize the decks as follows:
 		// - each player deck (#0 and #1) gets half the cards, randomly
 		//   selected
@@ -79,12 +89,12 @@ public class CanastaState extends GameState
 		toPlay = orig.toPlay;
 		// create new deck array, making copy of each deck
 		piles = new Deck[6];
-		piles[0] = new Deck(orig.piles[0]);
-		piles[1] = new Deck(orig.piles[1]);
-		piles[2] = new Deck(orig.piles[2]);
-		piles[3] = new Deck(orig.piles[3]);
-		piles[4] = new Deck(orig.piles[4]);
-		piles[5] = new Deck(orig.piles[5]);
+		piles[0] = new Deck(orig.piles[0]); //actual deck
+		piles[1] = new Deck(orig.piles[1]); // discard
+		piles[2] = new Deck(orig.piles[2]); // human player's deck
+		piles[3] = new Deck(orig.piles[3]); // left player
+		piles[4] = new Deck(orig.piles[4]); // teammate's deck
+		piles[5] = new Deck(orig.piles[5]); // right player
 	}
 
 	/**
@@ -136,6 +146,57 @@ public class CanastaState extends GameState
 		}
 	}
 
+	/**
+	 * Get team one's total score
+	 * @return teamOneTotalScore
+     */
+	public int getTeamOneTotalScore() {
+		return teamOneTotalScore;
+	}
+
+	/**
+	 * Get team two's total score
+	 * @return teamTwoTotalScore
+	 */
+	public int getTeamTwoTotalScore() {
+		return teamTwoTotalScore;
+	}
+
+	/**
+	 * Get team two's round score
+	 * @return teamTwoRoundScore
+	 */
+	public int getTeamTwoRoundScore() {
+		return teamTwoRoundScore;
+	}
+
+	/**
+	 * Get team one's round score
+	 * @return teamOneRoundScore
+	 */
+	public int getTeamOneRoundScore() {
+		return teamOneRoundScore;
+	}
+
+	public int getGoal() {
+		return goal;
+	}
+
+	public void setTeamOneRoundScore(int scoreOne) {
+		teamOneRoundScore += scoreOne;
+	}
+
+	public void setTeamTwoRoundScore(int scoreTwo) {
+		teamTwoRoundScore += scoreTwo;
+	}
+
+	public void setTeamOneTotalScore(int totalScore) {
+		teamOneTotalScore += totalScore;
+	}
+
+	public void setTeamTwoTotalScore(int totalScore) {
+		teamTwoTotalScore += totalScore;
+	}
 
 	public boolean canMeld(Card[] cards) {
 		Rank rank = cards[0].getRank();
