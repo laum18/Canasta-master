@@ -107,9 +107,15 @@ public class CanastaComputerPlayer extends GameComputerPlayer
         	sleep((int)(2000*Math.random()));
 
 			game.sendAction(drawDeck);
+
 			//while (savedState.canMeld( )) {
 			//	game.sendAction(meld);
 			//}
+
+//			while (savedState.canMeld( )) {
+//				game.sendAction(meld);
+//			}
+
 			game.sendAction(discard);
 
         	// submit our move to the game object

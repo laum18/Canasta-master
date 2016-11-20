@@ -1,5 +1,7 @@
 package edu.up.cs301.canasta;
 
+import android.util.Log;
+
 import edu.up.cs301.card.Card;
 import edu.up.cs301.card.Rank;
 import edu.up.cs301.game.infoMsg.GameState;
@@ -46,25 +48,30 @@ public class CanastaState extends GameState
 
 	public CanastaState() {
 		// randomly pick the player who starts
+
 		toPlay = (int)(2*Math.random());
 		teamOneRoundScore = 0;
 		teamTwoRoundScore = 0;
 		teamOneTotalScore = 0;
 		teamTwoTotalScore = 0;
 		goal = 5000;
+
+		toPlay = 1;//(int)(2*Math.random());
+
+
 		// initialize the decks as follows:
 		// - each player deck (#0 and #1) gets half the cards, randomly
 		//   selected
 		// - the middle deck (#2) is empty
 		piles = new Deck[6];
-		piles[0] = new Deck(); // create empty deck
-		piles[1] = new Deck(); // create empty deck
-		piles[2] = new Deck(); // player 0 deck
-		piles[3] = new Deck(); // player 1 deck
-		piles[4] = new Deck(); // player 2 deck
-		piles[5] = new Deck(); // player 3 deck
-		piles[toPlay].add52(); // give all cards to player whose turn it is, in order
-		piles[toPlay].shuffle(); // shuffle the cards
+		piles[0] = new Deck(); // create empty deck (initial deck)
+		piles[1] = new Deck(); // create empty deck (discard)
+		piles[2] = new Deck(); // player 0 deck (you)
+		piles[3] = new Deck(); // player 1 deck (left)
+		piles[4] = new Deck(); // player 2 deck (teammate)
+		piles[5] = new Deck(); // player 3 deck (right)
+		piles[0].add52(); // give all cards to deck
+		piles[0].shuffle(); // shuffle the cards
 		// move cards to opponent, until to piles have ~same size
     	/*while (piles[toPlay].size() >=
     			piles[1-toPlay].size()+1) {
@@ -72,9 +79,10 @@ public class CanastaState extends GameState
     	}*/
 
 		/* deals 11 cards to each player */
-		for(int i=0; i<11; i++){
-			for(int j=0; j<4; j++){
-				piles[toPlay].moveTopCardTo(piles[j+2]);
+		for(int i=0; i<11; i++){ //card
+			for(int j=0; j<4; j++){ //player
+				piles[0].moveTopCardTo(piles[j+2]);
+				//Log.i("card",getTopCard(piles[j+2]));
 			}
 		}
 	}

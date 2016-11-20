@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -31,12 +32,13 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 
 	// sizes and locations of card decks and cards, expressed as percentages
 	// of the screen height and width
-	private final static float CARD_HEIGHT_PERCENT = 40; // height of a card
-	private final static float CARD_WIDTH_PERCENT = 17; // width of a card
-	private final static float LEFT_BORDER_PERCENT = 4; // width of left border
-	private final static float RIGHT_BORDER_PERCENT = 20; // width of right border
-	private final static float VERTICAL_BORDER_PERCENT = 4; // width of top/bottom borders
-	private final static float OPP_ONE_VERTICAL_BORDER_PERCENT = 70; // width of border to first opponents hand
+	private final static float CARD_HEIGHT_PERCENT = 20; // height of a card
+	private final static float CARD_WIDTH_PERCENT = 9; // width of a card
+	private final static float LEFT_BORDER_PERCENT = 8; // width of left border
+	private final static float LEFT_DECK_BORDER_PERCENT = 25; //width of the decks
+	private final static float RIGHT_BORDER_PERCENT = 25; // width of right border
+	private final static float VERTICAL_BORDER_PERCENT = 40; // width of top/bottom borders
+	private final static float OPP_VERTICAL_BORDER_PERCENT = 35; // width of border to first opponents hand
 	private final static float PLAYER_HAND_VERTICAL_BORDER_PERCENT = -10; // width of border to player meld pile
 	private final static float TEAMMATE_HAND_VERTICAL_BORDER_PERCENT = 10;
 
@@ -181,56 +183,44 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		int height = surface.getHeight();
 		int width = surface.getWidth();
 
-		// draw the middle card-pile
-		Card c = state.getDeck(2).peekAtTopCard(); // top card in pile
-		if (c != null) {
-			// if middle card is not empty, draw a set of N card-backs
-			// behind the middle card, so that the user can see the size of
-			// the pile
-			RectF midTopLocation = middlePileTopCardLocation();
-			drawCardBacks(g, midTopLocation,
-					0.0025f*width, -0.01f*height, state.getDeck(2).size());
-			// draw the top card, face-up
-			drawCard(g, midTopLocation, c);
-		}
+		// draw the discard card-pile
+		Card c = state.getDeck(1).peekAtTopCard(); // top card in pile
 
-		// draw the opponent's cards, face down
-		RectF oppTopLocation = opponentTopCardLocation(); // drawing size/location
-		drawCardBacks(g, oppTopLocation,
-				0.0025f*width, -0.01f*height, state.getDeck(1-this.playerNum).size());
+		// draw the deck cards, face down
+		RectF deckTopLocation = deckCardLocation(); // drawing size/location
+		drawCard(g,deckTopLocation,null);
 
-		// draw my cards, face down
-		RectF thisTopLocation = thisPlayerTopCardLocation(); // drawing size/location
-		drawCardBacks(g, thisTopLocation,
-				0.0025f*width, -0.01f*height, state.getDeck(this.playerNum).size());
+		//draw discard cards, face down
+		RectF discardTopLocation = discardTopCardLocation(); // drawing size/location
+		drawCard(g, discardTopLocation, c);
 
 		//draw my hand (should be face up)
 		RectF playerHandLocation = playerHandFirstCardLocation();
 		drawCardBacks(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size());
 
 		//draw left opponent hand, face down
-		RectF leftOpponentHand = playerMeldPileFirstCardLocation();
-		//drawCardBacks(g, playerMeldLocation, 0, 0.05f*height, state.getDeck(3).size());
+		RectF leftOpponentHand = leftOppHandFirstCardLocation();
+		drawCardBacks(g, leftOpponentHand, 0, 0.05f*height, state.getDeck(3).size());
 
 		//draw teammate hand, face down
 		RectF teammateHand = teammateHandFirstCardLocation();
 		drawCardBacks(g, teammateHand, 0.06f*width, 0, state.getDeck(4).size());
 
 		//draw right opponent hand, face down
-		RectF rightOpponentHand = playerMeldPileFirstCardLocation();
-		//drawCardBacks(g, playerMeldLocation, 0.06f*width, 0, state.getDeck(5).size());
+		RectF rightOpponentHand = rightOppHandFirstCardLocation();
+		drawCardBacks(g, rightOpponentHand, 0, 0.05f*height, state.getDeck(5).size());
 
 		// draw a red bar to denote which player is to play (flip) a card
-		RectF currentPlayerRect =
-				state.toPlay() == this.playerNum ? thisTopLocation : oppTopLocation;
-		RectF turnIndicator =
-				new RectF(currentPlayerRect.left,
-						currentPlayerRect.bottom,
-						currentPlayerRect.right,
-						height);
-		Paint paint = new Paint();
-		paint.setColor(Color.RED);
-		g.drawRect(turnIndicator, paint);
+//		RectF currentPlayerRect =
+//				state.toPlay() == this.playerNum ? thisTopLocation : oppTopLocation;
+//		RectF turnIndicator =
+//				new RectF(currentPlayerRect.left,
+//						currentPlayerRect.bottom,
+//						currentPlayerRect.right,
+//						height);
+//		Paint paint = new Paint();
+//		paint.setColor(Color.RED);
+//		g.drawRect(turnIndicator, paint);
 	}
 
 	/**
@@ -239,14 +229,14 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 	 * 		surface where the top card in the opponent's deck is to
 	 * 		be drawn
 	 */
-	private RectF opponentTopCardLocation() {
+	private RectF deckCardLocation() {
 		// near the left-bottom of the drawing surface, based on the height
 		// and width, and the percentages defined above
 		int width = surface.getWidth();
 		int height = surface.getHeight();
-		return new RectF(LEFT_BORDER_PERCENT*width/100f,
+		return new RectF(LEFT_DECK_BORDER_PERCENT*width/100f,
 				(100-VERTICAL_BORDER_PERCENT-CARD_HEIGHT_PERCENT)*height/100f,
-				(LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT)*width/100f,
+				(LEFT_DECK_BORDER_PERCENT+CARD_WIDTH_PERCENT)*width/100f,
 				(100-VERTICAL_BORDER_PERCENT)*height/100f);
 	}
 
@@ -256,7 +246,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 	 * 		surface where the top card in the current player's deck is to
 	 * 		be drawn
 	 */
-	private RectF thisPlayerTopCardLocation() {
+	private RectF discardTopCardLocation() {
 		// near the right-bottom of the drawing surface, based on the height
 		// and width, and the percentages defined above
 		int width = surface.getWidth();
@@ -267,36 +257,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 				(100-VERTICAL_BORDER_PERCENT)*height/100f);
 	}
 
-	/**
-	 * @return
-	 * 		the rectangle that represents the location on the drawing
-	 * 		surface where the top card in the middle pile is to
-	 * 		be drawn
-	 */
-	private RectF middlePileTopCardLocation() {
-		// near the middle-bottom of the drawing surface, based on the height
-		// and width, and the percentages defined above
-		int height = surface.getHeight();
-		int width = surface.getWidth();
-		float rectLeft = (100-CARD_WIDTH_PERCENT+LEFT_BORDER_PERCENT-RIGHT_BORDER_PERCENT)*width/200;
-		float rectRight = rectLeft + width*CARD_WIDTH_PERCENT/100;
-		float rectTop = (100-VERTICAL_BORDER_PERCENT-CARD_HEIGHT_PERCENT)*height/100f;
-		float rectBottom = (100-VERTICAL_BORDER_PERCENT)*height/100f;
-		return new RectF(rectLeft, rectTop, rectRight, rectBottom);
-	}
-
 	/* location of player hand */
 	private RectF playerHandFirstCardLocation() {
-		int height = surface.getHeight();
-		int width = surface.getWidth();
-		return new RectF(LEFT_BORDER_PERCENT*width/100f,
-				(100-PLAYER_HAND_VERTICAL_BORDER_PERCENT-CARD_HEIGHT_PERCENT)*height/100f,
-				(LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT)*width/100f,
-				(100-PLAYER_HAND_VERTICAL_BORDER_PERCENT)*height/100f);
-	}
-
-	/* location of player hand */
-	private RectF playerMeldPileFirstCardLocation() {
 		int height = surface.getHeight();
 		int width = surface.getWidth();
 		return new RectF(LEFT_BORDER_PERCENT*width/100f,
@@ -313,6 +275,25 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 				(TEAMMATE_HAND_VERTICAL_BORDER_PERCENT-CARD_HEIGHT_PERCENT)*height/100f,
 				(LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT)*width/100f,
 				(TEAMMATE_HAND_VERTICAL_BORDER_PERCENT)*height/100f);
+	}
+
+	/* location of left hand */
+	private RectF leftOppHandFirstCardLocation() {
+		int height = surface.getHeight();
+		int width = surface.getWidth();
+		return new RectF(0,(OPP_VERTICAL_BORDER_PERCENT-CARD_HEIGHT_PERCENT)*height/100f,
+				(CARD_WIDTH_PERCENT)*width/100f,(OPP_VERTICAL_BORDER_PERCENT)*height/100f);
+	}
+
+
+	/*location of right hand*/
+	private RectF rightOppHandFirstCardLocation() {
+		int height = surface.getHeight();
+		int width = surface.getWidth();
+		return new RectF((100-CARD_WIDTH_PERCENT)*width/100f,
+				(OPP_VERTICAL_BORDER_PERCENT-CARD_HEIGHT_PERCENT)*height/100f,
+				(100)*width/100f,
+				(OPP_VERTICAL_BORDER_PERCENT)*height/100f);
 	}
 
 	/**
@@ -362,18 +343,17 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 
 		// determine whether the touch occurred on the top-card of either
 		// the player's pile or the middle pile
-		RectF myTopCardLoc = thisPlayerTopCardLocation();
-		RectF middleTopCardLoc = middlePileTopCardLocation();
+		RectF myTopCardLoc = discardTopCardLocation();
 		if (myTopCardLoc.contains(x, y)) {
 			// it's on my pile: we're playing a card: send action to
 			// the game
 			game.sendAction(new CanastaPlayAction(this));
 		}
-		else if (middleTopCardLoc.contains(x, y)) {
-			// it's on the middlel pile: we're slapping a card: send
-			// action to the game
-			game.sendAction(new CanastaMeldAction(this));
-		}
+//		else if (middleTopCardLoc.contains(x, y)) {
+//			// it's on the middlel pile: we're slapping a card: send
+//			// action to the game
+//			game.sendAction(new CanastaMeldAction(this));
+//		}
 		else {
 			// illegal touch-location: flash for 1/20 second
 			surface.flash(Color.RED, 50);
