@@ -17,7 +17,7 @@
     <!-- From: file:/P:/cs%20301/Canasta-master/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="add_player">Add Player</string>
-    <string name="app_name">SlapJack</string>
+    <string name="app_name">Canasta</string>
     <string name="begin_game">Begin Game</string>
     <string name="dialog_continue_label">Continue Playing Game</string>
     <string name="dialog_quit_label">Quit</string>

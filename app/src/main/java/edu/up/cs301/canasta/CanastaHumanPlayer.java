@@ -210,17 +210,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		RectF rightOpponentHand = rightOppHandFirstCardLocation();
 		drawCardBacks(g, rightOpponentHand, 0, 0.05f*height, state.getDeck(5).size());
 
-		// draw a red bar to denote which player is to play (flip) a card
-//		RectF currentPlayerRect =
-//				state.toPlay() == this.playerNum ? thisTopLocation : oppTopLocation;
-//		RectF turnIndicator =
-//				new RectF(currentPlayerRect.left,
-//						currentPlayerRect.bottom,
-//						currentPlayerRect.right,
-//						height);
-//		Paint paint = new Paint();
-//		paint.setColor(Color.RED);
-//		g.drawRect(turnIndicator, paint);
+
 	}
 
 	/**

@@ -11,4 +11,115 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" />
 
-</RelativeLayout><!-- From: file:/P:/cs%20301/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="111dp"
+        android:layout_marginEnd="111dp"
+        android:layout_marginLeft="800dp"
+        android:layout_marginTop="550dp"
+        android:background="@android:color/background_light"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meld "
+            android:id="@+id/meldButton"
+            android:clickable="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discard"
+            android:id="@+id/discardButton"
+            android:clickable="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="700dp"
+        android:layout_marginTop="250dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="151dp"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Team 1 Score"
+                    android:id="@+id/teamOneScore"
+                    android:textSize="23dp"
+                    android:layout_weight="0.18" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Round:"
+                    android:id="@+id/oneRoundScore"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Total:"
+                    android:id="@+id/oneTotalScore"
+                    android:textSize="20dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="151dp"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Team 2 Score"
+                android:id="@+id/teamTwoScore"
+                android:textSize="23dp"
+                android:layout_weight="0.00" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Round:"
+                android:id="@+id/twoRoundScore"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Total:"
+                android:id="@+id/twoTotalScore"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout><!-- From: file:/C:/Users/Edwards18/AndroidStudioProjects/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->

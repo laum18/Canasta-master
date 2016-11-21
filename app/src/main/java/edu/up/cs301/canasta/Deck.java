@@ -259,4 +259,7 @@ public class Deck implements Serializable {
 	public Card getTopCard(Deck d) {
 		return cards.get(cards.size()-2);
 	}
+
+
+
 }
