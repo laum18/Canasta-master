@@ -64,7 +64,7 @@ public class CanastaState extends GameState
 		teamTwoTotalScore = 0;
 		goal = 5000;
 
-		// 0 = drawDeck stage, 1 = meldCard stage
+		// 0 = drawDeck/drawDiscard stage, 1 = meldCard/discard stage
 		substage = 0;
 
 		// initialize the decks as follows:

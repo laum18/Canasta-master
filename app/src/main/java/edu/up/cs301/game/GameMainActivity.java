@@ -502,9 +502,10 @@ View.OnClickListener {
 		if (justStarted) {
 			return;
 		}
-		if (button == discard) {
-			//Card c = ;
-		}
+//		if (button == discard) {
+//			//Card c = ;
+//			discard.setText("hi");
+//		}
 		
 		// Add Player Button
 		if (button.getId() == R.id.addPlayerButton) {
@@ -547,6 +548,9 @@ View.OnClickListener {
 				MessageBox.popUpMessage(msg, this);
 			}
 
+		}
+		else if (button.getId() == R.id.discardButton) {
+			discard.setText("HI");
 		}
 
 	}// onClick

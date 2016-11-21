@@ -60,6 +60,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 
 	private static Card discard;
 
+	public Card[] selected = new Card[15];
+
 	/**
 	 * constructor
 	 *
@@ -354,6 +356,20 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		}
 	}
 
+	private void drawSelectedFaces(Canvas g, RectF topRect, float deltaX, float deltaY,
+							   int numCards) {
+		// loop through from back to front, drawing a card-back in each location
+		for (int i = 0; i <= numCards-1; i++) {
+			// determine the position of this card's top/left corner
+			float left = topRect.left + i*deltaX;
+			float top = topRect.top + i*deltaY;
+			// draw a card-back (hence null) into the appropriate rectangle
+			drawCard(g,
+					new RectF(left, top-100, left + topRect.width(), top + topRect.height()),
+					state.getDeck(2).peekAtCards(i));
+		}
+	}
+
 	private void drawOppMeldPiles(Canvas g, Card[][] c){
 		int height = surface.getHeight()-250;
 		int width = surface.getWidth()-550;
@@ -404,6 +420,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		// the player's pile or the middle pile
 		RectF myTopCardLoc = discardTopCardLocation();
 
+		// discard card
 		for (int i = 0; i < state.getDeck(2).size(); i++) {
 			RectF player = playerHandCardLocation(i);
 			if (player.contains(x,y)) {
@@ -414,9 +431,25 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 			}
 		}
 
+		// select card
+		for (int i = 0; i < state.getDeck(2).size(); i++) {
+			RectF player = playerHandCardLocation(i);
+			//drawCardFaces(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size());
+			//drawSelectedFaces(g, player, 0.06f*width, 0, state.getDeck(2).size());
+
+			if (player.contains(x,y)) {
+				surface.flash(Color.GRAY, 100);
+				selected[i] = state.getDeck(2).peekAtCards(i);
+				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
+				//Log.i("array", selected[i].toString());
+				game.sendAction(new CanastaMeldAction(this));
+			}
+		}
+
+		// draws a card
 		RectF drawDeck = deckCardLocation();
 		if (drawDeck.contains(x,y)) {
-			surface.flash(Color.GRAY, 100);
+			//surface.flash(Color.GRAY, 100);
 			game.sendAction(new CanastaDrawDeckAction(this));
 		}
 		if (myTopCardLoc.contains(x, y)) {
