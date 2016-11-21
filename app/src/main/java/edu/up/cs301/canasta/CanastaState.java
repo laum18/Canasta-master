@@ -240,9 +240,10 @@ public class CanastaState extends GameState
 
 	public void discardCard(Card c) {
 		Deck player = getDeck(toPlay);
-		Deck discard = getDeck(2);
+		Deck discard = getDeck(1);
 		player.removeCard(c);
 		discard.add(c);
+
 	}
 
 	public boolean canDiscard(Card c) {

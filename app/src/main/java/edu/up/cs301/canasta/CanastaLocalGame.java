@@ -154,15 +154,10 @@ public class CanastaLocalGame extends LocalGame {
 			}
 
 		}
-		else if (canastaMA instanceof CanastaDiscardAction) { // we have a "play" action
+		else if (canastaMA instanceof CanastaDiscardAction) { // we have a "discard" action
 			if (state.substage == 1) {
 				Card c = CanastaHumanPlayer.getDiscard();
-//				if (state.toPlay() != 4) {
-//					state.setToPlay(thisPlayerIdx+1);
-//				}
-//				else {
-//					state.setToPlay(0);
-//				}
+				state.discardCard(c);
 				return true;
 			}
 			else {
