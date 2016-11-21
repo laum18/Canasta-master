@@ -410,9 +410,15 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 				surface.flash(Color.GRAY, 100);
 				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
 				discard = state.getDeck(2).peekAtCards(i);
+				game.sendAction(new CanastaDiscardAction(this));
 			}
 		}
 
+		RectF drawDeck = deckCardLocation();
+		if (drawDeck.contains(x,y)) {
+			surface.flash(Color.GRAY, 100);
+			game.sendAction(new CanastaDrawDeckAction(this));
+		}
 		if (myTopCardLoc.contains(x, y)) {
 			// it's on my pile: we're playing a card: send action to
 			// the game

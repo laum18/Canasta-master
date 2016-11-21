@@ -39,6 +39,8 @@ public class CanastaState extends GameState
 	private int teamOneTotalScore;
 	private int teamTwoTotalScore;
 
+	public int substage;
+
 	public Card[][] myTeamMeld;
 	public Card[][] otherTeamMeld;
 	public Card[] temp;
@@ -54,14 +56,16 @@ public class CanastaState extends GameState
 		// randomly pick the player who starts
 
 		toPlay = (int)(2*Math.random());
+		toPlay = 0;//(int)(2*Math.random());
+
 		teamOneRoundScore = 0;
 		teamTwoRoundScore = 0;
 		teamOneTotalScore = 0;
 		teamTwoTotalScore = 0;
 		goal = 5000;
 
-		toPlay = 1;//(int)(2*Math.random());
-
+		// 0 = drawDeck stage, 1 = meldCard stage
+		substage = 0;
 
 		// initialize the decks as follows:
 		// - each player deck (#0 and #1) gets half the cards, randomly
@@ -99,6 +103,13 @@ public class CanastaState extends GameState
 	public CanastaState(CanastaState orig) {
 		// set index of player whose turn it is
 		toPlay = orig.toPlay;
+		teamOneRoundScore = orig.teamOneRoundScore;
+		teamOneTotalScore = orig.teamOneTotalScore;
+		teamTwoRoundScore = orig.teamTwoRoundScore;
+		teamTwoTotalScore = orig.teamTwoTotalScore;
+		goal = orig.goal;
+		substage = orig.substage;
+
 		// create new deck array, making copy of each deck
 		piles = new Deck[6];
 		piles[0] = new Deck(orig.piles[0]); //actual deck

@@ -139,19 +139,30 @@ public class CanastaLocalGame extends LocalGame {
 		}
 
 		if (canastaMA instanceof CanastaDrawDeckAction) {
-			if(state.getDeck(0).getTopCard(state.getDeck(0))== null){
+			if(state.getDeck(0)== null){
+				//state.getDeck(0).getTopCard(state.getDeck(0)
 				return false;
 			}
-			else {
+			else if (state.substage == 0) {
 				state.drawCard(state.getDeck(0).getTopCard(state.getDeck(0)));
 				state.getDeck(thisPlayerIdx);
+				state.substage = 1;
 				return true;
+			}
+			else {
+				return false;
 			}
 
 		}
 		else if (canastaMA instanceof CanastaDiscardAction) { // we have a "play" action
-			// need to get the player's card
-			Card c = CanastaHumanPlayer.getDiscard();
+			if (state.substage == 1) {
+				Card c = CanastaHumanPlayer.getDiscard();
+				return false;
+			}
+			else {
+				return false;
+			}
+
 		}
 		else if (canastaMA instanceof CanastaDrawDiscardAction) {
 			//if (state.canMeld())
