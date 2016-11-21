@@ -76,7 +76,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 	 */
 	@Override
 	public void receiveInfo(GameInfo info) {
-		Log.i("SJComputerPlayer", "receiving updated state ("+info.getClass()+")");
+		//Log.i("SJComputerPlayer", "receiving updated state ("+info.getClass()+")");
 		if (info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo) {
 			// if we had an out-of-turn or illegal move, flash the screen
 			surface.flash(Color.RED, 50);
@@ -90,7 +90,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 			// going, there is no need to explicitly display anything. That will happen
 			// at the next animation-tick, which should occur within 1/20 of a second
 			this.state = (CanastaState)info;
-			Log.i("human player", "receiving");
+			//Log.i("human player", "receiving");
 		}
 	}
 
@@ -270,9 +270,12 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 	private RectF playerHandCardLocation(int cardNum) {
 		int height = surface.getHeight();
 		int width = surface.getWidth();
-		return new RectF(LEFT_BORDER_PERCENT*(width*cardNum)/100f,
+
+		float deltaX = cardNum * (0.06f*width);
+
+		return new RectF((LEFT_BORDER_PERCENT*width/100f) + (deltaX),
 				(100-PLAYER_HAND_VERTICAL_BORDER_PERCENT-CARD_HEIGHT_PERCENT)*height/100f,
-				(LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT)*(cardNum*width)/100f,
+				((LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT)*width/100f) + (deltaX),
 				(100-PLAYER_HAND_VERTICAL_BORDER_PERCENT)*height/100f);
 	}
 
@@ -368,10 +371,12 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		// the player's pile or the middle pile
 		RectF myTopCardLoc = discardTopCardLocation();
 
-		for (int i = 1; i < state.getDeck(2).size()+1; i++) {
+		for (int i = 0; i < state.getDeck(2).size(); i++) {
 			RectF player = playerHandCardLocation(i);
 			if (player.contains(x,y)) {
-				//surface.flash(Color.YELLOW, 100);
+				surface.flash(Color.GRAY, 100);
+				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
+
 			}
 		}
 

@@ -200,9 +200,9 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 		if (myHandler == null) { Log.d("Info", "oh, no, no handler!!!"); return; }
 		
 		// post message to the handler
-		Log.d("sendInfo", "about to post");
+		//Log.d("sendInfo", "about to post");
 		myHandler.post(new MyRunnable(info));
-		Log.d("sendInfo", "done with post");
+		//Log.d("sendInfo", "done with post");
 	}
 
 	/**
