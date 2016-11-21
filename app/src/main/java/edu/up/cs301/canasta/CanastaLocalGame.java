@@ -139,9 +139,15 @@ public class CanastaLocalGame extends LocalGame {
 		}
 
 		if (canastaMA instanceof CanastaDrawDeckAction) {
-			state.drawCard(state.getDeck(0).getTopCard(state.getDeck(0)));
-			state.getDeck(thisPlayerIdx);
-			//return true;
+			if(state.getDeck(0).getTopCard(state.getDeck(0))== null){
+				return false;
+			}
+			else {
+				state.drawCard(state.getDeck(0).getTopCard(state.getDeck(0)));
+				state.getDeck(thisPlayerIdx);
+				return true;
+			}
+
 		}
 		else if (canastaMA instanceof CanastaDiscardAction) { // we have a "play" action
 			// need to get the player's card
