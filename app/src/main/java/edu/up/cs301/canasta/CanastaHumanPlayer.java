@@ -182,7 +182,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		// ignore if we have not yet received the game state
 		if (state == null) return;
 
-		Card[][] meldCard = new Card[11][8];
+		Card[][] meldCard = new Card[12][8];
 
 		// get the height and width of the animation surface
 		int height = surface.getHeight();
@@ -215,7 +215,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		RectF rightOpponentHand = rightOppHandFirstCardLocation();
 		drawCardBacks(g, rightOpponentHand, 0, 0.05f*height, state.getDeck(5).size());
 
-		drawMeldPiles(g, meldCard);
+		drawOppMeldPiles(g, meldCard);
+		drawMyMeldPiles(g, meldCard);
 
 
 	}
@@ -351,21 +352,31 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		}
 	}
 
-	private void drawMeldPiles(Canvas g, Card[][] c){
-		int height = surface.getHeight()-200;
-		int width = surface.getWidth()-500;
-		for(int i =0; i<11;i++){
+	private void drawOppMeldPiles(Canvas g, Card[][] c){
+		int height = surface.getHeight()-250;
+		int width = surface.getWidth()-550;
+		for(int i =0; i<12;i++){
 			for(int j = 0; j<8; j++){
 				if(c[i][j] == null){
 					RectF rect = new RectF((MELD_LEFT_BORDER_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							MELD_TOP_BORDER_PERCENT*height/100f,
 							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							(MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
-					RectF rect2 = new RectF((MELD_LEFT_BORDER_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
-							MELD_TOP_BORDER_PERCENT*height/100f,
-							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
-							(MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
 					drawCardFaces(g,rect,0,0,1);
+				}
+			}
+		}
+	}
+	private void drawMyMeldPiles(Canvas g, Card[][] c){
+		int height = surface.getHeight()-250;
+		int width = surface.getWidth()-550;
+		for(int i =0; i<12;i++){
+			for(int j = 0; j<8; j++){
+				if(c[i][j] == null){
+					RectF rect2 = new RectF((MELD_LEFT_BORDER_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
+							(100-MELD_TOP_BORDER_PERCENT)*height/100f,
+							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
+							(100-MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
 					drawCardFaces(g,rect2,0,0,1);
 				}
 			}
