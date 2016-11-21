@@ -70,21 +70,50 @@
                     android:textSize="23dp"
                     android:layout_weight="0.18" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Round:"
-                    android:id="@+id/oneRoundScore"
-                    android:textSize="20dp" />
+                    android:layout_weight="0.18">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Round:"
+                        android:id="@+id/oneRoundScore"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/oneRoundText"
+                        android:text="0" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Total:"
-                    android:id="@+id/oneTotalScore"
-                    android:textSize="20dp" />
+                    android:layout_weight="0.18">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Total:"
+                        android:id="@+id/oneTotalScore"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/oneTotalText"
+                        android:text="0" />
+
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 
@@ -103,21 +132,50 @@
                 android:textSize="23dp"
                 android:layout_weight="0.00" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Round:"
-                android:id="@+id/twoRoundScore"
-                android:textSize="20dp" />
+                android:layout_weight="0.00">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Round:"
+                    android:id="@+id/twoRoundScore"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/twoRoundText"
+                    android:text="0" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Total:"
-                android:id="@+id/twoTotalScore"
-                android:textSize="20dp" />
+                android:layout_weight="0.00">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Total:"
+                    android:id="@+id/twoTotalScore"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/twoTotalText"
+                    android:text="0" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

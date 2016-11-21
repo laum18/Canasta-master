@@ -37,6 +37,8 @@ public class CanastaState extends GameState
 	private int teamOneTotalScore;
 	private int teamTwoTotalScore;
 
+	public Card[][] myTeamMeld;
+	public Card[][] otherTeamMeld;
 	public Card[] temp;
 
 
@@ -71,6 +73,7 @@ public class CanastaState extends GameState
 		piles[4] = new Deck(); // player 2 deck (teammate)
 		piles[5] = new Deck(); // player 3 deck (right)
 		piles[0].add52(); // give all cards to deck
+		piles[0].add52();
 		piles[0].shuffle(); // shuffle the cards
 		// move cards to opponent, until to piles have ~same size
     	/*while (piles[toPlay].size() >=

@@ -10,9 +10,9 @@ import edu.up.cs301.game.config.GamePlayerType;
 import android.graphics.Color;
 
 /**
- * this is the primary activity for Slapjack game
+ * this is the primary activity for Canasta game
  * 
- * @author Steven R. Vegdahl
+ * @author Steven R. Vegdahl, Nick Edwards, Aaron Banobi, Michele Lau, David Vanderwark
  * @version July 2013
  */
 public class CanastaMainActivity extends GameMainActivity {
@@ -40,30 +40,17 @@ public class CanastaMainActivity extends GameMainActivity {
 				return new CanastaComputerPlayer(name);
 			}
 		});
-		playerTypes.add(new GamePlayerType("computer player (fast)") {
+		playerTypes.add(new GamePlayerType("computer player (hard)") {
 			public GamePlayer createPlayer(String name) {
-				return new CanastaComputerPlayer(name, 0.3);
+				return new CanastaComputerPlayer(name);
 			}
 		});
-		playerTypes.add(new GamePlayerType("computer player (slow)") {
-			public GamePlayer createPlayer(String name) {
-				return new CanastaComputerPlayer(name, 1.0);
-			}
-		});
-		playerTypes.add(new GamePlayerType("computer player (very fast)") {
-			public GamePlayer createPlayer(String name) {
-				return new CanastaComputerPlayer(name, 0.15);
-			}
-		});
-		playerTypes.add(new GamePlayerType("computer player (very slow)") {
-			public GamePlayer createPlayer(String name) {
-				return new CanastaComputerPlayer(name, 3.5);
-			}
-		});
+
+
 
 
 		// Create a game configuration class for SlapJack
-		GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "SlapJack", PORT_NUMBER);
+		GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "Canasta", PORT_NUMBER);
 
 
 		// Add the default players

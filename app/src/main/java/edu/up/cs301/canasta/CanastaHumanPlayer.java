@@ -42,6 +42,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 	private final static float PLAYER_HAND_VERTICAL_BORDER_PERCENT = -10; // width of border to player meld pile
 	private final static float TEAMMATE_HAND_VERTICAL_BORDER_PERCENT = 10;
 
+	private final static float MELD_LEFT_BORDER_PERCENT = 15;
+	private final static float MELD_TOP_BORDER_PERCENT = 15;
+
 
 	// our game state
 	protected CanastaState state;
@@ -179,6 +182,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		// ignore if we have not yet received the game state
 		if (state == null) return;
 
+		Card[][] meldCard = new Card[11][8];
+
 		// get the height and width of the animation surface
 		int height = surface.getHeight();
 		int width = surface.getWidth();
@@ -209,6 +214,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		//draw right opponent hand, face down
 		RectF rightOpponentHand = rightOppHandFirstCardLocation();
 		drawCardBacks(g, rightOpponentHand, 0, 0.05f*height, state.getDeck(5).size());
+
+		drawMeldPiles(g, meldCard);
 
 
 	}
@@ -298,6 +305,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 				(OPP_VERTICAL_BORDER_PERCENT)*height/100f);
 	}
 
+
+
 	/**
 	 * draws a sequence of card-backs, each offset a bit from the previous one, so that all can be
 	 * seen to some extent
@@ -339,6 +348,22 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 			drawCard(g,
 					new RectF(left, top, left + topRect.width(), top + topRect.height()),
 					state.getDeck(2).peekAtCards(i));
+		}
+	}
+
+	private void drawMeldPiles(Canvas g, Card[][] c){
+		int height = surface.getHeight();
+		int width = surface.getWidth();
+		for(int i =0; i<11;i++){
+			for(int j = 0; j<8; j++){
+				if(c[i][j] == null){
+					RectF rect = new RectF((MELD_LEFT_BORDER_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
+							MELD_TOP_BORDER_PERCENT*height/100f,
+							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
+							(MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
+					drawCardFaces(g,rect,0,0,1);
+				}
+			}
 		}
 	}
 

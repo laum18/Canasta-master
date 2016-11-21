@@ -25,6 +25,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
+
+import org.w3c.dom.Text;
+
 import edu.up.cs301.game.config.GameConfig;
 import edu.up.cs301.game.config.GamePlayerType;
 import edu.up.cs301.game.util.IPCoder;
@@ -70,6 +73,11 @@ View.OnClickListener {
 	// whether the game is in the "configuration" stage, before the actual game
 	// has started
 	private boolean doingConfiguration = true;
+
+	private TextView teamOneRoundScore;
+	private TextView teamOneTotalScore;
+	private TextView teamTwoRoundScore;
+	private TextView teamTwoTotalScore;
 
 	/**
 	 * contains the game configuration this activity will be used to initialize
@@ -139,6 +147,11 @@ View.OnClickListener {
 	@Override
 	public final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		teamOneRoundScore = (TextView)findViewById(R.id.oneRoundText);
+		teamOneTotalScore = (TextView)findViewById(R.id.oneTotalText);
+		teamTwoRoundScore = (TextView)findViewById(R.id.twoRoundText);
+		teamTwoTotalScore = (TextView)findViewById(R.id.twoTotalText);
 
 		// Initialize the layout
 		setContentView(R.layout.game_config_main);
