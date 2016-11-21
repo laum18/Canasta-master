@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -78,6 +79,7 @@ View.OnClickListener {
 	private TextView teamOneTotalScore;
 	private TextView teamTwoRoundScore;
 	private TextView teamTwoTotalScore;
+	private Button discard;
 
 	/**
 	 * contains the game configuration this activity will be used to initialize
@@ -152,6 +154,7 @@ View.OnClickListener {
 		teamOneTotalScore = (TextView)findViewById(R.id.oneTotalText);
 		teamTwoRoundScore = (TextView)findViewById(R.id.twoRoundText);
 		teamTwoTotalScore = (TextView)findViewById(R.id.twoTotalText);
+		discard = (Button)findViewById(R.id.discardButton);
 
 		// Initialize the layout
 		setContentView(R.layout.game_config_main);

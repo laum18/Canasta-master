@@ -13,7 +13,7 @@ public class CanastaDiscardAction extends CanastaMoveAction {
         super(player);
     }
 
-    public boolean isDiscard() {
-        return true;
-    }
+//    public boolean isDiscard() {
+//        return true;
+//    }
 }

@@ -242,12 +242,12 @@ public class CanastaState extends GameState
 		}
 	}
 
-	public Card drawCard(Card c) {
-		Deck player = getDeck(toPlay);
-		Deck deck = getDeck(2);
+	public void drawCard(Card c) {
+		Deck player = getDeck(2);
+		Deck deck = getDeck(0);
 		deck.removeCard(c);
 		player.add(c);
-		return c;
+		//return c;
 	}
 
 	public void Meld(Card[] c) {

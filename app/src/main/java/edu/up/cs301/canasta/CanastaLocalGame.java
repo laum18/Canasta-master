@@ -141,11 +141,11 @@ public class CanastaLocalGame extends LocalGame {
 		if (canastaMA instanceof CanastaDrawDeckAction) {
 			state.drawCard(state.getDeck(0).getTopCard(state.getDeck(0)));
 			state.getDeck(thisPlayerIdx);
-			return true;
+			//return true;
 		}
 		else if (canastaMA instanceof CanastaDiscardAction) { // we have a "play" action
 			// need to get the player's card
-			//state.
+			Card c = CanastaHumanPlayer.getDiscard();
 		}
 		else if (canastaMA instanceof CanastaDrawDiscardAction) {
 			//if (state.canMeld())
@@ -159,7 +159,7 @@ public class CanastaLocalGame extends LocalGame {
 			//state.canMeld()
 		}
 
-		// return true, because the move was successful if we get her
+		// return true, because the move was successful if we get here
 		return true;
 	}
 	

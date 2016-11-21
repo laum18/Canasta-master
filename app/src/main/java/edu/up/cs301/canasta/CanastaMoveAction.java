@@ -29,24 +29,24 @@ public abstract class CanastaMoveAction extends GameAction {
      * @return
      * 		whether the move was a slap
      */
-    public boolean isMeld() {
-    	return false;
-    }
-    
-    /**
-     * @return
-     * 		whether the move was a "play"
-     */
-    public boolean isDrawDeck() {
-    	return false;
-    }
-
-    public boolean isDrawDiscard() {
-        return false;
-    }
-
-    public boolean isDiscard() {
-        return false;
-    }
+//    public boolean isMeld() {
+//    	return false;
+//    }
+//
+//    /**
+//     * @return
+//     * 		whether the move was a "play"
+//     */
+//    public boolean isDrawDeck() {
+//    	return false;
+//    }
+//
+//    public boolean isDrawDiscard() {
+//        return false;
+//    }
+//
+//    public boolean isDiscard() {
+//        return false;
+//    }
 
 }
