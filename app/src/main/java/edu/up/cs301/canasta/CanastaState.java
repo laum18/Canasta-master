@@ -144,8 +144,12 @@ public class CanastaState extends GameState
 		Card c = piles[0].removeTopCard();
 
 		// set all cards in deck to null
-		for (Deck d : piles) {
+		/*for (Deck d : piles) {
 			d.nullifyDeck();
+		}*/
+
+		for (int d = 3; d < 6; d++) {
+			getDeck(d).nullifyDeck();
 		}
 
 		// if middle deck had not been empty, add back the top (non-null) card

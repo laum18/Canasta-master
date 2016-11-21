@@ -196,7 +196,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 
 		//draw my hand (should be face up)
 		RectF playerHandLocation = playerHandFirstCardLocation();
-		drawCardBacks(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size());
+		drawCardFaces(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size());
 
 		//draw left opponent hand, face down
 		RectF leftOpponentHand = leftOppHandFirstCardLocation();
@@ -266,6 +266,15 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 				(LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT)*width/100f,
 				(100-PLAYER_HAND_VERTICAL_BORDER_PERCENT)*height/100f);
 	}
+	//location of any card in player hand
+	private RectF playerHandCardLocation(int cardNum) {
+		int height = surface.getHeight();
+		int width = surface.getWidth();
+		return new RectF(LEFT_BORDER_PERCENT*(width*cardNum)/100f,
+				(100-PLAYER_HAND_VERTICAL_BORDER_PERCENT-CARD_HEIGHT_PERCENT)*height/100f,
+				(LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT)*(cardNum*width)/100f,
+				(100-PLAYER_HAND_VERTICAL_BORDER_PERCENT)*height/100f);
+	}
 
 	/* location of teammate hand */
 	private RectF teammateHandFirstCardLocation() {
@@ -315,7 +324,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 	private void drawCardBacks(Canvas g, RectF topRect, float deltaX, float deltaY,
 							   int numCards) {
 		// loop through from back to front, drawing a card-back in each location
-		for (int i = numCards-1; i >= 0; i--) {
+		for (int i = 0; i <= numCards-1; i++) {
 			// determine theh position of this card's top/left corner
 			float left = topRect.left + i*deltaX;
 			float top = topRect.top + i*deltaY;
@@ -323,6 +332,20 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 			drawCard(g,
 					new RectF(left, top, left + topRect.width(), top + topRect.height()),
 					null);
+		}
+	}
+
+	private void drawCardFaces(Canvas g, RectF topRect, float deltaX, float deltaY,
+							   int numCards) {
+		// loop through from back to front, drawing a card-back in each location
+		for (int i = 0; i <= numCards-1; i++) {
+			// determine the position of this card's top/left corner
+			float left = topRect.left + i*deltaX;
+			float top = topRect.top + i*deltaY;
+			// draw a card-back (hence null) into the appropriate rectangle
+			drawCard(g,
+					new RectF(left, top, left + topRect.width(), top + topRect.height()),
+					state.getDeck(2).peekAtCards(i));
 		}
 	}
 
@@ -344,6 +367,14 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		// determine whether the touch occurred on the top-card of either
 		// the player's pile or the middle pile
 		RectF myTopCardLoc = discardTopCardLocation();
+
+		for (int i = 1; i < state.getDeck(2).size()+1; i++) {
+			RectF player = playerHandCardLocation(i);
+			if (player.contains(x,y)) {
+				//surface.flash(Color.YELLOW, 100);
+			}
+		}
+
 		if (myTopCardLoc.contains(x, y)) {
 			// it's on my pile: we're playing a card: send action to
 			// the game
@@ -356,7 +387,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 //		}
 		else {
 			// illegal touch-location: flash for 1/20 second
-			surface.flash(Color.RED, 50);
+			//surface.flash(Color.RED, 50);
 		}
 	}
 

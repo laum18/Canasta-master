@@ -118,6 +118,7 @@ public class Card implements Serializable {
     	
     	// create the source rectangle
     	Rect r = new Rect(0,0,bitmap.getWidth(),bitmap.getHeight());
+
     	
     	// draw the bitmap into the target rectangle
     	g.drawBitmap(bitmap, r, where, p);

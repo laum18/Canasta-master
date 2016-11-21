@@ -199,6 +199,16 @@ public class Deck implements Serializable {
 			return cards.get(cards.size()-1);
 		}
 	}
+
+	public Card peekAtCards(int numCards) {
+		synchronized (this.cards) {
+			if (cards.isEmpty()) {
+				return null;
+			} else {
+				return cards.get(numCards);
+			}
+		}
+	}
 	
 	/**
 	 * creates a printable version of the object, a list
@@ -247,6 +257,6 @@ public class Deck implements Serializable {
 	}
 
 	public Card getTopCard(Deck d) {
-		return cards.remove(cards.size()-2);
+		return cards.get(cards.size()-2);
 	}
 }
