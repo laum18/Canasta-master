@@ -58,6 +58,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 	// the background color
 	private int backgroundColor;
 
+	private static Card discard;
+
 	/**
 	 * constructor
 	 *
@@ -407,7 +409,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 			if (player.contains(x,y)) {
 				surface.flash(Color.GRAY, 100);
 				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
-
+				discard = state.getDeck(2).peekAtCards(i);
 			}
 		}
 
@@ -489,5 +491,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 
 		// create/return the new rectangle
 		return new RectF(left, top, right, bottom);
+	}
+
+	public static Card getDiscard() {
+		return discard;
 	}
 }

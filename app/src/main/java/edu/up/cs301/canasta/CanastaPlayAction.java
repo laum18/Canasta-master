@@ -28,8 +28,8 @@ public class CanastaPlayAction extends CanastaMoveAction
      * @return
      * 		whether this action is a "play" move
      */
-    public boolean isPlay() {
-        return true;
-    }
+//    public boolean isPlay() {
+//        return true;
+//    }
     
 }

@@ -27,8 +27,8 @@ public class CanastaMeldAction extends CanastaMoveAction
     /**
 	 * @return whether this action is a "slap" move
      */
-    public boolean isMeld() {
-        return true;
-    }
+//    public boolean isMeld() {
+//        return true;
+//    }
     
 }
