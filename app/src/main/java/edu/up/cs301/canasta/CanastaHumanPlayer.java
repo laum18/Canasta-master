@@ -352,8 +352,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 	}
 
 	private void drawMeldPiles(Canvas g, Card[][] c){
-		int height = surface.getHeight();
-		int width = surface.getWidth();
+		int height = surface.getHeight()-200;
+		int width = surface.getWidth()-500;
 		for(int i =0; i<11;i++){
 			for(int j = 0; j<8; j++){
 				if(c[i][j] == null){
@@ -361,7 +361,12 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 							MELD_TOP_BORDER_PERCENT*height/100f,
 							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							(MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
+					RectF rect2 = new RectF((MELD_LEFT_BORDER_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
+							MELD_TOP_BORDER_PERCENT*height/100f,
+							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
+							(MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
 					drawCardFaces(g,rect,0,0,1);
+					drawCardFaces(g,rect2,0,0,1);
 				}
 			}
 		}
