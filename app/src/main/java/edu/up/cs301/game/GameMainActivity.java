@@ -29,6 +29,7 @@ import android.widget.TabHost.TabSpec;
 
 import org.w3c.dom.Text;
 
+import edu.up.cs301.card.Card;
 import edu.up.cs301.game.config.GameConfig;
 import edu.up.cs301.game.config.GamePlayerType;
 import edu.up.cs301.game.util.IPCoder;
@@ -79,6 +80,7 @@ View.OnClickListener {
 	private TextView teamOneTotalScore;
 	private TextView teamTwoRoundScore;
 	private TextView teamTwoTotalScore;
+
 	private Button discard;
 
 	/**
@@ -149,6 +151,8 @@ View.OnClickListener {
 	@Override
 	public final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		discard = (Button) findViewById(R.id.discardButton);
 
 		teamOneRoundScore = (TextView)findViewById(R.id.oneRoundText);
 		teamOneTotalScore = (TextView)findViewById(R.id.oneTotalText);
@@ -497,6 +501,9 @@ View.OnClickListener {
 		// if the GUI many not have been fully initialized, ignore
 		if (justStarted) {
 			return;
+		}
+		if (button == discard) {
+			//Card c = ;
 		}
 		
 		// Add Player Button

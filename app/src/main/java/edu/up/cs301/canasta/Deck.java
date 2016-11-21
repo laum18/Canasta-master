@@ -260,6 +260,8 @@ public class Deck implements Serializable {
 		return cards.get(cards.size()-2);
 	}
 
-
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
 
 }

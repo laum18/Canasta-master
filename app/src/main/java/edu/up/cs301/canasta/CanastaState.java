@@ -2,6 +2,8 @@ package edu.up.cs301.canasta;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import edu.up.cs301.card.Card;
 import edu.up.cs301.card.Rank;
 import edu.up.cs301.game.infoMsg.GameState;
@@ -242,10 +244,16 @@ public class CanastaState extends GameState
 		}
 	}
 
+	int count = 0;
+
 	public void drawCard(Card c) {
+		Log.i(c.toString(), "skdgfkad");
+		count++;
+		Log.i("" +count, "" +count);
 		Deck player = getDeck(2);
 		Deck deck = getDeck(0);
-		deck.removeCard(c);
+		ArrayList<Card> ca = deck.getCards();
+		ca.remove(c);
 		player.add(c);
 		//return c;
 	}
