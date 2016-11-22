@@ -89,8 +89,9 @@ public class CanastaState extends GameState
 		/* deals 11 cards to each player */
 		for(int i=0; i<11; i++){ //card
 			for(int j=0; j<4; j++){ //player
+				Log.i("" +j, piles[0].getTopCard(piles[j+2]) +"");
 				piles[0].moveTopCardTo(piles[j+2]);
-				//Log.i("card",getTopCard(piles[j+2]));
+
 			}
 		}
 	}
@@ -239,10 +240,12 @@ public class CanastaState extends GameState
 	}
 
 	public void discardCard(Card c) {
-		Deck player = getDeck(toPlay);
-		Deck discard = getDeck(2);
+		Deck player = getDeck(toPlay+2);
+		Deck discard = getDeck(1);
 		player.removeCard(c);
 		discard.add(c);
+
+
 	}
 
 	public boolean canDiscard(Card c) {

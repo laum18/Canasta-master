@@ -74,7 +74,8 @@ public class CanastaComputerPlayer extends GameComputerPlayer
 
 		CanastaDrawDeckAction drawDeck = new CanastaDrawDeckAction(this);
 		CanastaMeldAction meld = new CanastaMeldAction(this);
-		CanastaDiscardAction discard = new CanastaDiscardAction(this);
+
+		sleep(500);
 
     	// if we don't have a game-state, ignore
     	if (!(info instanceof CanastaState)) {
@@ -116,6 +117,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer
 //				game.sendAction(meld);
 //			}
 
+			CanastaDiscardAction discard = new CanastaDiscardAction(this, savedState.getDeck(this.playerNum).peekAtTopCard());
 			game.sendAction(discard);
 
         	// submit our move to the game object

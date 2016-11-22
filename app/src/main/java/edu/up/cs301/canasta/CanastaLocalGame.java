@@ -90,7 +90,7 @@ public class CanastaLocalGame extends LocalGame {
 		// make a copy of the state; null out all cards except for the
 		// top card in the middle deck
 		CanastaState stateForPlayer = new CanastaState(state); // copy of state
-		stateForPlayer.nullAllButTopOf2(); // put nulls except for visible card
+		//stateForPlayer.nullAllButTopOf2(); // put nulls except for visible card
 		
 		// send the modified copy of the state to the player
 		p.sendInfo(stateForPlayer);
@@ -156,13 +156,17 @@ public class CanastaLocalGame extends LocalGame {
 		}
 		else if (canastaMA instanceof CanastaDiscardAction) { // we have a "play" action
 			if (state.substage == 1) {
-				Card c = CanastaHumanPlayer.getDiscard();
-//				if (state.toPlay() != 4) {
-//					state.setToPlay(thisPlayerIdx+1);
-//				}
-//				else {
-//					state.setToPlay(0);
-//				}
+				Card c = ((CanastaDiscardAction) canastaMA).getCard();
+				state.discardCard(c);
+				if (thisPlayerIdx == 3) {
+					state.setToPlay(0);
+				}
+				else {
+					state.setToPlay(thisPlayerIdx+1);
+
+				}
+				System.out.println(state.toPlay());
+
 				return true;
 			}
 			else {

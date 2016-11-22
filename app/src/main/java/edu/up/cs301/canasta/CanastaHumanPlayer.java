@@ -205,19 +205,19 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 
 		//draw my hand (should be face up)
 		RectF playerHandLocation = playerHandFirstCardLocation();
-		drawCardFaces(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size());
+		drawCardFaces(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size(), 0);
 
 		//draw left opponent hand, face down
 		RectF leftOpponentHand = leftOppHandFirstCardLocation();
-		drawCardBacks(g, leftOpponentHand, 0, 0.05f*height, state.getDeck(3).size());
+		drawCardFaces(g, leftOpponentHand, 0, 0.05f*height, state.getDeck(3).size(), 1);
 
 		//draw teammate hand, face down
 		RectF teammateHand = teammateHandFirstCardLocation();
-		drawCardBacks(g, teammateHand, 0.06f*width, 0, state.getDeck(4).size());
+		drawCardFaces(g, teammateHand, 0.06f*width, 0, state.getDeck(4).size(), 2);
 
 		//draw right opponent hand, face down
 		RectF rightOpponentHand = rightOppHandFirstCardLocation();
-		drawCardBacks(g, rightOpponentHand, 0, 0.05f*height, state.getDeck(5).size());
+		drawCardFaces(g, rightOpponentHand, 0, 0.05f*height, state.getDeck(5).size(), 3);
 
 		drawOppMeldPiles(g, meldCard);
 		drawMyMeldPiles(g, meldCard);
@@ -343,7 +343,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 	}
 
 	private void drawCardFaces(Canvas g, RectF topRect, float deltaX, float deltaY,
-							   int numCards) {
+							   int numCards, int player) {
 		// loop through from back to front, drawing a card-back in each location
 		for (int i = 0; i <= numCards-1; i++) {
 			// determine the position of this card's top/left corner
@@ -352,12 +352,12 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 			// draw a card-back (hence null) into the appropriate rectangle
 			drawCard(g,
 					new RectF(left, top, left + topRect.width(), top + topRect.height()),
-					state.getDeck(2).peekAtCards(i));
+					state.getDeck(player+2).peekAtCards(i));
 		}
 	}
 
 	private void drawSelectedFaces(Canvas g, RectF topRect, float deltaX, float deltaY,
-							   int numCards) {
+							   int numCards, int player) {
 		// loop through from back to front, drawing a card-back in each location
 		for (int i = 0; i <= numCards-1; i++) {
 			// determine the position of this card's top/left corner
@@ -366,7 +366,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 			// draw a card-back (hence null) into the appropriate rectangle
 			drawCard(g,
 					new RectF(left, top-100, left + topRect.width(), top + topRect.height()),
-					state.getDeck(2).peekAtCards(i));
+					state.getDeck(player+2).peekAtCards(i));
 		}
 	}
 
@@ -380,7 +380,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 							MELD_TOP_BORDER_PERCENT*height/100f,
 							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							(MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
-					drawCardFaces(g,rect,0,0,1);
+					drawCardFaces(g,rect,0,0,1, state.toPlay());
 				}
 			}
 		}
@@ -395,7 +395,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 							(100-MELD_TOP_BORDER_PERCENT)*height/100f,
 							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							(100-MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
-					drawCardFaces(g,rect2,0,0,1);
+					drawCardFaces(g,rect2,0,0,1, state.toPlay());
 				}
 			}
 		}
@@ -426,8 +426,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 			if (player.contains(x,y)) {
 				surface.flash(Color.GRAY, 100);
 				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
-				discard = state.getDeck(2).peekAtCards(i);
-				game.sendAction(new CanastaDiscardAction(this));
+				Card card = state.getDeck(2).peekAtCards(i);
+
+				game.sendAction(new CanastaDiscardAction(this, card));
 			}
 		}
 
@@ -532,7 +533,4 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		return new RectF(left, top, right, bottom);
 	}
 
-	public static Card getDiscard() {
-		return discard;
-	}
 }
