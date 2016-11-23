@@ -90,7 +90,7 @@ public class CanastaLocalGame extends LocalGame {
 		// make a copy of the state; null out all cards except for the
 		// top card in the middle deck
 		CanastaState stateForPlayer = new CanastaState(state); // copy of state
-		//stateForPlayer.nullAllButTopOf2(); // put nulls except for visible card
+		stateForPlayer.nullAllButTopOf2(); // put nulls except for visible card
 		
 		// send the modified copy of the state to the player
 		p.sendInfo(stateForPlayer);
@@ -182,8 +182,13 @@ public class CanastaLocalGame extends LocalGame {
 			}
 		}
 		else if (canastaMA instanceof CanastaMeldAction) {
-			// need to get cards
-			//state.canMeld()
+			if (state.substage == 1) {
+				state.Meld(state.getDeck(thisPlayerIdx+2).getCards());
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 		// return true, because the move was successful if we get here

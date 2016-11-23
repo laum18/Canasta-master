@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 import edu.up.cs301.animation.AnimationSurface;
 import edu.up.cs301.animation.Animator;
 import edu.up.cs301.card.Card;
@@ -62,7 +64,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
 	private static Card discard;
 
-	public Card[] selected = new Card[15];
+
 
 	//button instance variables
 	private Button meldButton;
@@ -146,9 +148,32 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 	public void onClick(View v){
 		if(v==meldButton){
 			meldButton.setBackgroundColor(Color.BLUE);
+			game.sendAction((new CanastaMeldAction(this)));
+
+
 		}
 		else if(v==discardButton){
-			discardButton.setBackgroundColor(Color.RED);
+
+			 //discard card
+			ArrayList<Card> selected = new ArrayList<Card>();
+			ArrayList<Card> hand = state.getDeck(2).getCards();
+			for (Card c: hand) {
+				if (c.getSelected()){
+					selected.add(c);
+				}
+				if(selected.size() == 1){
+					game.sendAction(new CanastaDiscardAction(this, selected.get(0)));
+				}
+
+//			RectF player = playerHandCardLocation(i);
+//			if (player.contains(x,y)) {
+//				surface.flash(Color.GRAY, 100);
+//				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
+//				Card card = state.getDeck(2).peekAtCards(i);
+//
+//				game.sendAction(new CanastaDiscardAction(this, card));
+//			}
+			}
 		}
 	}
 
@@ -227,19 +252,20 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		//draw my hand (should be face up)
 		RectF playerHandLocation = playerHandFirstCardLocation();
 		drawCardFaces(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size(), 0);
-		drawSelected(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size(), 0);
-
+		if(state.toPlay() == 0) {
+			drawSelected(g, playerHandLocation, 0.06f * width, 0, state.getDeck(2).size(), 0);
+		}
 		//draw left opponent hand, face down
 		RectF leftOpponentHand = leftOppHandFirstCardLocation();
-		drawCardFaces(g, leftOpponentHand, 0, 0.05f*height, state.getDeck(3).size(), 1);
+		drawCardBacks(g, leftOpponentHand, 0, 0.05f*height, state.getDeck(3).size());
 
 		//draw teammate hand, face down
 		RectF teammateHand = teammateHandFirstCardLocation();
-		drawCardFaces(g, teammateHand, 0.06f*width, 0, state.getDeck(4).size(), 2);
+		drawCardBacks(g, teammateHand, 0.06f*width, 0, state.getDeck(4).size());
 
 		//draw right opponent hand, face down
 		RectF rightOpponentHand = rightOppHandFirstCardLocation();
-		drawCardFaces(g, rightOpponentHand, 0, 0.05f*height, state.getDeck(5).size(), 3);
+		drawCardBacks(g, rightOpponentHand, 0, 0.05f*height, state.getDeck(5).size());
 
 		drawOppMeldPiles(g, meldCard);
 		drawMyMeldPiles(g, meldCard);
@@ -417,7 +443,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 							MELD_TOP_BORDER_PERCENT*height/100f,
 							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							(MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
-					drawCardFaces(g,rect,0,0,1, state.toPlay());
+					drawCardFaces(g,rect,0,0,1, state.toPlay()); //TODO: not sure what last parameter should be
 				}
 			}
 		}
@@ -432,7 +458,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 							(100-MELD_TOP_BORDER_PERCENT)*height/100f,
 							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							(100-MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
-					drawCardFaces(g,rect2,0,0,1, state.toPlay());
+					drawCardFaces(g,rect2,0,0,1, state.toPlay()); //TODO: not sure what last parameter should be
 				}
 			}
 		}
@@ -458,16 +484,16 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		RectF myTopCardLoc = discardTopCardLocation();
 
 		// discard card
-		for (int i = 0; i < state.getDeck(2).size(); i++) {
-			RectF player = playerHandCardLocation(i);
-			if (player.contains(x,y)) {
-				surface.flash(Color.GRAY, 100);
-				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
-				Card card = state.getDeck(2).peekAtCards(i);
-
-				game.sendAction(new CanastaDiscardAction(this, card));
-			}
-		}
+//		for (int i = 0; i < state.getDeck(2).size(); i++) {
+//			RectF player = playerHandCardLocation(i);
+//			if (player.contains(x,y)) {
+//				surface.flash(Color.GRAY, 100);
+//				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
+//				Card card = state.getDeck(2).peekAtCards(i);
+//
+//				game.sendAction(new CanastaDiscardAction(this, card));
+//			}
+//		}
 
 		// select card
 		for (int i = 0; i < state.getDeck(2).size(); i++) {
@@ -484,7 +510,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
 				//Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
 				//Log.i("array", selected[i].toString());
-				game.sendAction(new CanastaMeldAction(this));
+
 			}
 		}
 

@@ -41,8 +41,8 @@ public class CanastaState extends GameState
 
 	public int substage;
 
-	public Card[][] myTeamMeld;
-	public Card[][] otherTeamMeld;
+	public ArrayList<Card> myTeamMeld = new ArrayList<Card>();
+	public ArrayList<Card> otherTeamMeld = new ArrayList<Card>();
 	public Card[] temp;
 
 
@@ -85,6 +85,8 @@ public class CanastaState extends GameState
     			piles[1-toPlay].size()+1) {
     		piles[toPlay].moveTopCardTo(piles[1-toPlay]);
     	}*/
+
+		piles[0].moveTopCardTo(piles[1]);
 
 		/* deals 11 cards to each player */
 		for(int i=0; i<11; i++){ //card
@@ -155,23 +157,25 @@ public class CanastaState extends GameState
 	/**
 	 * Replaces all cards with null, except for the top card of deck 2
 	 */
-	public void nullAllButTopOf2() {
+	public void nullAllButTopOf2() { //TODO: fix this
 		// see if the middle deck is empty; remove top card from middle deck
-		boolean empty2 = piles[0].size() == 0;
-		Card c = piles[0].removeTopCard();
+		boolean empty2 = piles[1].size() == 0;
+		Card c = piles[1].removeTopCard();
 
 		// set all cards in deck to null
 		/*for (Deck d : piles) {
 			d.nullifyDeck();
 		}*/
 
-		for (int d = 3; d < 6; d++) {
-			getDeck(d).nullifyDeck();
+		for (int d = 0; d < 6; d++) {
+			if(d != toPlay+2) {
+				getDeck(d).nullifyDeck();
+			}
 		}
 
 		// if middle deck had not been empty, add back the top (non-null) card
 		if (!empty2) {
-			piles[0].add(c);
+			piles[1].add(c);
 		}
 	}
 
@@ -228,13 +232,16 @@ public class CanastaState extends GameState
 	}
 
 	public boolean canMeld(Card[] cards) {
-		Rank rank = cards[0].getRank();
 		boolean r = false;
-		for (int i = 1; i < cards.length - 1; i++) {
-			if (rank.equals(cards[i].getRank())) {
-				r = true;
-			} else {
-				r = false;
+		if(cards != null){
+			Rank rank = cards[0].getRank();
+
+			for (int i = 1; i < cards.length - 1; i++) {
+				if (rank.equals(cards[i].getRank())) {
+					r = true;
+				} else {
+					r = false;
+				}
 			}
 		}
 		return r;
@@ -271,12 +278,56 @@ public class CanastaState extends GameState
 		//return c;
 	}
 
-	public void Meld(Card[] c) {
-		Deck player = getDeck(toPlay);
-		Deck meld = getDeck(2);
-		for (int i = 0; i <c.length; i++) {
-			player.removeCard(c[i]);
-			meld.add(c[i]);
+	public void Meld(ArrayList<Card> c) {
+		Deck player = getDeck(toPlay + 2);
+		int count = 0;
+		for (int i = 0; i < c.size(); i++) {
+			if (c.get(i).getSelected() == true) {
+				count++;
+			}
+		}
+		System.out.println(count+ " cards selected");
+		Card[] selected = new Card[count];
+		int temp = 0;
+		for (int i =0; i < c.size(); i++) { //changed
+			if (c.get(i).getSelected() == true) {
+				selected[temp] = c.get(i);
+				temp++;
+			}
+		}
+
+		if (canMeld(selected) == true) {
+			Rank r = selected[0].getRank();
+			int rank;
+			if (r.equals("J")) {
+				rank = 11;
+			}
+			else if (r.equals("Q")) {
+				rank = 12;
+			}
+			else if (r.equals("K")) {
+				rank = 13;
+			}
+			else if (r.equals("A")) {
+				rank = 14;
+			}
+			else {
+				rank = Integer.parseInt(r.toString());
+			}
+
+
+			for (int i = 0; i < selected.length; i++) {
+				player.removeCard(selected[i]);
+			}
+			for (int i = 0; i < selected.length; i++) {
+				if (toPlay() == 0 || toPlay() == 3) {
+					myTeamMeld.add(selected[i]);
+				}
+				else {
+					otherTeamMeld.add(selected[i]);
+				}
+
+			}
 		}
 	}
 
