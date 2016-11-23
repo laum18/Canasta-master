@@ -182,8 +182,13 @@ public class CanastaLocalGame extends LocalGame {
 			}
 		}
 		else if (canastaMA instanceof CanastaMeldAction) {
-			// need to get cards
-			//state.canMeld()
+			if (state.substage == 1) {
+				state.Meld(state.getDeck(thisPlayerIdx+2).getCards());
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 		// return true, because the move was successful if we get here
