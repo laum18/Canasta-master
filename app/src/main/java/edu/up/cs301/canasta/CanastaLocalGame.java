@@ -31,11 +31,11 @@ public class CanastaLocalGame extends LocalGame {
 	protected String checkIfGameOver() {
 		// human player and teammate are the winner
 		if (state.getTeamOneTotalScore() >= state.getGoal()) {
-			return this.playerNames[0] + "," + this.playerNames[3] + " is the winner";
+			return this.playerNames[0] + "," + this.playerNames[2] + " is the winner";
 		}
 		// computer players are the winner
 		else if (state.getTeamTwoTotalScore() >= state.getGoal()){
-			return this.playerNames[2] + "," + this.playerNames[4] + " is the winner";
+			return this.playerNames[1] + "," + this.playerNames[3] + " is the winner";
 		}
 		// the game is not over
 		else {

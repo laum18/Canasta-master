@@ -293,9 +293,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
 		//draw my hand (should be face up)
 		RectF playerHandLocation = playerHandFirstCardLocation();
-		drawCardFaces(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size(), 0);
+		drawCardFaces(g, playerHandLocation, 0.075f*width, 0, state.getDeck(2).size(), 0);
 		if(state.toPlay() == 0) {
-			drawSelected(g, playerHandLocation, 0.06f * width, 0, state.getDeck(2).size(), 0);
+			drawSelected(g, playerHandLocation, 0.075f * width, 0, state.getDeck(2).size(), 0);
 		}
 		//draw left opponent hand, face down
 		RectF leftOpponentHand = leftOppHandFirstCardLocation();
@@ -363,7 +363,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		int height = surface.getHeight();
 		int width = surface.getWidth();
 
-		float deltaX = cardNum * (0.06f*width);
+		float deltaX = cardNum * (0.075f*width);
 
 		return new RectF((LEFT_BORDER_PERCENT*width/100f) + (deltaX),
 				(100-PLAYER_HAND_VERTICAL_BORDER_PERCENT-CARD_HEIGHT_PERCENT)*height/100f,
@@ -479,30 +479,33 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		int height = surface.getHeight()-250;
 		int width = surface.getWidth()-550;
 		for(int i =0; i<12;i++){
-			for(int j = 0; j<8; j++){
-				if(c[i][j] == null){
+
+				//if(c[i][j] == null){
 					RectF rect = new RectF((MELD_LEFT_BORDER_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							MELD_TOP_BORDER_PERCENT*height/100f,
 							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							(MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
-					drawCardFaces(g,rect,0,0,1, state.toPlay()); //TODO: not sure what last parameter should be
-				}
-			}
+
+					drawCard(g, rect, state.getDeck(6).peekAtCards(i));
+				//}
+
+
+			//}
 		}
 	}
 	private void drawMyMeldPiles(Canvas g, Card[][] c){
 		int height = surface.getHeight()-250;
 		int width = surface.getWidth()-550;
 		for(int i =0; i<12;i++){
-			for(int j = 0; j<8; j++){
-				if(c[i][j] == null){
+
+				//if(c[i][j] == null){
 					RectF rect2 = new RectF((MELD_LEFT_BORDER_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							(100-MELD_TOP_BORDER_PERCENT)*height/100f,
 							(MELD_LEFT_BORDER_PERCENT+CARD_WIDTH_PERCENT + i*CARD_WIDTH_PERCENT)*width/100f,
 							(100-MELD_TOP_BORDER_PERCENT+CARD_HEIGHT_PERCENT)*height/100f);
-					drawCardFaces(g,rect2,0,0,1, state.toPlay()); //TODO: not sure what last parameter should be
-				}
-			}
+				drawCard(g, rect2, state.getDeck(6).peekAtCards(i));
+				//}
+
 		}
 	}
 
@@ -541,7 +544,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		for (int i = 0; i < state.getDeck(2).size(); i++) {
 			RectF player = playerHandCardLocation(i);
 			if (player.contains(x,y)) {
-				surface.flash(Color.GRAY, 100);
+				//surface.flash(Color.GRAY, 100);
 				if (state.getDeck(playerNum + 2).peekAtCards(i).getSelected() == false) {
 					state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
 				}

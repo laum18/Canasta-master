@@ -75,7 +75,7 @@ public class CanastaState extends GameState
 		teamTwoRoundScore = 0;
 		teamOneTotalScore = 0;
 		teamTwoTotalScore = 0;
-		goal = 5000;
+		goal = 30;
 
 		// 0 = drawDeck/drawDiscard stage, 1 = meldCard/discard stage
 		substage = 0;
@@ -84,7 +84,7 @@ public class CanastaState extends GameState
 		// - each player deck (#0 and #1) gets half the cards, randomly
 		//   selected
 		// - the middle deck (#2) is empty
-		piles = new Deck[6];
+		piles = new Deck[7];
 		piles[0] = new Deck(); // create empty deck (initial deck)
 		piles[1] = new Deck(); // create empty deck (discard)
 		piles[2] = new Deck(); // player 0 deck (you)
@@ -98,6 +98,20 @@ public class CanastaState extends GameState
     			piles[1-toPlay].size()+1) {
     		piles[toPlay].moveTopCardTo(piles[1-toPlay]);
     	}*/
+
+		piles[6] = new Deck();
+		piles[6].add(Card.fromString("3"+"D"));
+		piles[6].add(Card.fromString("4"+"D"));
+		piles[6].add(Card.fromString("5"+"D"));
+		piles[6].add(Card.fromString("6"+"D"));
+		piles[6].add(Card.fromString("7"+"D"));
+		piles[6].add(Card.fromString("8"+"D"));
+		piles[6].add(Card.fromString("9"+"D"));
+		piles[6].add(Card.fromString("T"+"D"));
+		piles[6].add(Card.fromString("J"+"D"));
+		piles[6].add(Card.fromString("Q"+"D"));
+		piles[6].add(Card.fromString("K"+"D"));
+		piles[6].add(Card.fromString("A"+"D"));
 
 		piles[0].moveTopCardTo(piles[1]);
 
@@ -127,13 +141,14 @@ public class CanastaState extends GameState
 		substage = orig.substage;
 
 		// create new deck array, making copy of each deck
-		piles = new Deck[6];
+		piles = new Deck[7];
 		piles[0] = new Deck(orig.piles[0]); //actual deck
 		piles[1] = new Deck(orig.piles[1]); // discard
 		piles[2] = new Deck(orig.piles[2]); // human player's deck
 		piles[3] = new Deck(orig.piles[3]); // left player
 		piles[4] = new Deck(orig.piles[4]); // teammate's deck
 		piles[5] = new Deck(orig.piles[5]); // right player
+		piles[6] = new Deck(orig.piles[6]); // meld piles
 
 		three = orig.three;
 		four = orig.four;
@@ -156,7 +171,7 @@ public class CanastaState extends GameState
 	 *   index is 2
 	 */
 	public Deck getDeck(int num) {
-		if (num < 0 || num > 5) return null;
+		if (num < 0 || num > 6) return null;
 		return piles[num];
 	}
 
@@ -313,6 +328,8 @@ public class CanastaState extends GameState
 		for (int i = 0; i < c.size(); i++) {
 			if (c.get(i).getSelected() == true) {
 				count++;
+				teamOneTotalScore +=5; //TODO: check who is doing the meld
+
 			}
 		}
 		System.out.println(count+ " cards selected");
