@@ -94,7 +94,10 @@ public enum Rank {
 	QUEEN,
 
 	// king
-	KING
+	KING,
+
+	// joker
+	RJOKER,
 	;
 
 	/**

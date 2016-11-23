@@ -73,19 +73,21 @@ public final class R {
         public static final int card_qd=0x7f02002d;
         public static final int card_qh=0x7f02002e;
         public static final int card_qs=0x7f02002f;
-        public static final int card_rb=0x7f020030;
-        public static final int card_rr=0x7f020031;
-        public static final int card_tc=0x7f020032;
-        public static final int card_td=0x7f020033;
-        public static final int card_th=0x7f020034;
-        public static final int card_ts=0x7f020035;
-        public static final int ic_action_search=0x7f020036;
-        public static final int ic_launcher=0x7f020037;
-        public static final int purple_delete_button=0x7f020038;
-        public static final int suit_c=0x7f020039;
-        public static final int suit_d=0x7f02003a;
-        public static final int suit_h=0x7f02003b;
-        public static final int suit_s=0x7f02003c;
+        public static final int card_rc=0x7f020030;
+        public static final int card_rd=0x7f020031;
+        public static final int card_rh=0x7f020032;
+        public static final int card_rs=0x7f020033;
+        public static final int card_tc=0x7f020034;
+        public static final int card_td=0x7f020035;
+        public static final int card_th=0x7f020036;
+        public static final int card_ts=0x7f020037;
+        public static final int ic_action_search=0x7f020038;
+        public static final int ic_launcher=0x7f020039;
+        public static final int purple_delete_button=0x7f02003a;
+        public static final int suit_c=0x7f02003b;
+        public static final int suit_d=0x7f02003c;
+        public static final int suit_h=0x7f02003d;
+        public static final int suit_s=0x7f02003e;
     }
     public static final class id {
         public static final int addPlayerButton=0x7f09003a;
