@@ -86,6 +86,8 @@ public class CanastaState extends GameState
     		piles[toPlay].moveTopCardTo(piles[1-toPlay]);
     	}*/
 
+		piles[0].moveTopCardTo(piles[1]);
+
 		/* deals 11 cards to each player */
 		for(int i=0; i<11; i++){ //card
 			for(int j=0; j<4; j++){ //player
