@@ -227,6 +227,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		//draw my hand (should be face up)
 		RectF playerHandLocation = playerHandFirstCardLocation();
 		drawCardFaces(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size(), 0);
+		drawSelected(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size(), 0);
 
 		//draw left opponent hand, face down
 		RectF leftOpponentHand = leftOppHandFirstCardLocation();
@@ -391,6 +392,21 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		}
 	}
 
+	private void drawSelected(Canvas g, RectF topRect, float deltaX, float deltaY, int numCards, int player) {
+		// loop through from back to front, drawing a card-back in each location
+		for (int i = 0; i <= numCards-1; i++) {
+			if (state.getDeck(player+2).peekAtCards(i).getSelected() == true) {
+				// determine the position of this card's top/left corner
+				float left = topRect.left + i*deltaX;
+				float top = topRect.top + i*deltaY;
+				// draw a card-back (hence null) into the appropriate rectangle
+				drawCard(g,
+						new RectF(left - 20, top-20, left + topRect.width(), top + topRect.height()),
+						state.getDeck(player+2).peekAtCards(i));
+			}
+		}
+	}
+
 	private void drawOppMeldPiles(Canvas g, Card[][] c){
 		int height = surface.getHeight()-250;
 		int width = surface.getWidth()-550;
@@ -456,13 +472,17 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		// select card
 		for (int i = 0; i < state.getDeck(2).size(); i++) {
 			RectF player = playerHandCardLocation(i);
-			//drawCardFaces(g, playerHandLocation, 0.06f*width, 0, state.getDeck(2).size());
-			//drawSelectedFaces(g, player, 0.06f*width, 0, state.getDeck(2).size());
-
 			if (player.contains(x,y)) {
 				surface.flash(Color.GRAY, 100);
-				selected[i] = state.getDeck(2).peekAtCards(i);
-				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
+				if (state.getDeck(playerNum + 2).peekAtCards(i).getSelected() == false) {
+					state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
+				}
+				else {
+					state.getDeck(playerNum + 2).peekAtCards(i).setSelected(false);
+				}
+
+
+				//Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
 				//Log.i("array", selected[i].toString());
 				game.sendAction(new CanastaMeldAction(this));
 			}
@@ -522,6 +542,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 			// just draw the card
 			c.drawOn(g, rect);
 		}
+
 	}
 
 	/**

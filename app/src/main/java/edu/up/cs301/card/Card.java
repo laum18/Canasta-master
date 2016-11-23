@@ -33,6 +33,7 @@ public class Card implements Serializable {
 	// instance variables: the card's rank and the suit
     private Rank rank;
     private Suit suit;
+	protected boolean selected;
 
     /**
      * Constructor for class card
@@ -43,6 +44,7 @@ public class Card implements Serializable {
     public Card(Rank r, Suit s) {
         rank = r;
         suit = s;
+		selected = false;
     }
 
     /**
@@ -219,5 +221,13 @@ public class Card implements Serializable {
     		}
     	}
     }
+
+	public Boolean getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Boolean b) {
+		selected = b;
+	}
 
 }
