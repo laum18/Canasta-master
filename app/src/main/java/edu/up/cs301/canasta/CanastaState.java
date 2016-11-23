@@ -41,8 +41,8 @@ public class CanastaState extends GameState
 
 	public int substage;
 
-	public Card[][] myTeamMeld;
-	public Card[][] otherTeamMeld;
+	public ArrayList<Card> myTeamMeld = new ArrayList<Card>();
+	public ArrayList<Card> otherTeamMeld = new ArrayList<Card>();
 	public Card[] temp;
 
 
@@ -271,12 +271,50 @@ public class CanastaState extends GameState
 		//return c;
 	}
 
-	public void Meld(Card[] c) {
-		Deck player = getDeck(toPlay);
-		Deck meld = getDeck(2);
-		for (int i = 0; i <c.length; i++) {
-			player.removeCard(c[i]);
-			meld.add(c[i]);
+	public void Meld(ArrayList<Card> c) {
+		Deck player = getDeck(toPlay + 2);
+
+		int count = 0;
+		Card[] selected = new Card[c.size()];
+		for (int i =0; i < c.size(); i++) {
+			if (c.get(i).getSelected() == true) {
+				selected[count] = c.get(i);
+				count++;
+			}
+		}
+
+		if (canMeld(selected) == true) {
+			Rank r = selected[0].getRank();
+			int rank;
+			if (r.equals("J")) {
+				rank = 11;
+			}
+			else if (r.equals("Q")) {
+				rank = 12;
+			}
+			else if (r.equals("K")) {
+				rank = 13;
+			}
+			else if (r.equals("A")) {
+				rank = 14;
+			}
+			else {
+				rank = Integer.parseInt(r.toString());
+			}
+
+
+			for (int i = 0; i < selected.length; i++) {
+				player.removeCard(selected[i]);
+			}
+			for (int i = 0; i < selected.length; i++) {
+				if (toPlay() == 0 || toPlay() == 3) {
+					myTeamMeld.add(selected[i]);
+				}
+				else {
+					otherTeamMeld.add(selected[i]);
+				}
+
+			}
 		}
 	}
 
