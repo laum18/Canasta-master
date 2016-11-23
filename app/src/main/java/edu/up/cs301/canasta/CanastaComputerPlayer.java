@@ -87,24 +87,20 @@ public class CanastaComputerPlayer extends GameComputerPlayer
     	
     	// access the state's middle deck
     	Deck middleDeck = savedState.getDeck(2);
-    	
-    	// look at the top card
-    	Card topCard = middleDeck.peekAtTopCard();
+
     	
     	// if it's a Jack, slap it; otherwise, if it's our turn to
     	// play, play a card
-    	if (topCard != null && topCard.getRank() == Rank.JACK) {
-    		// we have a Jack to slap: set up a timer, depending on reaction time.
-    		// The slap will occur when the timer "ticks". Our reaction time will be
-    		// between the minimum reaction time and 3 times the minimum reaction time
-        	int time = (int)(minReactionTimeInMillis*(1+2*Math.random()));
-    		this.getTimer().setInterval(time);
-    		this.getTimer().start();
-    	}
-    	else if (savedState.toPlay() == this.playerNum) {
-    		// not a Jack but it's my turn to play a card
-    		
-    		// delay for up to two seconds; then play
+//    	if (topCard != null && topCard.getRank() == Rank.JACK) {
+//    		// we have a Jack to slap: set up a timer, depending on reaction time.
+//    		// The slap will occur when the timer "ticks". Our reaction time will be
+//    		// between the minimum reaction time and 3 times the minimum reaction time
+//        	int time = (int)(minReactionTimeInMillis*(1+2*Math.random()));
+//    		this.getTimer().setInterval(time);
+//    		this.getTimer().start();
+//    	}
+    	if (savedState.toPlay() == this.playerNum) {
+			//delay half-second
         	sleep(500);
 
 			game.sendAction(drawDeck);

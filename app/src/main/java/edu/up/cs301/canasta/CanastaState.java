@@ -157,23 +157,25 @@ public class CanastaState extends GameState
 	/**
 	 * Replaces all cards with null, except for the top card of deck 2
 	 */
-	public void nullAllButTopOf2() {
+	public void nullAllButTopOf2() { //TODO: fix this
 		// see if the middle deck is empty; remove top card from middle deck
-		boolean empty2 = piles[0].size() == 0;
-		Card c = piles[0].removeTopCard();
+		boolean empty2 = piles[1].size() == 0;
+		Card c = piles[1].removeTopCard();
 
 		// set all cards in deck to null
 		/*for (Deck d : piles) {
 			d.nullifyDeck();
 		}*/
 
-		for (int d = 3; d < 6; d++) {
-			getDeck(d).nullifyDeck();
+		for (int d = 0; d < 6; d++) {
+			if(d != toPlay+2) {
+				getDeck(d).nullifyDeck();
+			}
 		}
 
 		// if middle deck had not been empty, add back the top (non-null) card
 		if (!empty2) {
-			piles[0].add(c);
+			piles[1].add(c);
 		}
 	}
 
@@ -232,15 +234,15 @@ public class CanastaState extends GameState
 	public boolean canMeld(Card[] cards) {
 		boolean r = false;
 		if(cards != null){
-		Rank rank = cards[0].getRank();
+			Rank rank = cards[0].getRank();
 
-		for (int i = 1; i < cards.length - 1; i++) {
-			if (rank.equals(cards[i].getRank())) {
-				r = true;
-			} else {
-				r = false;
+			for (int i = 1; i < cards.length - 1; i++) {
+				if (rank.equals(cards[i].getRank())) {
+					r = true;
+				} else {
+					r = false;
+				}
 			}
-		}
 		}
 		return r;
 	}
@@ -284,10 +286,10 @@ public class CanastaState extends GameState
 				count++;
 			}
 		}
-
+		System.out.println(count+ " cards selected");
 		Card[] selected = new Card[count];
 		int temp = 0;
-		for (int i =0; i < count; i++) {
+		for (int i =0; i < c.size(); i++) { //changed
 			if (c.get(i).getSelected() == true) {
 				selected[temp] = c.get(i);
 				temp++;
