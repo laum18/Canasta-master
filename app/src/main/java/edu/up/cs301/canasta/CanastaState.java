@@ -273,13 +273,19 @@ public class CanastaState extends GameState
 
 	public void Meld(ArrayList<Card> c) {
 		Deck player = getDeck(toPlay + 2);
-
 		int count = 0;
-		Card[] selected = new Card[c.size()];
-		for (int i =0; i < c.size(); i++) {
+		for (int i = 0; i < c.size(); i++) {
 			if (c.get(i).getSelected() == true) {
-				selected[count] = c.get(i);
 				count++;
+			}
+		}
+
+		Card[] selected = new Card[count];
+		int temp = 0;
+		for (int i =0; i < count; i++) {
+			if (c.get(i).getSelected() == true) {
+				selected[temp] = c.get(i);
+				temp++;
 			}
 		}
 
