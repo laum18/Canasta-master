@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -69,6 +70,21 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 	//button instance variables
 	private Button meldButton;
 	private Button discardButton;
+
+	TextView my3;
+	TextView my4;
+	TextView my5;
+	TextView my6;
+	TextView my7;
+	TextView my8;
+	TextView my9;
+	TextView my10;
+	TextView myj;
+	TextView myq;
+	TextView myk;
+	TextView mya;
+
+
 	/**
 	 * constructor
 	 *
@@ -134,6 +150,19 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		meldButton.setOnClickListener(this);
 		discardButton.setOnClickListener(this);
 
+		my3 = (TextView) activity.findViewById(R.id.myThree);
+		my4 = (TextView) activity.findViewById(R.id.myFour);
+		my5 = (TextView) activity.findViewById(R.id.myFive);
+		my6 = (TextView) activity.findViewById(R.id.mySix);
+		my7 = (TextView) activity.findViewById(R.id.mySeven);
+		my8 = (TextView) activity.findViewById(R.id.myEight);
+		my9 = (TextView) activity.findViewById(R.id.myNine);
+		my10 = (TextView) activity.findViewById(R.id.myTen);
+		myj = (TextView) activity.findViewById(R.id.myEleven);
+		myq = (TextView) activity.findViewById(R.id.myTwelve);
+		myk = (TextView) activity.findViewById(R.id.myThirteen);
+		mya = (TextView) activity.findViewById(R.id.myAce);
+
 
 		// read in the card images
 		Card.initImages(activity);
@@ -149,6 +178,19 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		if(v==meldButton){
 			meldButton.setBackgroundColor(Color.BLUE);
 			game.sendAction((new CanastaMeldAction(this)));
+
+			my3.setText(Integer.toString(state.three));
+			my4.setText(Integer.toString(state.four));
+			my5.setText(Integer.toString(state.five));
+			my6.setText(Integer.toString(state.six));
+			my7.setText(Integer.toString(state.seven));
+			my8.setText(Integer.toString(state.eight));
+			my9.setText(Integer.toString(state.nine));
+			my10.setText(Integer.toString(state.ten));
+			myj.setText(Integer.toString(state.jack));
+			myq.setText(Integer.toString(state.queen));
+			myk.setText(Integer.toString(state.king));
+			mya.setText(Integer.toString(state.ace));
 
 
 		}

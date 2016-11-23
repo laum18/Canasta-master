@@ -45,6 +45,19 @@ public class CanastaState extends GameState
 	public ArrayList<Card> otherTeamMeld = new ArrayList<Card>();
 	public Card[] temp;
 
+	public int three = 0;
+	public int four = 0;
+	public int five = 0;
+	public int six = 0;
+	public int seven = 0;
+	public int eight = 0;
+	public int nine = 0;
+	public int ten = 0;
+	public int jack = 0;
+	public int queen = 0;
+	public int king = 0;
+	public int ace = 0;
+
 
 	/**
 	 * Constructor for objects of class SJState. Initializes for the beginning of the
@@ -121,6 +134,19 @@ public class CanastaState extends GameState
 		piles[3] = new Deck(orig.piles[3]); // left player
 		piles[4] = new Deck(orig.piles[4]); // teammate's deck
 		piles[5] = new Deck(orig.piles[5]); // right player
+
+		three = orig.three;
+		four = orig.four;
+		five = orig.five;
+		six = orig.six;
+		seven = orig.seven;
+		eight = orig.eight;
+		nine = orig.nine;
+		ten = orig.ten;
+		jack = orig.jack;
+		queen = orig.queen;
+		king = orig.king;
+		ace = orig.ace;
 	}
 
 	/**
@@ -233,14 +259,17 @@ public class CanastaState extends GameState
 
 	public boolean canMeld(Card[] cards) {
 		boolean r = false;
-		if(cards != null){
+		if(cards != null && cards.length > 0){
 			Rank rank = cards[0].getRank();
 
-			for (int i = 1; i < cards.length - 1; i++) {
-				if (rank.equals(cards[i].getRank())) {
-					r = true;
-				} else {
-					r = false;
+			for (int i = 0; i < cards.length - 1; i++) {
+				for (int j = i; j < cards.length - 1; j++) {
+					if (cards[i].getRank().equals(cards[j+1].getRank())) {
+						r = true;
+					} else {
+						r = false;
+						return r;
+					}
 				}
 			}
 		}
@@ -299,20 +328,63 @@ public class CanastaState extends GameState
 		if (canMeld(selected) == true) {
 			Rank r = selected[0].getRank();
 			int rank;
-			if (r.equals("J")) {
+			if (r.equals("TWO")) {
+				rank = 2;
+			} else if (r.shortName() == '3') {
+				rank = 3;
+				three += count;
+				System.out.println(""+three);
+			} else if (r.shortName() == '4') {
+				rank = 4;
+				four += count;
+				System.out.println(""+four);
+			} else if (r.shortName() == '5') {
+				rank = 5;
+				five += count;
+				System.out.println(""+five);
+			} else if (r.shortName() == '6') {
+				rank = 6;
+				six += count;
+				System.out.println(""+six);
+			} else if (r.shortName() == '7') {
+				rank = 7;
+				seven += count;
+				System.out.println(""+seven);
+			} else if (r.shortName() == '8') {
+				rank = 8;
+				eight += count;
+				System.out.println(""+eight);
+			} else if (r.shortName() == '9') {
+				rank = 9;
+				nine += count;
+				System.out.println(""+nine);
+			} else if (r.shortName() == 'T') {
+				rank = 10;
+				ten += count;
+				System.out.println(""+ten);
+			}
+			else if (r.shortName() == 'J') {
 				rank = 11;
+				jack += count;
+				System.out.println(""+jack);
 			}
-			else if (r.equals("Q")) {
+			else if (r.shortName() == 'Q') {
 				rank = 12;
+				queen += count;
+				System.out.println(""+queen);
 			}
-			else if (r.equals("K")) {
+			else if (r.shortName() == 'K') {
 				rank = 13;
+				king += count;
+				System.out.println(""+king);
 			}
-			else if (r.equals("A")) {
+			else if (r.shortName() == 'A') {
 				rank = 14;
+				ace += count;
+				System.out.println(""+ace);
 			}
 			else {
-				rank = Integer.parseInt(r.toString());
+				//rank = (int) Integer.parseInt(r.toString());
 			}
 
 
