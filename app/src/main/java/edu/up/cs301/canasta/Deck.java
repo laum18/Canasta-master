@@ -60,6 +60,8 @@ public class Deck implements Serializable {
 					this.add(Card.fromString(""+r+s));
 				}
 			}
+			//this.add(Card.fromString("JB"));
+			//this.add(Card.fromString("JR"));
 		}
 		// return the deck
 		return this;

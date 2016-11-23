@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 import edu.up.cs301.animation.AnimationSurface;
 import edu.up.cs301.animation.Animator;
 import edu.up.cs301.card.Card;
@@ -62,7 +64,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
 	private static Card discard;
 
-	public Card[] selected = new Card[15];
+
 
 	//button instance variables
 	private Button meldButton;
@@ -146,9 +148,32 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 	public void onClick(View v){
 		if(v==meldButton){
 			meldButton.setBackgroundColor(Color.BLUE);
+			game.sendAction((new CanastaMeldAction(this)));
+
+
 		}
 		else if(v==discardButton){
-			discardButton.setBackgroundColor(Color.RED);
+
+			 //discard card
+			ArrayList<Card> selected = new ArrayList<Card>();
+			ArrayList<Card> hand = state.getDeck(2).getCards();
+			for (Card c: hand) {
+				if (c.getSelected()){
+					selected.add(c);
+				}
+				if(selected.size() == 1){
+					game.sendAction(new CanastaDiscardAction(this, selected.get(0)));
+				}
+
+//			RectF player = playerHandCardLocation(i);
+//			if (player.contains(x,y)) {
+//				surface.flash(Color.GRAY, 100);
+//				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
+//				Card card = state.getDeck(2).peekAtCards(i);
+//
+//				game.sendAction(new CanastaDiscardAction(this, card));
+//			}
+			}
 		}
 	}
 
@@ -458,16 +483,16 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		RectF myTopCardLoc = discardTopCardLocation();
 
 		// discard card
-		for (int i = 0; i < state.getDeck(2).size(); i++) {
-			RectF player = playerHandCardLocation(i);
-			if (player.contains(x,y)) {
-				surface.flash(Color.GRAY, 100);
-				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
-				Card card = state.getDeck(2).peekAtCards(i);
-
-				game.sendAction(new CanastaDiscardAction(this, card));
-			}
-		}
+//		for (int i = 0; i < state.getDeck(2).size(); i++) {
+//			RectF player = playerHandCardLocation(i);
+//			if (player.contains(x,y)) {
+//				surface.flash(Color.GRAY, 100);
+//				Log.i(state.getDeck(2).peekAtCards(i).toString(),state.getDeck(2).peekAtCards(i).toString());
+//				Card card = state.getDeck(2).peekAtCards(i);
+//
+//				game.sendAction(new CanastaDiscardAction(this, card));
+//			}
+//		}
 
 		// select card
 		for (int i = 0; i < state.getDeck(2).size(); i++) {

@@ -230,14 +230,17 @@ public class CanastaState extends GameState
 	}
 
 	public boolean canMeld(Card[] cards) {
-		Rank rank = cards[0].getRank();
 		boolean r = false;
+		if(cards != null){
+		Rank rank = cards[0].getRank();
+
 		for (int i = 1; i < cards.length - 1; i++) {
 			if (rank.equals(cards[i].getRank())) {
 				r = true;
 			} else {
 				r = false;
 			}
+		}
 		}
 		return r;
 	}
