@@ -9,6 +9,8 @@ import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+
 import edu.up.cs301.animation.AnimationSurface;
 import edu.up.cs301.animation.Animator;
 import edu.up.cs301.card.Card;
@@ -28,7 +30,7 @@ import edu.up.cs301.game.infoMsg.NotYourTurnInfo;
  * @author Steven R. Vegdahl
  * @version July 2013
  */
-public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
+public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, View.OnClickListener {
 
 	// sizes and locations of card decks and cards, expressed as percentages
 	// of the screen height and width
@@ -62,6 +64,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 
 	public Card[] selected = new Card[15];
 
+	//button instance variables
+	private Button meldButton;
+	private Button discardButton;
 	/**
 	 * constructor
 	 *
@@ -121,6 +126,13 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 				.findViewById(R.id.animation_surface);
 		surface.setAnimator(this);
 
+		meldButton = (Button)activity.findViewById(R.id.meldButton);
+		discardButton = (Button)activity.findViewById(R.id.discardButton);
+
+		meldButton.setOnClickListener(this);
+		discardButton.setOnClickListener(this);
+
+
 		// read in the card images
 		Card.initImages(activity);
 
@@ -128,6 +140,15 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator {
 		// any state-related processing is done
 		if (state != null) {
 			receiveInfo(state);
+		}
+	}
+
+	public void onClick(View v){
+		if(v==meldButton){
+			meldButton.setBackgroundColor(Color.BLUE);
+		}
+		else if(v==discardButton){
+			discardButton.setBackgroundColor(Color.RED);
 		}
 	}
 

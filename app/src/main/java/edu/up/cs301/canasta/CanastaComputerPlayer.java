@@ -57,7 +57,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer
     	Card topCard = savedState.getDeck(2).peekAtTopCard();
     	if (topCard != null && topCard.getRank() == Rank.JACK) {
     		// the Jack is still there, so submit our move to the game object
-    		game.sendAction(new CanastaMeldAction(this));
+    		//game.sendAction(new CanastaMeldAction(this));
     	}
     	
     	// stop the timer, since we don't want another timer-tick until it
@@ -75,7 +75,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer
 		CanastaDrawDeckAction drawDeck = new CanastaDrawDeckAction(this);
 		CanastaMeldAction meld = new CanastaMeldAction(this);
 
-		sleep(500);
+		sleep(1000);
 
     	// if we don't have a game-state, ignore
     	if (!(info instanceof CanastaState)) {
@@ -105,7 +105,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer
     		// not a Jack but it's my turn to play a card
     		
     		// delay for up to two seconds; then play
-        	sleep((int)(2000*Math.random()));
+        	sleep(1000);
 
 			game.sendAction(drawDeck);
 
@@ -117,7 +117,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer
 //				game.sendAction(meld);
 //			}
 
-			CanastaDiscardAction discard = new CanastaDiscardAction(this, savedState.getDeck(this.playerNum).peekAtTopCard());
+			CanastaDiscardAction discard = new CanastaDiscardAction(this, savedState.getDeck(this.playerNum+2).peekAtTopCard());
 			game.sendAction(discard);
 
         	// submit our move to the game object

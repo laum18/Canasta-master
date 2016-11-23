@@ -149,6 +149,7 @@ public class CanastaState extends GameState
 	 */
 	public void setToPlay(int idx) {
 		toPlay = idx;
+		substage = 0;
 	}
 
 	/**
@@ -245,7 +246,6 @@ public class CanastaState extends GameState
 		player.removeCard(c);
 		discard.add(c);
 
-
 	}
 
 	public boolean canDiscard(Card c) {
@@ -263,7 +263,7 @@ public class CanastaState extends GameState
 		Log.i(c.toString(), "skdgfkad");
 		count++;
 		Log.i("" +count, "" +count);
-		Deck player = getDeck(2);
+		Deck player = getDeck(toPlay()+2);
 		Deck deck = getDeck(0);
 		ArrayList<Card> ca = deck.getCards();
 		ca.remove(c);
