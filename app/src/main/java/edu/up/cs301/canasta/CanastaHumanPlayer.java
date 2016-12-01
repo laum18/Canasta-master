@@ -72,6 +72,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 	//button instance variables
 	private Button meldButton;
 	private Button discardButton;
+	private Button drawDiscardButton;
 
 	TextView turn;
 	TextView teamOneRound;
@@ -156,9 +157,12 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
 		meldButton = (Button)activity.findViewById(R.id.meldButton);
 		discardButton = (Button)activity.findViewById(R.id.discardButton);
+		drawDiscardButton = (Button)activity.findViewById(R.id.drawDiscardButton);
 
 		meldButton.setOnClickListener(this);
 		discardButton.setOnClickListener(this);
+		drawDiscardButton.setOnClickListener(this);
+
 
 		turn = (TextView)activity.findViewById(R.id.turnIndicator);
 		teamOneRound = (TextView)activity.findViewById(R.id.oneRoundText);
@@ -230,6 +234,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 //			}
 			}
 			surface.invalidate();
+		}
+		else if(v==drawDiscardButton){
+			game.sendAction((new CanastaDrawDiscardAction(this)));
 		}
 		updateGUI();
 

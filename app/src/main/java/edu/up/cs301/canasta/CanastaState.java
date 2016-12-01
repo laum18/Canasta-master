@@ -323,6 +323,113 @@ public class CanastaState extends GameState
 		//return c;
 	}
 
+	//TODO: need to increment meld plie count
+	public void drawDiscard(Card c, ArrayList<Card> list) {
+		Deck player = getDeck(toPlay + 2);
+		int count = 0;
+		for(int i=0; i<list.size(); i++){
+			if(list.get(i).getSelected() == true){
+				count++;
+			}
+		}
+		Card[] selected = new Card[count+1];
+		int temp = 0;
+		for (int i =0; i < list.size(); i++) { //changed
+			if (list.get(i).getSelected() == true) {
+				selected[temp] = list.get(i);
+				temp++;
+			}
+		}
+		selected[count] = c;
+
+		if (canMeld(selected) == true) {
+			Rank r = selected[0].getRank();
+			int rank;
+			if (r.equals("TWO")) {
+				rank = 2;
+			} else if (r.shortName() == '3') {
+				rank = 3;
+				three += count;
+				System.out.println(""+three);
+			} else if (r.shortName() == '4') {
+				rank = 4;
+				four += count;
+				System.out.println(""+four);
+			} else if (r.shortName() == '5') {
+				rank = 5;
+				five += count;
+				System.out.println(""+five);
+			} else if (r.shortName() == '6') {
+				rank = 6;
+				six += count;
+				System.out.println(""+six);
+			} else if (r.shortName() == '7') {
+				rank = 7;
+				seven += count;
+				System.out.println(""+seven);
+			} else if (r.shortName() == '8') {
+				rank = 8;
+				eight += count;
+				System.out.println(""+eight);
+			} else if (r.shortName() == '9') {
+				rank = 9;
+				nine += count;
+				System.out.println(""+nine);
+			} else if (r.shortName() == 'T') {
+				rank = 10;
+				ten += count;
+				System.out.println(""+ten);
+			}
+			else if (r.shortName() == 'J') {
+				rank = 11;
+				jack += count;
+				System.out.println(""+jack);
+			}
+			else if (r.shortName() == 'Q') {
+				rank = 12;
+				queen += count;
+				System.out.println(""+queen);
+			}
+			else if (r.shortName() == 'K') {
+				rank = 13;
+				king += count;
+				System.out.println(""+king);
+			}
+			else if (r.shortName() == 'A') {
+				rank = 14;
+				ace += count;
+				System.out.println(""+ace);
+			}
+			else {
+				//rank = (int) Integer.parseInt(r.toString());
+			}
+
+
+			for (int i = 0; i < selected.length; i++) {
+				player.removeCard(selected[i]);
+			}
+			getDeck(1).removeCard(c);
+			for (int i = 0; i < selected.length; i++) {
+				if (toPlay() == 0 || toPlay() == 3) {
+					myTeamMeld.add(selected[i]);
+				}
+				else {
+					otherTeamMeld.add(selected[i]);
+				}
+			}
+			if (toPlay() == 0 || toPlay() == 3) {
+				myTeamMeld.add(c);
+			}
+			else {
+				otherTeamMeld.add(c);
+			}
+			teamOneTotalScore +=5; //TODO: check who is doing the meld
+		}
+
+	}
+
+
+	/* method to represent cards being melded in the game state */
 	public void Meld(ArrayList<Card> c) {
 		Deck player = getDeck(toPlay + 2);
 		int count = 0;

@@ -261,7 +261,7 @@ public class Deck implements Serializable {
 	}
 
 	public Card getTopCard(Deck d) {
-		return cards.get(cards.size()-2);
+		return cards.get(cards.size()-1);  //TODO: was -2
 	}
 
 	public ArrayList<Card> getCards() {
