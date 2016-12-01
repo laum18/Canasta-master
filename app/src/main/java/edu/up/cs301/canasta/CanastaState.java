@@ -274,19 +274,56 @@ public class CanastaState extends GameState
 	}
 
 	public boolean canMeld(Card[] cards) {
+		Rank rank = cards[0].getRank();
+		int check = 0;
 		boolean r = false;
 		if(cards != null && cards.length > 0){
-			Rank rank = cards[0].getRank();
-
 			for (int i = 0; i < cards.length - 1; i++) {
 				for (int j = i; j < cards.length - 1; j++) {
 					if (cards[i].getRank().equals(cards[j+1].getRank())) {
+						check++;
 						r = true;
 					} else {
 						r = false;
 						return r;
 					}
 				}
+			}
+		}
+
+		if (r && check > 2) {
+			return r;
+		}
+		else {
+			r = false;
+			if (rank.shortName() == '3' && three > 0) {
+				r = true;
+			} else if (rank.shortName() == '4' && four > 0) {
+				r = true;
+			} else if (rank.shortName() == '5' && five > 0) {
+				r = true;
+			} else if (rank.shortName() == '6' && six > 0) {
+				r = true;
+			} else if (rank.shortName() == '7' && seven > 0) {
+				r = true;
+			} else if (rank.shortName() == '8' && eight > 0) {
+				r = true;
+			} else if (rank.shortName() == '9' && nine > 0) {
+				r = true;
+			} else if (rank.shortName() == 'T' && ten > 0) {
+				r = true;
+			}
+			else if (rank.shortName() == 'J' && jack > 0) {
+				r = true;
+			}
+			else if (rank.shortName() == 'Q' && queen > 0) {
+				r = true;
+			}
+			else if (rank.shortName() == 'K' && king > 0) {
+				r = true;
+			}
+			else if (rank.shortName() == 'A' && ace > 0) {
+				r = true;
 			}
 		}
 		return r;
