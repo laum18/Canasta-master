@@ -376,4 +376,14 @@
             android:layout_weight="1" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn"
+        android:id="@+id/turnIndicator"
+        android:layout_alignTop="@+id/linearLayout2"
+        android:layout_alignBottom="@+id/linearLayout2"
+        android:layout_alignLeft="@+id/linearLayout3"
+        android:layout_alignStart="@+id/linearLayout3" />
+
 </RelativeLayout>

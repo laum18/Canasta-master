@@ -73,6 +73,12 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 	private Button meldButton;
 	private Button discardButton;
 
+	TextView turn;
+	TextView teamOneRound;
+	TextView teamTwoRound;
+	TextView teamOneTotal;
+	TextView teamTwoTotal;
+
 	TextView my3;
 	TextView my4;
 	TextView my5;
@@ -154,6 +160,13 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		meldButton.setOnClickListener(this);
 		discardButton.setOnClickListener(this);
 
+		turn = (TextView)activity.findViewById(R.id.turnIndicator);
+		teamOneRound = (TextView)activity.findViewById(R.id.oneRoundText);
+		teamTwoRound = (TextView)activity.findViewById(R.id.twoRoundText);
+		teamOneTotal = (TextView)activity.findViewById(R.id.oneTotalText);
+		teamTwoTotal = (TextView)activity.findViewById(R.id.twoTotalText);
+
+
 		my3 = (TextView) activity.findViewById(R.id.myThree);
 		my4 = (TextView) activity.findViewById(R.id.myFour);
 		my5 = (TextView) activity.findViewById(R.id.myFive);
@@ -166,6 +179,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		myq = (TextView) activity.findViewById(R.id.myTwelve);
 		myk = (TextView) activity.findViewById(R.id.myThirteen);
 		mya = (TextView) activity.findViewById(R.id.myAce);
+
+
 
 
 		// read in the card images
@@ -191,12 +206,19 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 			ArrayList<Card> selected = new ArrayList<Card>();
 			ArrayList<Card> hand = state.getDeck(2).getCards();
 			for (Card c: hand) {
+				if(c == null){
+					Log.i("","Reached this point");
+					break;
+				}
 				if (c.getSelected()){
 					selected.add(c);
 				}
 				if(selected.size() == 1){
 					game.sendAction(new CanastaDiscardAction(this, selected.get(0)));
+					break;
 				}
+
+
 
 //			RectF player = playerHandCardLocation(i);
 //			if (player.contains(x,y)) {
@@ -227,6 +249,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		myq.setText(Integer.toString(state.queen));
 		myk.setText(Integer.toString(state.king));
 		mya.setText(Integer.toString(state.ace));
+		int score = 5*(state.three + state.four + state.five + state.six + state.seven + state.eight
+				+ state.nine + state.ten + state.jack + state.queen + state.king + state.ace);
+		teamOneRound.setText(""+score);
 
 		surface.invalidate();
 
@@ -303,6 +328,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		//draw discard cards, face down
 		RectF discardTopLocation = discardTopCardLocation(); // drawing size/location
 		drawCard(g, discardTopLocation, c);
+
+
 
 		//draw my hand (should be face up)
 		RectF playerHandLocation = playerHandFirstCardLocation();
@@ -571,6 +598,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
 			}
 		}
+
 
 		// draws a card
 		RectF drawDeck = deckCardLocation();

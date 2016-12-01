@@ -75,7 +75,7 @@ public class CanastaState extends GameState
 		teamTwoRoundScore = 0;
 		teamOneTotalScore = 0;
 		teamTwoTotalScore = 0;
-		goal = 30;
+		goal = 100;
 
 		// 0 = drawDeck/drawDiscard stage, 1 = meldCard/discard stage
 		substage = 0;
@@ -92,6 +92,7 @@ public class CanastaState extends GameState
 		piles[4] = new Deck(); // player 2 deck (teammate)
 		piles[5] = new Deck(); // player 3 deck (right)
 		piles[0].add52(); // give all cards to deck
+		Log.i("","NUMBER OF CARDS "+piles[0].size());
 		piles[0].shuffle(); // shuffle the cards
 		// move cards to opponent, until to piles have ~same size
     	/*while (piles[toPlay].size() >=

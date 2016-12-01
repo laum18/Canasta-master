@@ -56,15 +56,15 @@ public class Deck implements Serializable {
 		// add the cards
 		for (int i = 0; i <= 1; i++) {
 			for (char s : "SHDC".toCharArray()) {
-				for (char r : "KQJT98765432A".toCharArray()) {
-					this.add(Card.fromString(""+r+s));
+				for (char r : "RKQJT98765432A".toCharArray()) {
+					if(!((s=='S' || s=='H')&& r=='R')){
+						this.add(Card.fromString(""+r+s));
+					}
+					//this.add(Card.fromString(""+r+s));
+
 				}
 			}
 		}
-		this.add(Card.fromString(""+'R'+'S'));
-		this.add(Card.fromString(""+'R'+'H'));
-		this.add(Card.fromString(""+'R'+'D'));
-		this.add(Card.fromString(""+'R'+'C'));
 		// return the deck
 		return this;
 	}

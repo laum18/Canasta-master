@@ -110,6 +110,7 @@ public class CanastaLocalGame extends LocalGame {
 		else {
 			// player can move if it's their turn, or if the middle deck is non-empty
 			// so they can slap
+
 			return state.toPlay() == playerIdx;
 		}
 	}
