@@ -328,7 +328,6 @@ public class CanastaState extends GameState
 		for (int i = 0; i < c.size(); i++) {
 			if (c.get(i).getSelected() == true) {
 				count++;
-				teamOneTotalScore +=5; //TODO: check who is doing the meld
 
 			}
 		}
@@ -407,10 +406,9 @@ public class CanastaState extends GameState
 
 			for (int i = 0; i < selected.length; i++) {
 				player.removeCard(selected[i]);
-			}
-			for (int i = 0; i < selected.length; i++) {
 				if (toPlay() == 0 || toPlay() == 3) {
 					myTeamMeld.add(selected[i]);
+					teamOneTotalScore +=5;
 				}
 				else {
 					otherTeamMeld.add(selected[i]);
@@ -421,6 +419,8 @@ public class CanastaState extends GameState
 	}
 
 
-
+	public CanastaState getState() {
+		return this;
+	}
 
 }

@@ -75,7 +75,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer
 		CanastaDrawDeckAction drawDeck = new CanastaDrawDeckAction(this);
 		CanastaMeldAction meld = new CanastaMeldAction(this);
 
-		sleep(500);
+		sleep(100);
 
     	// if we don't have a game-state, ignore
     	if (!(info instanceof CanastaState)) {
@@ -101,7 +101,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer
 //    	}
     	if (savedState.toPlay() == this.playerNum) {
 			//delay half-second
-        	sleep(500);
+        	sleep(00);
 
 			game.sendAction(drawDeck);
 

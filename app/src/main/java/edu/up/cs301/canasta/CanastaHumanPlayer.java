@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +20,7 @@ import edu.up.cs301.animation.Animator;
 import edu.up.cs301.card.Card;
 import edu.up.cs301.game.GameHumanPlayer;
 import edu.up.cs301.game.GameMainActivity;
+import edu.up.cs301.game.LocalGame;
 import edu.up.cs301.game.R;
 import edu.up.cs301.game.infoMsg.GameInfo;
 import edu.up.cs301.game.infoMsg.IllegalMoveInfo;
@@ -120,8 +122,10 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 			// going, there is no need to explicitly display anything. That will happen
 			// at the next animation-tick, which should occur within 1/20 of a second
 			this.state = (CanastaState)info;
+			updateGUI();
 			//Log.i("human player", "receiving");
 		}
+
 	}
 
 	/**
@@ -176,22 +180,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
 	public void onClick(View v){
 		if(v==meldButton){
-			meldButton.setBackgroundColor(Color.BLUE);
 			game.sendAction((new CanastaMeldAction(this)));
 
-			my3.setText(Integer.toString(state.three));
-			my4.setText(Integer.toString(state.four));
-			my5.setText(Integer.toString(state.five));
-			my6.setText(Integer.toString(state.six));
-			my7.setText(Integer.toString(state.seven));
-			my8.setText(Integer.toString(state.eight));
-			my9.setText(Integer.toString(state.nine));
-			my10.setText(Integer.toString(state.ten));
-			myj.setText(Integer.toString(state.jack));
-			myq.setText(Integer.toString(state.queen));
-			myk.setText(Integer.toString(state.king));
-			mya.setText(Integer.toString(state.ace));
-
+			//surface.invalidate();
 
 		}
 		else if(v==discardButton){
@@ -216,7 +207,29 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 //				game.sendAction(new CanastaDiscardAction(this, card));
 //			}
 			}
+			surface.invalidate();
 		}
+		updateGUI();
+
+	}
+
+	private void updateGUI()
+	{
+		my3.setText(Integer.toString(state.three));
+		my4.setText(Integer.toString(state.four));
+		my5.setText(Integer.toString(state.five));
+		my6.setText(Integer.toString(state.six));
+		my7.setText(Integer.toString(state.seven));
+		my8.setText(Integer.toString(state.eight));
+		my9.setText(Integer.toString(state.nine));
+		my10.setText(Integer.toString(state.ten));
+		myj.setText(Integer.toString(state.jack));
+		myq.setText(Integer.toString(state.queen));
+		myk.setText(Integer.toString(state.king));
+		mya.setText(Integer.toString(state.ace));
+
+		surface.invalidate();
+
 	}
 
 	/**
@@ -645,5 +658,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 		// create/return the new rectangle
 		return new RectF(left, top, right, bottom);
 	}
+
+
 
 }
