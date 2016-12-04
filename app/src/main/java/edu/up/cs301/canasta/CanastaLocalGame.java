@@ -177,7 +177,15 @@ public class CanastaLocalGame extends LocalGame {
 		}
 		else if (canastaMA instanceof CanastaDrawDiscardAction) {
 			//if (state.canMeld())
-			state.drawDiscard(state.getDeck(1).getTopCard(state.getDeck(0)), state.getDeck(thisPlayerIdx+2).getCards());
+			//state.drawDiscard(state.getDeck(1).getTopCard(state.getDeck(0)), state.getDeck(thisPlayerIdx+2).getCards());
+//
+			if (state.substage == 0 && state.getDeck(1) != null) {
+				state.drawDiscard(state.getDeck(1).peekAtTopCard(), state.getDeck(thisPlayerIdx+2).getCards());
+				state.substage = 1;
+				return true;
+			}
+
+			return false;
 		}
 
 		else if (canastaMA instanceof CanastaMeldAction) {
