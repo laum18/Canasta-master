@@ -68,7 +68,6 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 	private static Card discard;
 
 
-
 	//button instance variables
 	private Button meldButton;
 	private Button discardButton;

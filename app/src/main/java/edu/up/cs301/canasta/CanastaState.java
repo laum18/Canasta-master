@@ -568,4 +568,10 @@ public class CanastaState extends GameState
 		return this;
 	}
 
+	public void sortHand(int playerIdx) {
+		for (int i = 0; i < piles[playerIdx+2].size()-1; i++) {
+
+		}
+	}
+
 }
