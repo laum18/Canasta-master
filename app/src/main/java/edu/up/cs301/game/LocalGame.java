@@ -2,6 +2,7 @@ package edu.up.cs301.game;
 
 import edu.up.cs301.game.actionMsg.GameAction;
 import edu.up.cs301.game.actionMsg.GameOverAckAction;
+import edu.up.cs301.game.actionMsg.RoundOverAckAction;
 import edu.up.cs301.game.actionMsg.MyNameIsAction;
 import edu.up.cs301.game.actionMsg.ReadyAction;
 import edu.up.cs301.game.actionMsg.TimerAction;
@@ -248,6 +249,13 @@ public abstract class LocalGame implements Game, Tickable {
 					playerFinishedCount++;
 				}
 			}
+			else if (action instanceof RoundOverAckAction && gameStage == GameStage.ROUND_OVER) {
+				int playerIdx = getPlayerIdx(action.getPlayer());
+				if (playerIdx >= 0 && !playersFinished[playerIdx]) {
+					playersFinished[playerIdx] = true;
+					playerFinishedCount++;
+				}
+			}
 		}
 	}
 	
@@ -340,7 +348,7 @@ public abstract class LocalGame implements Game, Tickable {
 	private final void finishUpRound(String msg) {
 
 		// set the game-stage to ????
-		gameStage = GameStage.DURING_GAME;
+		gameStage = GameStage.ROUND_OVER;
 
 		// set up the array and count so that we can keep track of
 		// whether everyone has replied
@@ -370,7 +378,7 @@ public abstract class LocalGame implements Game, Tickable {
 	 *            the action to send
 	 */
 	public final void sendAction(GameAction action) {
-		if (myHandler == null) return; // give up if no handler
+		while (myHandler == null) Thread.yield(); // give up if no handler
 		
 		// package the action into a message and send it to the handler
 		Message msg = new Message();
@@ -395,7 +403,7 @@ public abstract class LocalGame implements Game, Tickable {
 	
 	// an enum-class that itemizes the game stages
 	private static enum GameStage {
-		BEFORE_GAME, WAITING_FOR_NAMES, WAITING_FOR_READY, DURING_GAME, GAME_OVER
+		BEFORE_GAME, WAITING_FOR_NAMES, WAITING_FOR_READY, DURING_GAME, ROUND_OVER, GAME_OVER
 	}
 	
 	// a handler class for the game's thread

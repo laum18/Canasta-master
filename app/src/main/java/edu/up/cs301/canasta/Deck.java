@@ -208,8 +208,11 @@ public class Deck implements Serializable {
 		synchronized (this.cards) {
 			if (cards.isEmpty()) {
 				return null;
-			} else {
+			} else if (numCards < this.cards.size()){
 				return cards.get(numCards);
+			}
+			else {
+				return null;
 			}
 		}
 	}

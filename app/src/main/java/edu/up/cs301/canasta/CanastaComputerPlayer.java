@@ -112,6 +112,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer
 //			while (savedState.canMeld( )) {
 //				game.sendAction(meld);
 //			}
+			//game.sendAction(new CanastaMeldAction(this));
 
 			CanastaDiscardAction discard = new CanastaDiscardAction(this, savedState.getDeck(this.playerNum+2).peekAtTopCard());
 			game.sendAction(discard);

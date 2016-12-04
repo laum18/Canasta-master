@@ -85,19 +85,29 @@ public enum Rank {
 	},
 	
 	// ten
-	TEN,
+	TEN {
+		public char shortName() { return 'T'; }
+	},
 
 	// jack
-	JACK,
+	JACK {
+		public char shortName() { return 'J'; }
+	},
 
 	// queen
-	QUEEN,
+	QUEEN {
+		public char shortName() { return 'Q'; }
+	},
 
 	// king
-	KING,
+	KING {
+		public char shortName() { return 'K'; }
+	},
 
 	// joker
-	RJOKER,
+	RJOKER {
+		public char shortName() { return 'Z'; }
+	}
 	;
 
 	/**

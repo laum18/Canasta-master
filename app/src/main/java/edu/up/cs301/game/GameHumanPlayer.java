@@ -3,9 +3,11 @@ package edu.up.cs301.game;
 import edu.up.cs301.game.actionMsg.GameOverAckAction;
 import edu.up.cs301.game.actionMsg.MyNameIsAction;
 import edu.up.cs301.game.actionMsg.ReadyAction;
+import edu.up.cs301.game.actionMsg.RoundOverAckAction;
 import edu.up.cs301.game.infoMsg.BindGameInfo;
 import edu.up.cs301.game.infoMsg.GameInfo;
 import edu.up.cs301.game.infoMsg.GameOverInfo;
+import edu.up.cs301.game.infoMsg.RoundOverInfo;
 import edu.up.cs301.game.infoMsg.StartGameInfo;
 import edu.up.cs301.game.infoMsg.TimerInfo;
 import edu.up.cs301.game.util.GameTimer;
@@ -43,6 +45,7 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 	private GameMainActivity myActivity; // the current activity
 	private GameTimer myTimer = new GameTimer(this); // my player's timer
 	private boolean gameOver; // whether the game is over
+	private boolean roundOver; // whether the round is over
 
 	/**
 	 * constructor
@@ -55,6 +58,8 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 		
 		// mark game as not being over
 		this.gameOver = false;
+
+		this.roundOver = false;
 		
 		// get new handler for this thread
 		this.myHandler = new Handler();
@@ -197,7 +202,10 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 	 */
 	public void sendInfo(GameInfo info) {
 		// if handler somehow does not exit, ignore
-		if (myHandler == null) { Log.d("Info", "oh, no, no handler!!!"); return; }
+		while (myHandler == null) {
+			Log.d("Info", "oh, no, no handler!!!");
+			Thread.yield();
+		}
 		
 		// post message to the handler
 		//Log.d("sendInfo", "about to post");
@@ -235,6 +243,10 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 				myActivity.setGameOver(true);
 				return;
 			}
+
+			if (roundOver) {
+				myActivity.setRoundOver(true);
+			}
 			
 			if (game == null) {
 				// game has not been bound: the only thing we're looking for is
@@ -264,6 +276,21 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 					// tell the game we're ready to play the game
 					game.sendAction(new ReadyAction(GameHumanPlayer.this));
 				}
+			}
+			else if (myInfo instanceof RoundOverInfo) {
+				// if we're being notified the game is over, finish up
+
+				// perform the "gave over" behavior--by default, to show pop-up message
+				roundIsOver(((RoundOverInfo)myInfo).getMessage());
+
+				// if our activity is non-null (which it should be), mark the activity as over
+				if (myActivity != null) myActivity.setRoundOver(true);
+
+				// acknowledge to the game that the game is over
+				game.sendAction(new RoundOverAckAction(GameHumanPlayer.this));
+
+				// set our instance variable, to indicate the game as over
+				roundOver = true;
 			}
 			else if (myInfo instanceof GameOverInfo) {
 				// if we're being notified the game is over, finish up
@@ -306,6 +333,12 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 	 * 		the "game over" message sent by the game
 	 */
 	protected void gameIsOver(String msg) {
+		// the default behavior is to put a pop-up for the user to see that tells
+		// the game's result
+		MessageBox.popUpMessage(msg, myActivity);
+	}
+
+	protected void roundIsOver(String msg) {
 		// the default behavior is to put a pop-up for the user to see that tells
 		// the game's result
 		MessageBox.popUpMessage(msg, myActivity);
