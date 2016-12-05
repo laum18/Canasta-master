@@ -181,9 +181,19 @@ public class CanastaLocalGame extends LocalGame {
             }
         }
 
-        // return true, because the move was successful if we get here
-        return true;
-    }
+		else if (canastaMA instanceof CanastaComputerMeldAction) {
+			if (state.substage == 1) {
+				state.computerMeld(((CanastaComputerMeldAction) canastaMA).getMeld());
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+
+		// return true, because the move was successful if we get here
+		return true;
+	}
 
 //	/**
 //	 * helper method that gives all the cards in the middle deck to

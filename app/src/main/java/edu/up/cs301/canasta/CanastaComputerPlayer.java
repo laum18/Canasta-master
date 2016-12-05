@@ -1,5 +1,8 @@
 package edu.up.cs301.canasta;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import edu.up.cs301.card.Card;
 import edu.up.cs301.card.Rank;
 import edu.up.cs301.game.GameComputerPlayer;
@@ -88,7 +91,13 @@ public class CanastaComputerPlayer extends GameComputerPlayer
     	// access the state's middle deck
     	Deck middleDeck = savedState.getDeck(2);
 
-    	
+		// access deck of the player whose turn it is
+		Deck myDeck = savedState.getDeck(savedState.toPlay() + 2);
+
+
+		ArrayList<Card> myMeldArray= findMeld(myDeck);
+
+
     	// if it's a Jack, slap it; otherwise, if it's our turn to
     	// play, play a card
 //    	if (topCard != null && topCard.getRank() == Rank.JACK) {
@@ -113,12 +122,40 @@ public class CanastaComputerPlayer extends GameComputerPlayer
 //				game.sendAction(meld);
 //			}
 			//game.sendAction(new CanastaMeldAction(this));
+			if(myMeldArray.size()>=3){
+				CanastaComputerMeldAction computerMeld = new CanastaComputerMeldAction(this, myMeldArray);
+				game.sendAction(computerMeld);
+			}
 
 			CanastaDiscardAction discard = new CanastaDiscardAction(this, savedState.getDeck(this.playerNum+2).peekAtTopCard());
 			game.sendAction(discard);
+
 
         	// submit our move to the game object
         	game.sendAction(new CanastaPlayAction(this));
     	}
     }
+
+	private ArrayList<Card> findMeld(Deck d){
+		ArrayList<Card> myHand = d.getCards();
+		ArrayList<Card> meldArray = new ArrayList<Card>();
+		for(int i=0; i<myHand.size(); i++){
+			meldArray = new ArrayList<Card>();
+
+			Rank rank = myHand.get(i).getRank();
+
+			for(int j=i; j<myHand.size()-i; j++){
+				if(myHand.get(j).getRank() == rank || myHand.get(j).getRank() == Rank.TWO || myHand.get(j).getRank() == Rank.RJOKER){
+					meldArray.add(myHand.get(j));
+				}
+			}
+			if(meldArray.size()>=3){
+				return meldArray;
+			}
+		}
+
+
+		return meldArray;
+
+	}
 }
