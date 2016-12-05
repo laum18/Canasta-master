@@ -319,17 +319,16 @@ public class CanastaState extends GameState
 		boolean r = false;
 
 		// checks if the player selected at least three cards
-		if(cards != null && cards.length > 0){
+		if (cards != null && cards.length > 0) {
 			for (int i = 0; i < cards.length - 1; i++) {
 				for (int j = i; j < cards.length - 1; j++) {
-					if (cards[i].getRank().equals(cards[j+1].getRank())) {
+					if (cards[i].getRank().equals(cards[j + 1].getRank())) {
 						check++;
-					}
-					else if (cards[i].getRank().shortName() == 'R' || cards[i].getRank().shortName() == '2'
-							|| cards[j+1].getRank().shortName() == 'R' || cards[j+1].getRank().shortName() == '2') {
 
-					}
-					else {
+					} else if (cards[i].getRank().shortName() == 'R' || cards[i].getRank().shortName() == '2'
+							|| cards[j + 1].getRank().shortName() == 'R' || cards[j + 1].getRank().shortName() == '2') {
+
+					} else {
 						r = false;
 						return r;
 					}
@@ -339,13 +338,17 @@ public class CanastaState extends GameState
 
 		// if there is at least one wildcard
 		if (check >= 1 && hasWildCard == true) {
+
 			r = true;
 			return r;
+
 		}
 		// if all selected cards are the same rank with no wildcards
 		else if (check > 2) {
+
 			r = true;
 			return r;
+
 		}
 		// if they are trying to meld a card that has an existing melded pile
 		else {
@@ -930,13 +933,10 @@ public class CanastaState extends GameState
 	public Deck sortHand(Deck d) {
 		Card temp;
 		int index2 = 0;
-
 		int c1 = 0;
 		ArrayList<Card> cs1 = d.getCards();
-
 		int c2 = 0;
 		//ArrayList<Card> cs2 = d.getCards();
-
 		ifNull:
 		for (int i = 0; i < d.size()-1; i++) {
 			Rank r1 = null;
@@ -946,11 +946,6 @@ public class CanastaState extends GameState
 			} else {
 				break ifNull;
 			}
-			/*if (r1.shortName() == '2' || r1.shortName() == '3' || r1.shortName() == '4' || r1.shortName() == '5' || r1.shortName() == '6' ||
-					r1.shortName() == '7' || r1.shortName() == '8' || r1.shortName() == '9') {
-				c1 = Character.getNumericValue(r1.shortName());
-			} */
-
 			if (r1.shortName() == '2') {
 				c1 = 2;
 			} else if (r1.shortName() == '3') {
@@ -1035,6 +1030,4 @@ public class CanastaState extends GameState
 	public void setPlayerDeck(Deck d) {
 		piles[2] = d;
 	}
-
-
 }

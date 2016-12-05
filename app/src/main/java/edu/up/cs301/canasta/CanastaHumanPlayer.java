@@ -221,6 +221,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     public void onClick(View v) {
         if (v == meldButton) {
             game.sendAction((new CanastaMeldAction(this)));
+            for (int i = 0; i < 15; i++) {
+                state.setPlayerDeck(state.sortHand(state.getDeck(2))); //must be called many times, not sure why
+            }
 
         } else if (v == discardButton) {
             //discard card
@@ -250,6 +253,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 //			}
             }
             surface.invalidate();
+            for (int i = 0; i < 15; i++) {
+                state.setPlayerDeck(state.sortHand(state.getDeck(2))); //must be called many times, not sure why
+            }
         } else if (v == drawDiscardButton) {
             game.sendAction((new CanastaDrawDiscardAction(this)));
             for (int i = 0; i < 15; i++) {
@@ -565,6 +571,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 //        }
 //    }
 
+
     private void drawSelected(Canvas g, RectF topRect, float deltaX, float deltaY, int numCards, int player) {
         // loop through from back to front, drawing a card-back in each location
         for (int i = 0; i <= numCards - 1; i++) {
@@ -594,6 +601,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                 }
             }
 
+        }
     }
 
     private void drawDiscardFaces(Canvas g, RectF topRect, float deltaX, float deltaY,
