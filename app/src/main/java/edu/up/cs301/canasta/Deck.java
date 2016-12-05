@@ -271,4 +271,11 @@ public class Deck implements Serializable {
 		return cards;
 	}
 
+	public Deck swapCards(Deck d, Card c1, Card c2, int index1, int index2) {
+		Card temp = c2;
+		d.getCards().set(index2, c1);
+		d.getCards().set(index1, temp);
+		return d;
+	}
+
 }

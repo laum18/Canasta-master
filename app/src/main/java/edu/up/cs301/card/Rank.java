@@ -10,7 +10,13 @@ import java.util.ArrayList;
 public enum Rank {
 	
 	// ace
-	ACE,
+	ACE{
+		// override the shortName behavior: the corresponding digit
+		@Override
+		public char shortName() {
+			return 'A';
+		}
+	},
 	
 	// deuce
 	TWO {
@@ -106,7 +112,7 @@ public enum Rank {
 
 	// joker
 	RJOKER {
-		public char shortName() { return 'Z'; }
+		public char shortName() { return 'R'; }
 	}
 	;
 
