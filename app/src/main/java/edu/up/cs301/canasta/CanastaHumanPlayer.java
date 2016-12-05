@@ -287,6 +287,15 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                 //+ state.nine + state.ten + state.jack + state.queen + state.king + state.ace);
         //teamOneRound.setText("" + score);
 
+        if(state.three >= 7 || state.four >= 7 || state.five >= 7 || state.six >= 7 || state.seven >= 7 || state.eight
+                >= 7 || state.nine >= 7 || state.ten >= 7 || state.jack >= 7 || state.queen >= 7 || state.king >= 7 || state.ace >=7) {
+            if (state.toPlay() == 0 || state.toPlay() == 3) {
+                state.setTeamOneRoundScore(state.getTeamOneRoundScore()+300);
+            } else {
+                state.setTeamTwoRoundScore(state.getTeamOneRoundScore()+300);
+            }
+        }
+
         teamOneRound.setText(" " + state.getTeamOneRoundScore());
         teamOneTotal.setText(" " + state.getTeamOneTotalScore());
         teamTwoRound.setText(" " + state.getTeamTwoRoundScore());
@@ -295,7 +304,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         discardSize.setText("" + state.getDeck(1).size());
         turn.setText("Player " + state.toPlay() + "'s turn");
         teamTwoTotal.setText(" " + state.getTeamTwoTotalScore());
-        System.out.println("Team two round: "+state.getTeamTwoRoundScore());
+        //System.out.println("Team two round: "+state.getTeamTwoRoundScore());
 
         surface.invalidate();
 
@@ -377,7 +386,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
             drawDiscardFaces(g, playerHandLocation, 0.055f * width, 0, state.getDeck(2).size(), 0);
             draw = 1;
         }
-        if (state.toPlay() == 0 && draw == 0) {
+        if (draw == 0) {
             drawSelected(g, playerHandLocation, 0.075f * width, 0, state.getDeck(2).size(), 0);
 
         } else {
@@ -594,7 +603,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
             float top = topRect.top + i * deltaY;
             // draw a card-back (hence null) into the appropriate rectangle
             drawCard(g,
-                    new RectF(left, top, left + topRect.width()-50, top + topRect.height()),
+                    new RectF(left, top, left + topRect.width()-40, top + topRect.height()),
                     state.getDeck(player + 2).peekAtCards(i));
         }
     }
@@ -623,7 +632,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                     // draw a card-back (hence null) into the appropriate rectangle
 
                     drawCard(g,
-                            new RectF(left, top - 20, left + topRect.width()-50, top + topRect.height()),
+                            new RectF(left, top - 20, left + topRect.width()-40, top + topRect.height()),
                             state.getDeck(player + 2).peekAtCards(i));
                 }
             }
