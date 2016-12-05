@@ -13,19 +13,15 @@ import edu.up.cs301.game.infoMsg.GameInfo;
  * by the constructor parameter.
  * 
  * @author Steven R. Vegdahl
- * @version July 2013 
+ * @version December 2016
  */
-public class CanastaComputerPlayer extends GameComputerPlayer
-{
-	// the minimum reaction time for this player, in milliseconds
-	private double minReactionTimeInMillis;
-	
+public class CanastaComputerPlayer extends GameComputerPlayer {
+
 	// the most recent state of the game
 	private CanastaState savedState;
 	
     /**
-     * Constructor for the SJComputerPlayer class; creates an "average"
-     * player.
+     * Constructor for the CanastaComputerPlayer class; creates an "average" player.
      * 
      * @param name
      * 		the player's name
@@ -33,40 +29,9 @@ public class CanastaComputerPlayer extends GameComputerPlayer
     public CanastaComputerPlayer(String name) {
         // invoke general constructor to create player whose average reaction
     	// time is half a second.
-        this(name, 0.5);
-    }	
-    
-    /*
-     * Constructor for the SJComputerPlayer class
-     */
-    public CanastaComputerPlayer(String name, double avgReactionTime) {
-        // invoke superclass constructor
         super(name);
-        
-        // set the minimim reaction time, which is half the average reaction
-        // time, converted to milliseconds (0.5 * 1000 = 500)
-        minReactionTimeInMillis = 500*avgReactionTime;
-    }
+    }	
 
-	/**
-	 * Invoked whenever the player's timer has ticked. It is expected
-	 * that this will be overridden in many players.
-	 */
-    @Override
-    protected void timerTicked() {
-    	// we had seen a Jack, now we have waited the requisite time to slap
-    	
-    	// look at the top card now. If it's still a Jack, slap it
-    	Card topCard = savedState.getDeck(2).peekAtTopCard();
-    	if (topCard != null && topCard.getRank() == Rank.JACK) {
-    		// the Jack is still there, so submit our move to the game object
-    		//game.sendAction(new CanastaMeldAction(this));
-    	}
-    	
-    	// stop the timer, since we don't want another timer-tick until it
-    	// again is explicitly started
-    	getTimer().stop();
-    }
 
     /**
      * callback method, called when we receive a message, typically from
@@ -76,9 +41,8 @@ public class CanastaComputerPlayer extends GameComputerPlayer
     protected void receiveInfo(GameInfo info) {
 
 		CanastaDrawDeckAction drawDeck = new CanastaDrawDeckAction(this);
-		CanastaMeldAction meld = new CanastaMeldAction(this);
 
-		sleep(100);
+		sleep(500);
 
     	// if we don't have a game-state, ignore
     	if (!(info instanceof CanastaState)) {
@@ -87,58 +51,49 @@ public class CanastaComputerPlayer extends GameComputerPlayer
     	
     	// update our state variable
     	savedState = (CanastaState)info;
-    	
-    	// access the state's middle deck
-    	Deck middleDeck = savedState.getDeck(2);
 
 		// access deck of the player whose turn it is
 		Deck myDeck = savedState.getDeck(savedState.toPlay() + 2);
 
+		/* array list containing the cards from the players hand that will be melded,
+		uses the findMeld method to find a possible meld in the players hand */
+		ArrayList<Card> myMeldArray = findMeld(myDeck);
 
-		ArrayList<Card> myMeldArray= findMeld(myDeck);
-
-
-    	// if it's a Jack, slap it; otherwise, if it's our turn to
-    	// play, play a card
-//    	if (topCard != null && topCard.getRank() == Rank.JACK) {
-//    		// we have a Jack to slap: set up a timer, depending on reaction time.
-//    		// The slap will occur when the timer "ticks". Our reaction time will be
-//    		// between the minimum reaction time and 3 times the minimum reaction time
-//        	int time = (int)(minReactionTimeInMillis*(1+2*Math.random()));
-//    		this.getTimer().setInterval(time);
-//    		this.getTimer().start();
-//    	}
+		// check that it is the players turn
     	if (savedState.toPlay() == this.playerNum) {
-			//delay half-second
-        	sleep(100);
 
+			// draw a card
 			game.sendAction(drawDeck);
+			// delay half-second
+			sleep(500);
 
-			//while (savedState.canMeld( )) {
-			//	game.sendAction(meld);
-			//}
-
-//			while (savedState.canMeld( )) {
-//				game.sendAction(meld);
-//			}
-			//game.sendAction(new CanastaMeldAction(this));
-			if(myMeldArray.size()>=3){
-				CanastaComputerMeldAction computerMeld = new CanastaComputerMeldAction(this, myMeldArray);
-				game.sendAction(computerMeld);
+			// check that meld was found and contains at least three cards; if so, create and send meld action to the game
+			if(myMeldArray != null) {
+				if (myMeldArray.size() >= 3) {
+					CanastaComputerMeldAction computerMeld = new CanastaComputerMeldAction(this, myMeldArray);
+					game.sendAction(computerMeld);
+					//delay half-second
+					sleep(500);
+				}
 			}
-
+			// create and send discard action to the game
 			CanastaDiscardAction discard = new CanastaDiscardAction(this, savedState.getDeck(this.playerNum+2).peekAtTopCard());
 			game.sendAction(discard);
 
 
+			//TODO: what is this for?
         	// submit our move to the game object
         	game.sendAction(new CanastaPlayAction(this));
     	}
     }
 
+	/* method to find a legal meld in a given deck of cards
+	* iterates through given deck and compares each card to all the other cards in the deck
+	* looking for three cards of the same rank including wild cards*/
 	private ArrayList<Card> findMeld(Deck d){
 		ArrayList<Card> myHand = d.getCards();
-		ArrayList<Card> meldArray = new ArrayList<Card>();
+		ArrayList<Card> meldArray;
+
 		for(int i=0; i<myHand.size(); i++){
 			meldArray = new ArrayList<Card>();
 
@@ -154,8 +109,8 @@ public class CanastaComputerPlayer extends GameComputerPlayer
 			}
 		}
 
-
-		return meldArray;
+		// if no legal meld found, return null
+		return null;
 
 	}
 }
