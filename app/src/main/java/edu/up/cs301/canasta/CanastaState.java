@@ -58,6 +58,8 @@ public class CanastaState extends GameState
 	public int king = 0;
 	public int ace = 0;
 
+	public boolean canDrawDiscard;
+
 	/**
 	 * Constructor for objects of class SJState. Initializes for the beginning of the
 	 * game, with a random player as the first to turn card
@@ -114,6 +116,7 @@ public class CanastaState extends GameState
 		piles[6].add(Card.fromString("A"+"D"));
 
 		piles[0].moveTopCardTo(piles[1]);
+		canDrawDiscard = false;
 
 		/* deals 11 cards to each player */
 		for(int i=0; i<11; i++){ //card
@@ -167,6 +170,8 @@ public class CanastaState extends GameState
 		queen = orig.queen;
 		king = orig.king;
 		ace = orig.ace;
+
+		canDrawDiscard = orig.canDrawDiscard;
 	}
 
 	/**
@@ -277,6 +282,8 @@ public class CanastaState extends GameState
 		teamTwoTotalScore += totalScore;
 	}
 
+	public boolean getCanDiscard() { return canDrawDiscard; }
+
 	public boolean canMeld(Card[] cards, boolean hasWildCard) {
 		if (cards.length == 0) {
 			return false;
@@ -385,96 +392,91 @@ public class CanastaState extends GameState
 	//TODO: need to increment meld plie count
 	public void drawDiscard(Card c, ArrayList<Card> list) {
 		Deck player = getDeck(toPlay + 2);
+		Deck discardDeck = getDeck(1);
 		int count = 0;
 		boolean wildcard = false;
+
+		// find how many cards are selected
 		for(int i=0; i<list.size(); i++){
 			if(list.get(i).getSelected() == true){
 				count++;
 			}
 		}
+
+		// create a new array of the selected cards
 		Card[] selected = new Card[count+1];
+
 		int temp = 0;
-		for (int i = 0; i < list.size(); i++) { //changed
-			if (list.get(i).getSelected() == true) {
+		// move the selected cards into the new array
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getSelected()) {
 				selected[temp] = list.get(i);
 				temp++;
 			}
 		}
+
+		// set the discarded card to true
 		c.setSelected(true);
+		// add to the new array
 		selected[count] = c;
 
+		// check if there are any wildcards selected
 		for (int i = 0; i < selected.length; i++) {
 			if (selected[i].getRank().shortName() == 'R' || selected[i].getRank().shortName() == '2') {
 				wildcard = true;
 			}
 		}
 
-		if (canMeld(selected, wildcard) == true) {
+		// check if it can be melded
+		if (canMeld(selected, wildcard)) {
+			canDrawDiscard = true;
 			Rank r = selected[0].getRank();
-			int rank;
 
+			// check if the first selected card is a wildcard
 			if (selected[0].getRank().shortName() == 'R' || selected[0].getRank().shortName() == '2') {
 				r = selected[1].getRank();
 			}
 
+			// update the gui according to the melded card's rank
 			if (r.shortName() == '3') {
-				rank = 3;
 				three += selected.length;
-				System.out.println(""+three);
+				System.out.println("Three: "+three);
 			} else if (r.shortName() == '4') {
-				rank = 4;
 				four += selected.length;
-				System.out.println(""+four);
+				System.out.println("Four: "+four);
 			} else if (r.shortName() == '5') {
-				rank = 5;
 				five += selected.length;
-				System.out.println(""+five);
+				System.out.println("Five: "+five);
 			} else if (r.shortName() == '6') {
-				rank = 6;
 				six += selected.length;
-				System.out.println(""+six);
+				System.out.println("Six: "+six);
 			} else if (r.shortName() == '7') {
-				rank = 7;
 				seven += selected.length;
-				System.out.println(""+seven);
+				System.out.println("Seven: "+seven);
 			} else if (r.shortName() == '8') {
-				rank = 8;
 				eight += selected.length;
-				System.out.println(""+eight);
+				System.out.println("Eight: "+eight);
 			} else if (r.shortName() == '9') {
-				rank = 9;
 				nine += selected.length;
-				System.out.println(""+nine);
+				System.out.println("Nine: "+nine);
 			} else if (r.shortName() == 'T') {
-				rank = 10;
 				ten += selected.length;
-				System.out.println(""+ten);
-			}
-			else if (r.shortName() == 'J') {
-				rank = 11;
+				System.out.println("Ten: "+ten);
+			} else if (r.shortName() == 'J') {
 				jack += selected.length;
-				System.out.println(""+jack);
-			}
-			else if (r.shortName() == 'Q') {
-				rank = 12;
+				System.out.println("Jack: "+jack);
+			} else if (r.shortName() == 'Q') {
 				queen += selected.length;
-				System.out.println(""+queen);
-			}
-			else if (r.shortName() == 'K') {
-				rank = 13;
+				System.out.println("Queen: "+queen);
+			} else if (r.shortName() == 'K') {
 				king += selected.length;
-				System.out.println(""+king);
-			}
-			else if (r.shortName() == 'A') {
-				rank = 14;
+				System.out.println("King: "+king);
+			} else if (r.shortName() == 'A') {
 				ace += selected.length;
-				System.out.println(""+ace);
-			}
-			else {
-				//rank = (int) Integer.parseInt(r.toString());
+				System.out.println("Ace: "+ace);
 			}
 
-			// removes selected cards from player's hand
+			// removes selected cards from player's hand and updates score
 			for (int i = 0; i < selected.length-1; i++) {
 				if (toPlay() == 0 || toPlay() == 3) {
 					myTeamMeld.add(selected[i]);
@@ -490,47 +492,87 @@ public class CanastaState extends GameState
 						teamOneRoundScore +=10;
 						player.removeCard(selected[i]);
 					}
-					else {
+					else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A'){
 						teamOneRoundScore +=20;
+						player.removeCard(selected[i]);
+					}
+					else {
+						teamOneRoundScore += 50;
 						player.removeCard(selected[i]);
 					}
 				}
 				else {
 					otherTeamMeld.add(selected[i]);
-					teamTwoRoundScore += 5;
-					player.removeCard(selected[i]);
+					if (selected[i].getRank().shortName() == '3' || selected[i].getRank().shortName() == '4' ||
+							selected[i].getRank().shortName() == '5' || selected[i].getRank().shortName() == '6' ||
+							selected[i].getRank().shortName() == '7') {
+						teamTwoRoundScore +=5;
+						player.removeCard(selected[i]);
+					}
+					else if (selected[i].getRank().shortName() == '8' || selected[i].getRank().shortName() == '9'
+							|| selected[i].getRank().shortName() == 'T' || selected[i].getRank().shortName() == 'J'
+							|| selected[i].getRank().shortName() == 'Q' || selected[i].getRank().shortName() == 'K') {
+						teamTwoRoundScore +=10;
+						player.removeCard(selected[i]);
+					}
+					else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A'){
+						teamTwoRoundScore +=20;
+						player.removeCard(selected[i]);
+					}
+					else {
+						teamTwoRoundScore += 50;
+						player.removeCard(selected[i]);
+					}
 				}
 			}
 
-//			for (int i = 0; i < selected.length-1; i++) {
-//				player.removeCard(selected[i]);
-//			}
-
-			// removes top card from the discard pile
+			// removes top card from the discard pile & update score
 			if (toPlay() == 0 || toPlay() == 3) {
 				myTeamMeld.add(selected[selected.length-1]);
-				teamOneRoundScore += 5;
+
+				if (selected[selected.length-1].getRank().shortName() == '3' || selected[selected.length-1].getRank().shortName() == '4'
+						|| selected[selected.length-1].getRank().shortName() == '5' || selected[selected.length-1].getRank().shortName() == '6'
+						|| selected[selected.length-1].getRank().shortName() == '7') {
+					teamOneRoundScore += 5;
+				} else if (selected[selected.length-1].getRank().shortName() == '8' || selected[selected.length-1].getRank().shortName() == '9'
+						|| selected[selected.length-1].getRank().shortName() == 'T' || selected[selected.length-1].getRank().shortName() == 'J'
+						|| selected[selected.length-1].getRank().shortName() == 'Q' || selected[selected.length-1].getRank().shortName() == 'K') {
+					teamOneRoundScore += 10;
+				} else if (selected[selected.length-1].getRank().shortName() == 'R' || selected[selected.length-1].getRank().shortName() == '2') {
+					teamOneRoundScore += 20;
+				} else {
+					teamOneRoundScore += 50;
+				}
+
 				getDeck(1).removeCard(selected[selected.length-1]);
 			}
 			else {
 				otherTeamMeld.add(selected[selected.length-1]);
-				teamTwoRoundScore += 5;
+
+				if (selected[selected.length-1].getRank().shortName() == '3' || selected[selected.length-1].getRank().shortName() == '4'
+						|| selected[selected.length-1].getRank().shortName() == '5' || selected[selected.length-1].getRank().shortName() == '6'
+						|| selected[selected.length-1].getRank().shortName() == '7') {
+					teamTwoRoundScore += 5;
+				} else if (selected[selected.length-1].getRank().shortName() == '8' || selected[selected.length-1].getRank().shortName() == '9'
+						|| selected[selected.length-1].getRank().shortName() == 'T' || selected[selected.length-1].getRank().shortName() == 'J'
+						|| selected[selected.length-1].getRank().shortName() == 'Q' || selected[selected.length-1].getRank().shortName() == 'K') {
+					teamTwoRoundScore += 10;
+				} else if (selected[selected.length-1].getRank().shortName() == 'R' || selected[selected.length-1].getRank().shortName() == '2') {
+					teamTwoRoundScore += 20;
+				} else {
+					teamTwoRoundScore += 50;
+				}
+
 				getDeck(1).removeCard(selected[selected.length-1]);
 			}
 
-//			if (toPlay() == 0 || toPlay() == 3) {
-//				myTeamMeld.add(c);
-//				teamOneTotalScore +=5; //TODO: check who is doing the meld
-//			}
-//			else {
-//				otherTeamMeld.add(c);
-//				teamTwoTotalScore +=5; //TODO: check who is doing the meld
-//			}
-
+			// add meld pile to player's hand
+			int discardSize = discardDeck.size();
+			for (int i = 0; i < discardSize; i++) {
+				player.add(discardDeck.removeTopCard());
+			}
 		}
-
 	}
-
 
 	/* method to represent cards being melded in the game state */
 	public void Meld(ArrayList<Card> c) {
@@ -562,64 +604,51 @@ public class CanastaState extends GameState
 			}
 		}
 
-		if (canMeld(selected, wildCard) == true) {
-			Rank r = selected[0].getRank();
-			int rank = 0;
+		if (canMeld(selected, wildCard)) {
+			Rank r = selected[0].getRank();;
 
 			if (selected[0].getRank().shortName() == 'R' || selected[0].getRank().shortName() == '2') {
 				r = selected[1].getRank();
 			}
 
 			if (r.shortName() == '3') {
-				rank = 3;
 				three += count;
 				System.out.println(""+three);
 			} else if (r.shortName() == '4') {
-				rank = 4;
 				four += count;
 				System.out.println(""+four);
 			} else if (r.shortName() == '5') {
-				rank = 5;
 				five += count;
 				System.out.println(""+five);
 			} else if (r.shortName() == '6') {
-				rank = 6;
 				six += count;
 				System.out.println(""+six);
 			} else if (r.shortName() == '7') {
-				rank = 7;
 				seven += count;
 				System.out.println(""+seven);
 			} else if (r.shortName() == '8') {
-				rank = 8;
 				eight += count;
 				System.out.println(""+eight);
 			} else if (r.shortName() == '9') {
-				rank = 9;
 				nine += count;
 				System.out.println(""+nine);
 			} else if (r.shortName() == 'T') {
-				rank = 10;
 				ten += count;
 				System.out.println(""+ten);
 			}
 			else if (r.shortName() == 'J') {
-				rank = 11;
 				jack += count;
 				System.out.println(""+jack);
 			}
 			else if (r.shortName() == 'Q') {
-				rank = 12;
 				queen += count;
 				System.out.println(""+queen);
 			}
 			else if (r.shortName() == 'K') {
-				rank = 13;
 				king += count;
 				System.out.println(""+king);
 			}
 			else if (r.shortName() == 'A') {
-				rank = 14;
 				ace += count;
 				System.out.println(""+ace);
 			}
@@ -666,12 +695,6 @@ public class CanastaState extends GameState
 
 	public CanastaState getState() {
 		return this;
-	}
-
-	public void sortHand(int playerIdx) {
-		for (int i = 0; i < piles[playerIdx+2].size()-1; i++) {
-
-		}
 	}
 
 	public Deck sortHand(Deck d) {
