@@ -586,7 +586,9 @@ public class CanastaState extends GameState
 			// add meld pile to player's hand
 			int discardSize = discardDeck.size();
 			for (int i = 0; i < discardSize; i++) {
+				discardDeck.peekAtTopCard().setSelected(false);
 				player.add(discardDeck.removeTopCard());
+
 			}
 		}
 	}

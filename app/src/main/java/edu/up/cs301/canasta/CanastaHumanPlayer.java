@@ -374,14 +374,14 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         if (!state.canDrawDiscard) {
             drawCardFaces(g, playerHandLocation, 0.075f * width, 0, state.getDeck(2).size(), 0);
         } else {
-            drawDiscardFaces(g, playerHandLocation, 0.065f * width, 0, state.getDeck(2).size(), 0);
+            drawDiscardFaces(g, playerHandLocation, 0.055f * width, 0, state.getDeck(2).size(), 0);
             draw = 1;
         }
         if (state.toPlay() == 0 && draw == 0) {
             drawSelected(g, playerHandLocation, 0.075f * width, 0, state.getDeck(2).size(), 0);
 
         } else {
-            drawDiscardSelected(g, playerHandLocation, 0.065f * width, 0, state.getDeck(2).size(), 0);
+            drawDiscardSelected(g, playerHandLocation, 0.055f * width, 0, state.getDeck(2).size(), 0);
         }
         //draw left opponent hand, face down
         RectF leftOpponentHand = leftOppHandFirstCardLocation();
@@ -450,6 +450,19 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         int width = surface.getWidth();
 
         float deltaX = cardNum * (0.075f * width);
+
+        return new RectF((LEFT_BORDER_PERCENT * width / 100f) + (deltaX),
+                (100 - PLAYER_HAND_VERTICAL_BORDER_PERCENT - CARD_HEIGHT_PERCENT) * height / 100f,
+                ((LEFT_BORDER_PERCENT + CARD_WIDTH_PERCENT) * width / 100f) + (deltaX),
+                (100 - PLAYER_HAND_VERTICAL_BORDER_PERCENT) * height / 100f);
+    }
+
+    //location of any card in player hand
+    private RectF playerDiscardHandCardLocation(int cardNum) {
+        int height = surface.getHeight();
+        int width = surface.getWidth();
+
+        float deltaX = cardNum * (0.055f * width);
 
         return new RectF((LEFT_BORDER_PERCENT * width / 100f) + (deltaX),
                 (100 - PLAYER_HAND_VERTICAL_BORDER_PERCENT - CARD_HEIGHT_PERCENT) * height / 100f,
@@ -581,7 +594,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
             float top = topRect.top + i * deltaY;
             // draw a card-back (hence null) into the appropriate rectangle
             drawCard(g,
-                    new RectF(left - 100, top, left + topRect.width(), top + topRect.height()),
+                    new RectF(left, top, left + topRect.width()-50, top + topRect.height()),
                     state.getDeck(player + 2).peekAtCards(i));
         }
     }
@@ -598,7 +611,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                 // draw a card-back (hence null) into the appropriate rectangle
 
                 drawCard(g,
-                        new RectF(left - 100, top - 100, left + topRect.width(), top + topRect.height()),
+                        new RectF(left, top - 20, left + topRect.width(), top + topRect.height()),
                         state.getDeck(player + 2).peekAtCards(i));
                 break;
             } else {
@@ -610,7 +623,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                     // draw a card-back (hence null) into the appropriate rectangle
 
                     drawCard(g,
-                            new RectF(left - 100, top - 20, left + topRect.width(), top + topRect.height()),
+                            new RectF(left, top - 20, left + topRect.width()-50, top + topRect.height()),
                             state.getDeck(player + 2).peekAtCards(i));
                 }
             }
@@ -684,17 +697,30 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
         // select card
         for (int i = 0; i < state.getDeck(2).size(); i++) {
-            RectF player = playerHandCardLocation(i);
-            if (player.contains(x, y)) {
-                //surface.flash(Color.GRAY, 100);
-                if (state.getDeck(playerNum + 2).peekAtCards(i).getSelected() == false) {
-                    state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
-                } else {
-                    state.getDeck(playerNum + 2).peekAtCards(i).setSelected(false);
+            if (state.canDrawDiscard) {
+                RectF player = playerDiscardHandCardLocation(i);
+                if (player.contains(x, y)) {
+                    //surface.flash(Color.GRAY, 100);
+                    if (state.getDeck(playerNum + 2).peekAtCards(i).getSelected() == false) {
+                        state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
+                    } else {
+                        state.getDeck(playerNum + 2).peekAtCards(i).setSelected(false);
+                    }
                 }
             }
-        }
+            else {
+                RectF player = playerHandCardLocation(i);
+                if (player.contains(x, y)) {
+                    //surface.flash(Color.GRAY, 100);
+                    if (state.getDeck(playerNum + 2).peekAtCards(i).getSelected() == false) {
+                        state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
+                    } else {
+                        state.getDeck(playerNum + 2).peekAtCards(i).setSelected(false);
+                    }
+                }
+            }
 
+        }
 
         // draws a card
         RectF drawDeck = deckCardLocation();
