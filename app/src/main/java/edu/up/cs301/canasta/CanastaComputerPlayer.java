@@ -42,6 +42,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer {
 
 		CanastaDrawDeckAction drawDeck = new CanastaDrawDeckAction(this);
 
+		// wait half-second to start the turn
 		sleep(500);
 
     	// if we don't have a game-state, ignore
@@ -72,18 +73,15 @@ public class CanastaComputerPlayer extends GameComputerPlayer {
 				if (myMeldArray.size() >= 3) {
 					CanastaComputerMeldAction computerMeld = new CanastaComputerMeldAction(this, myMeldArray);
 					game.sendAction(computerMeld);
-					//delay half-second
-					sleep(500);
 				}
+				//delay half-second
+				sleep(500);
 			}
 			// create and send discard action to the game
 			CanastaDiscardAction discard = new CanastaDiscardAction(this, savedState.getDeck(this.playerNum+2).peekAtTopCard());
 			game.sendAction(discard);
 
 
-			//TODO: what is this for?
-        	// submit our move to the game object
-        	game.sendAction(new CanastaPlayAction(this));
     	}
     }
 
@@ -97,13 +95,16 @@ public class CanastaComputerPlayer extends GameComputerPlayer {
 		for(int i=0; i<myHand.size(); i++){
 			meldArray = new ArrayList<Card>();
 
+			// rank of current card to match with
 			Rank rank = myHand.get(i).getRank();
 
+			// search for sets of three of the same rank or wild cards
 			for(int j=i; j<myHand.size()-i; j++){
 				if(myHand.get(j).getRank() == rank || myHand.get(j).getRank() == Rank.TWO || myHand.get(j).getRank() == Rank.RJOKER){
 					meldArray.add(myHand.get(j));
 				}
 			}
+			// if set of three or more found, return meld
 			if(meldArray.size()>=3){
 				return meldArray;
 			}
@@ -111,6 +112,5 @@ public class CanastaComputerPlayer extends GameComputerPlayer {
 
 		// if no legal meld found, return null
 		return null;
-
 	}
 }
