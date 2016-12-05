@@ -69,7 +69,6 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
     private static Card discard;
 
-
     //button instance variables
     private Button meldButton;
     private Button discardButton;
@@ -83,6 +82,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     TextView deckSize;
     TextView discardSize;
 
+    // text view for number of cards in team melds of each rank
     TextView my3;
     TextView my4;
     TextView my5;
@@ -96,6 +96,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     TextView myk;
     TextView mya;
 
+    // text view for number of cards in opponent melds of each rank
     TextView opp3;
     TextView opp4;
     TextView opp5;
