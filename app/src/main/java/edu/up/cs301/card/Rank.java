@@ -106,7 +106,7 @@ public enum Rank {
 
 	// joker
 	RJOKER {
-		public char shortName() { return 'Z'; }
+		public char shortName() { return 'R'; }
 	}
 	;
 

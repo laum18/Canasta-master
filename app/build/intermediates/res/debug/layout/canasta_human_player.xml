@@ -8,8 +8,9 @@
         android:id="@+id/animation_surface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,7 +18,7 @@
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentEnd="false"
         android:layout_marginRight="111dp"
         android:layout_marginEnd="111dp"
         android:layout_marginLeft="780dp"
@@ -392,4 +393,26 @@
         android:layout_alignLeft="@+id/linearLayout3"
         android:layout_alignStart="@+id/linearLayout3" />
 
-</RelativeLayout><!-- From: file:/Users/michellelau/Desktop/UP/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/deckSize"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_toRightOf="@+id/turnIndicator"
+        android:layout_toEndOf="@+id/turnIndicator" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/discardSize"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp"
+        android:layout_alignTop="@+id/deckSize"
+        android:layout_toRightOf="@+id/linearLayout2"
+        android:layout_toEndOf="@+id/linearLayout2" />
+
+</RelativeLayout><!-- From: file:/C:/Users/laum18/Desktop/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->
