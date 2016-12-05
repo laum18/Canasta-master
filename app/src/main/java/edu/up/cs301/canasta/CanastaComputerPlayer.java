@@ -110,7 +110,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer
 //    	}
     	if (savedState.toPlay() == this.playerNum) {
 			//delay half-second
-        	sleep(00);
+        	sleep(100);
 
 			game.sendAction(drawDeck);
 

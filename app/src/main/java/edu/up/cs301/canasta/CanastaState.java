@@ -599,7 +599,9 @@ public class CanastaState extends GameState
 				player.add(discardDeck.removeTopCard());
 
 			}
+			substage = 1;
 		}
+
 	}
 
 	/* method to represent cards being melded in the game state */

@@ -359,6 +359,7 @@ public abstract class LocalGame implements Game, Tickable {
 		for (GamePlayer p: players) {
 			p.sendInfo(new RoundOverInfo(msg));
 		}
+
 	}
 	
 	/**
