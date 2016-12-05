@@ -96,6 +96,19 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     TextView myk;
     TextView mya;
 
+    TextView opp3;
+    TextView opp4;
+    TextView opp5;
+    TextView opp6;
+    TextView opp7;
+    TextView opp8;
+    TextView opp9;
+    TextView opp10;
+    TextView oppj;
+    TextView oppq;
+    TextView oppk;
+    TextView oppa;
+
 
     /**
      * constructor
@@ -181,6 +194,19 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         myk = (TextView) activity.findViewById(R.id.myThirteen);
         mya = (TextView) activity.findViewById(R.id.myAce);
 
+        opp3 = (TextView) activity.findViewById(R.id.oppThree);
+        opp4 = (TextView) activity.findViewById(R.id.oppFour);
+        opp5 = (TextView) activity.findViewById(R.id.oppFive);
+        opp6 = (TextView) activity.findViewById(R.id.oppSix);
+        opp7 = (TextView) activity.findViewById(R.id.oppSeven);
+        opp8 = (TextView) activity.findViewById(R.id.oppEight);
+        opp9 = (TextView) activity.findViewById(R.id.oppNine);
+        opp10 = (TextView) activity.findViewById(R.id.oppTen);
+        oppj = (TextView) activity.findViewById(R.id.oppEleven);
+        oppq = (TextView) activity.findViewById(R.id.oppTwelve);
+        oppk = (TextView) activity.findViewById(R.id.oppThirteen);
+        oppa = (TextView) activity.findViewById(R.id.oppAce);
+
 
         // read in the card images
         Card.initImages(activity);
@@ -245,13 +271,31 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         myk.setText(Integer.toString(state.king));
         mya.setText(Integer.toString(state.ace));
 
+        opp3.setText(Integer.toString(state.oppThree));
+        opp4.setText(Integer.toString(state.oppFour));
+        opp5.setText(Integer.toString(state.oppFive));
+        opp6.setText(Integer.toString(state.oppSix));
+        opp7.setText(Integer.toString(state.oppSeven));
+        opp8.setText(Integer.toString(state.oppEight));
+        opp9.setText(Integer.toString(state.oppNine));
+        opp10.setText(Integer.toString(state.oppTen));
+        oppj.setText(Integer.toString(state.oppJack));
+        oppq.setText(Integer.toString(state.oppQueen));
+        oppk.setText(Integer.toString(state.oppKing));
+        oppa.setText(Integer.toString(state.oppAce));
+        //int score = 5 * (state.three + state.four + state.five + state.six + state.seven + state.eight
+                //+ state.nine + state.ten + state.jack + state.queen + state.king + state.ace);
+        //teamOneRound.setText("" + score);
+
         teamOneRound.setText(" " + state.getTeamOneRoundScore());
         teamOneTotal.setText(" " + state.getTeamOneTotalScore());
         teamTwoRound.setText(" " + state.getTeamTwoRoundScore());
-        teamTwoRound.setText(" " + state.getTeamTwoTotalScore());
+        teamTwoTotal.setText(" " + state.getTeamTwoTotalScore());
         deckSize.setText("" + state.getDeck(0).size());
         discardSize.setText("" + state.getDeck(1).size());
         turn.setText("Player " + state.toPlay() + "'s turn");
+        teamTwoTotal.setText(" " + state.getTeamTwoTotalScore());
+        System.out.println("Team two round: "+state.getTeamTwoRoundScore());
 
         surface.invalidate();
 
@@ -481,6 +525,20 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                     state.getDeck(player + 2).peekAtCards(i));
         }
     }
+
+//    private void drawSelectedFaces(Canvas g, RectF topRect, float deltaX, float deltaY,
+//                                   int numCards, int player) {
+//        // loop through from back to front, drawing a card-back in each location
+//        for (int i = 0; i <= numCards - 1; i++) {
+//            // determine the position of this card's top/left corner
+//            float left = topRect.left + i * deltaX;
+//            float top = topRect.top + i * deltaY;
+//            // draw a card-back (hence null) into the appropriate rectangle
+//            drawCard(g,
+//                    new RectF(left, top - 100, left + topRect.width(), top + topRect.height()),
+//                    state.getDeck(player + 2).peekAtCards(i));
+//        }
+//    }
 
     private void drawSelected(Canvas g, RectF topRect, float deltaX, float deltaY, int numCards, int player) {
         // loop through from back to front, drawing a card-back in each location
