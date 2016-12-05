@@ -167,7 +167,6 @@ public class CanastaLocalGame extends LocalGame {
 //
             if (state.substage == 0 && state.getDeck(1) != null) {
                 state.drawDiscard(state.getDeck(1).peekAtTopCard(), state.getDeck(thisPlayerIdx + 2).getCards());
-                state.substage = 1;
                 return true;
             }
 
