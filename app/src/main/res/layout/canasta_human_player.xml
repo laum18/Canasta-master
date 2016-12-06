@@ -308,7 +308,8 @@
         android:layout_alignLeft="@+id/linearLayout3"
         android:layout_alignStart="@+id/linearLayout3"
         android:layout_marginRight="80dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        android:id="@+id/linearLayout4">
 
         <TextView
             android:layout_width="wrap_content"
@@ -438,5 +439,14 @@
         android:layout_alignTop="@+id/deckSize"
         android:layout_toRightOf="@+id/linearLayout2"
         android:layout_toEndOf="@+id/linearLayout2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sort Hand"
+        android:id="@+id/sortButton"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/turnIndicator"
+        android:layout_alignStart="@+id/turnIndicator" />
 
 </RelativeLayout>

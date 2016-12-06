@@ -73,6 +73,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     private Button meldButton;
     private Button discardButton;
     private Button drawDiscardButton;
+    private Button sortButton;
 
     TextView turn;
     TextView teamOneRound;
@@ -169,10 +170,12 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         meldButton = (Button) activity.findViewById(R.id.meldButton);
         discardButton = (Button) activity.findViewById(R.id.discardButton);
         drawDiscardButton = (Button) activity.findViewById(R.id.drawDiscardButton);
+        sortButton = (Button) activity.findViewById(R.id.sortButton);
 
         meldButton.setOnClickListener(this);
         discardButton.setOnClickListener(this);
         drawDiscardButton.setOnClickListener(this);
+        sortButton.setOnClickListener(this);
 
         turn = (TextView) activity.findViewById(R.id.turnIndicator);
         teamOneRound = (TextView) activity.findViewById(R.id.oneRoundText);
@@ -222,9 +225,6 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     public void onClick(View v) {
         if (v == meldButton) {
             game.sendAction((new CanastaMeldAction(this)));
-            for (int i = 0; i < 15; i++) {
-                state.setPlayerDeck(state.sortHand(state.getDeck(2))); //must be called many times, not sure why
-            }
 
         } else if (v == discardButton) {
             //discard card
@@ -254,12 +254,10 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 //			}
             }
             surface.invalidate();
-            for (int i = 0; i < 15; i++) {
-                state.setPlayerDeck(state.sortHand(state.getDeck(2))); //must be called many times, not sure why
-            }
         } else if (v == drawDiscardButton) {
             game.sendAction((new CanastaDrawDiscardAction(this)));
-            for (int i = 0; i < 15; i++) {
+        } else if (v == sortButton) {
+            for (int i = 0; i < 14; i++) {
                 state.setPlayerDeck(state.sortHand(state.getDeck(2))); //must be called many times, not sure why
             }
         }
