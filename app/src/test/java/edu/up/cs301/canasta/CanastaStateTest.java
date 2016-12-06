@@ -76,7 +76,7 @@ public class CanastaStateTest {
         state.temp[1] = new Card(Rank.FOUR, Suit.Diamond);
         state.temp[2] = new Card(Rank.FOUR, Suit.Spade);
 
-        state.Meld(state.temp);
+        //state.Meld(state.temp);
         boolean melded0 = state.getDeck(state.toPlay()).containsCard(state.temp[0]);
         boolean melded1 = state.getDeck(state.toPlay()).containsCard(state.temp[1]);
         boolean melded2 = state.getDeck(state.toPlay()).containsCard(state.temp[2]);

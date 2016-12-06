@@ -6,6 +6,7 @@ import edu.up.cs301.game.actionMsg.ReadyAction;
 import edu.up.cs301.game.infoMsg.BindGameInfo;
 import edu.up.cs301.game.infoMsg.GameInfo;
 import edu.up.cs301.game.infoMsg.GameOverInfo;
+import edu.up.cs301.game.infoMsg.RoundOverInfo;
 import edu.up.cs301.game.infoMsg.StartGameInfo;
 import edu.up.cs301.game.infoMsg.TimerInfo;
 import edu.up.cs301.game.util.GameTimer;
@@ -224,6 +225,23 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 					// mark game as being over
 					gameOver = true;
 				}
+				else if (myInfo instanceof RoundOverInfo) {
+
+					// CASE 3: we get a "game over" message
+
+					// if we are the GUI, pop up a message box and tell the
+					// activity that the game is over
+					if (myActivity != null) {
+						roundIsOver(((GameOverInfo)myInfo).getMessage());
+						myActivity.setRoundOver(true);
+					}
+
+					// acknowledge to the game that we have receive the message
+					game.sendAction(new GameOverAckAction(GameComputerPlayer.this));
+
+					// mark game as being over
+					gameOver = true;
+				}
 				else if (myInfo instanceof TimerInfo) {
 
 					// CASE 4: we have a timer "tick"
@@ -253,6 +271,11 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 	 * 		the "game over" message sent by the game
 	 */
 	protected void gameIsOver(String msg) {
+		// the default behavior is to put a pop-up for the user to see that tells
+		// the game's result
+		MessageBox.popUpMessage(msg, myActivity);
+	}
+	protected void roundIsOver(String msg) {
 		// the default behavior is to put a pop-up for the user to see that tells
 		// the game's result
 		MessageBox.popUpMessage(msg, myActivity);

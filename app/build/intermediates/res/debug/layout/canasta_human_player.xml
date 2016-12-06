@@ -8,8 +8,9 @@
         android:id="@+id/animation_surface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,11 +18,11 @@
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentEnd="false"
         android:layout_marginRight="111dp"
         android:layout_marginEnd="111dp"
-        android:layout_marginLeft="800dp"
-        android:layout_marginTop="550dp"
+        android:layout_marginLeft="780dp"
+        android:layout_marginTop="500dp"
         android:background="@android:color/background_light"
         android:id="@+id/linearLayout">
 
@@ -38,6 +39,12 @@
             android:text="Discard"
             android:id="@+id/discardButton"
             android:clickable="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Draw Discard"
+            android:id="@+id/drawDiscardButton" />
     </LinearLayout>
 
     <LinearLayout
@@ -190,7 +197,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="140dp"
         android:layout_marginStart="108dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="177dp"
         android:layout_marginRight="80dp"
         android:layout_marginBottom="400dp"
         android:id="@+id/linearLayout3">
@@ -200,91 +207,103 @@
             android:layout_height="wrap_content"
             android:id="@+id/oppThree"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/oppFour"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/oppFive"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/oppSix"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/oppSeven"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/oppEight"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/oppNine"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/oppTen"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/oppEleven"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/oppTwelve"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/oppThirteen"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
             android:id="@+id/oppAce"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="20dp" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="147dp"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignLeft="@+id/linearLayout3"
         android:layout_alignStart="@+id/linearLayout3"
@@ -296,84 +315,128 @@
             android:layout_height="wrap_content"
             android:id="@+id/myThree"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/myFour"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/myFive"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/mySix"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/mySeven"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/myEight"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/myNine"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/myTen"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/myEleven"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/myTwelve"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/myThirteen"
             android:layout_weight="1"
-            android:text="0" />
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
             android:id="@+id/myAce"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="20dp" />
     </LinearLayout>
 
-</RelativeLayout><!-- From: file:/C:/Users/Kevin.JayVPLaptop/AndroidStudioProjects/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn"
+        android:id="@+id/turnIndicator"
+        android:layout_alignTop="@+id/linearLayout2"
+        android:layout_alignBottom="@+id/linearLayout2"
+        android:layout_alignLeft="@+id/linearLayout3"
+        android:layout_alignStart="@+id/linearLayout3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/deckSize"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_toRightOf="@+id/turnIndicator"
+        android:layout_toEndOf="@+id/turnIndicator" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/discardSize"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp"
+        android:layout_alignTop="@+id/deckSize"
+        android:layout_toRightOf="@+id/linearLayout2"
+        android:layout_toEndOf="@+id/linearLayout2" />
+
+</RelativeLayout><!-- From: file:/C:/Users/banobi19/AndroidStudioProjects/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->

@@ -56,8 +56,12 @@ public class Deck implements Serializable {
 		// add the cards
 		for (int i = 0; i <= 1; i++) {
 			for (char s : "SHDC".toCharArray()) {
-				for (char r : "KQJT98765432A".toCharArray()) {
-					this.add(Card.fromString(""+r+s));
+				for (char r : "RKQJT98765432A".toCharArray()) {
+					if(!((s=='S' || s=='H')&& r=='R')){
+						this.add(Card.fromString(""+r+s));
+					}
+					//this.add(Card.fromString(""+r+s));
+
 				}
 			}
 		}
@@ -204,8 +208,11 @@ public class Deck implements Serializable {
 		synchronized (this.cards) {
 			if (cards.isEmpty()) {
 				return null;
-			} else {
+			} else if (numCards < this.cards.size()){
 				return cards.get(numCards);
+			}
+			else {
+				return null;
 			}
 		}
 	}
@@ -257,11 +264,18 @@ public class Deck implements Serializable {
 	}
 
 	public Card getTopCard(Deck d) {
-		return cards.get(cards.size()-2);
+		return cards.get(cards.size()-1);  //TODO: was -2
 	}
 
 	public ArrayList<Card> getCards() {
 		return cards;
+	}
+
+	public Deck swapCards(Deck d, Card c1, Card c2, int index1, int index2) {
+		Card temp = c2;
+		d.getCards().set(index2, c1);
+		d.getCards().set(index1, temp);
+		return d;
 	}
 
 }

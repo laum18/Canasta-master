@@ -33,6 +33,7 @@ public class Card implements Serializable {
 	// instance variables: the card's rank and the suit
     private Rank rank;
     private Suit suit;
+	protected boolean selected;
 
     /**
      * Constructor for class card
@@ -43,6 +44,7 @@ public class Card implements Serializable {
     public Card(Rank r, Suit s) {
         rank = r;
         suit = s;
+		selected = false;
     }
 
     /**
@@ -163,28 +165,28 @@ public class Card implements Serializable {
     		R.drawable.card_4c, R.drawable.card_5c, R.drawable.card_6c,
     		R.drawable.card_7c, R.drawable.card_8c, R.drawable.card_9c,
     		R.drawable.card_tc, R.drawable.card_jc, R.drawable.card_qc,
-    		R.drawable.card_kc, 
+    		R.drawable.card_kc, R.drawable.card_rc,
     	},
     	{
     		R.drawable.card_ad, R.drawable.card_2d, R.drawable.card_3d,
     		R.drawable.card_4d, R.drawable.card_5d, R.drawable.card_6d,
     		R.drawable.card_7d, R.drawable.card_8d, R.drawable.card_9d,
     		R.drawable.card_td, R.drawable.card_jd, R.drawable.card_qd,
-    		R.drawable.card_kd, 
+    		R.drawable.card_kd, R.drawable.card_rd,
     	},
     	{
     		R.drawable.card_ah, R.drawable.card_2h, R.drawable.card_3h,
     		R.drawable.card_4h, R.drawable.card_5h, R.drawable.card_6h,
     		R.drawable.card_7h, R.drawable.card_8h, R.drawable.card_9h,
     		R.drawable.card_th, R.drawable.card_jh, R.drawable.card_qh,
-    		R.drawable.card_kh, 
+    		R.drawable.card_kh, R.drawable.card_rh,
     	},
     	{
     		R.drawable.card_as, R.drawable.card_2s, R.drawable.card_3s,
     		R.drawable.card_4s, R.drawable.card_5s, R.drawable.card_6s,
     		R.drawable.card_7s, R.drawable.card_8s, R.drawable.card_9s,
     		R.drawable.card_ts, R.drawable.card_js, R.drawable.card_qs,
-    		R.drawable.card_ks, 
+    		R.drawable.card_ks, R.drawable.card_rs,
     	},
     };
     
@@ -219,5 +221,13 @@ public class Card implements Serializable {
     		}
     	}
     }
+
+	public Boolean getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Boolean b) {
+		selected = b;
+	}
 
 }
