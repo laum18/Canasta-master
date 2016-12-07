@@ -73,6 +73,7 @@ public class HardComputerPlayer extends GameComputerPlayer {
             sleep(500);
 
             ArrayList<Card> myMeldArray = findMeld(myDeck);
+            //findMeld(myDeck);
             do {
                 if (myMeldArray == null) {
 
@@ -114,6 +115,7 @@ public class HardComputerPlayer extends GameComputerPlayer {
 	* iterates through given deck and compares each card to all the other cards in the deck
 	* looking for three cards of the same rank including wild cards*/
     private ArrayList<Card> findMeld(Deck d){
+//    private void findMeld(Deck d){
         ArrayList<Card> myHand = d.getCards();
         ArrayList<Card> meldArray;
 
@@ -127,6 +129,7 @@ public class HardComputerPlayer extends GameComputerPlayer {
             for(int j=i; j<myHand.size(); j++){
                 if(myHand.get(j).getRank() == rank || myHand.get(j).getRank() == Rank.TWO || myHand.get(j).getRank() == Rank.RJOKER){
                     meldArray.add(myHand.get(j));
+                    //myHand.get(j).setSelected(true);
                 }
             }
             // if set of three or more found, return meld
@@ -137,6 +140,19 @@ public class HardComputerPlayer extends GameComputerPlayer {
 
         // if no legal meld found, return null
         return null;
+
+//        int selected = 0;
+//        for (int i = 0; i < d.size(); i++) {
+//            if (myHand.get(i).getSelected()) {
+//                selected++;
+//            }
+//        }
+//
+//        if (selected < 3) {
+//            for (int i = 0; i < d.size(); i++) {
+//                myHand.get(i).setSelected(false);
+//            }
+//        }
     }
 
     private ArrayList<Card> canMeld(Deck d){

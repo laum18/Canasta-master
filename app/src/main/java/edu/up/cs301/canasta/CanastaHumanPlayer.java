@@ -737,9 +737,13 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                 if (player.contains(x, y)) {
                     //surface.flash(Color.GRAY, 100);
                     if (state.getDeck(playerNum + 2).peekAtCards(i).getSelected() == false) {
-                        state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
+                        //state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
+                        CanastaSelectedAction selected = new CanastaSelectedAction(this, true, i);
+                        game.sendAction(selected);
                     } else {
-                        state.getDeck(playerNum + 2).peekAtCards(i).setSelected(false);
+                        //state.getDeck(playerNum + 2).peekAtCards(i).setSelected(false);
+                        CanastaSelectedAction selected = new CanastaSelectedAction(this, false, i);
+                        game.sendAction(selected);
                     }
                 }
             }
@@ -748,9 +752,13 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                 if (player.contains(x, y)) {
                     //surface.flash(Color.GRAY, 100);
                     if (state.getDeck(playerNum + 2).peekAtCards(i).getSelected() == false) {
-                        state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
+                        //state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
+                        CanastaSelectedAction selected = new CanastaSelectedAction(this, true, i);
+                        game.sendAction(selected);
                     } else {
-                        state.getDeck(playerNum + 2).peekAtCards(i).setSelected(false);
+                        //state.getDeck(playerNum + 2).peekAtCards(i).setSelected(false);
+                        CanastaSelectedAction selected = new CanastaSelectedAction(this, false, i);
+                        game.sendAction(selected);
                     }
                 }
             }

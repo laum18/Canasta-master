@@ -214,6 +214,16 @@ public class CanastaLocalGame extends LocalGame {
                 return false;
             }
         }
+        else if (canastaMA instanceof  CanastaSelectedAction) {
+            CanastaSelectedAction a = (CanastaSelectedAction) canastaMA;
+            if (state.substage == 1) {
+                state.getDeck(thisPlayerIdx+2).peekAtCards(a.getPosition()).setSelected(a.getSelected());
+                return true;
+            }
+
+            return false;
+        }
+
 
 		// return true, because the move was successful if we get here
 		return true;
