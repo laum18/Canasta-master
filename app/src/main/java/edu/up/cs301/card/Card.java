@@ -230,4 +230,41 @@ public class Card implements Serializable {
 		selected = b;
 	}
 
+
+	public int getCardValue(Rank r) {
+		int cardValue = 0;
+		if (r.shortName() == '2') {
+			cardValue = 2;
+		} else if (r.shortName() == '3') {
+			cardValue = 3;
+		} else if (r.shortName() == '4') {
+			cardValue = 4;
+		} else if (r.shortName() == '5') {
+			cardValue = 5;
+		} else if (r.shortName() == '6') {
+			cardValue = 6;
+		} else if (r.shortName() == '7') {
+			cardValue = 7;
+		} else if (r.shortName() == '8') {
+			cardValue = 8;
+		} else if (r.shortName() == '9') {
+			cardValue = 9;
+		} else if (r.shortName() == 'T') {
+			cardValue = 10;
+		} else if (r.shortName() == 'J') {
+			cardValue = 11;
+		} else if (r.shortName() == 'Q') {
+			cardValue = 12;
+		} else if (r.shortName() == 'K') {
+			cardValue = 13;
+		} else if (r.shortName() == 'A') {
+			cardValue = 14;
+		} else if (r.shortName() == 'R') {
+			cardValue = 1;
+		} else {
+			cardValue = -1;
+		}
+		return cardValue;
+	}
+
 }

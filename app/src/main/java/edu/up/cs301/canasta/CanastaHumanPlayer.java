@@ -259,15 +259,15 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         } else if (v == drawDiscardButton) {
             game.sendAction((new CanastaDrawDiscardAction(this)));
         } else if (v == sortButton) {
-            for (int i = 0; i < 14; i++) {
-                state.setPlayerDeck(state.sortHand(state.getDeck(playerNum + 2))); //must be called many times, not sure why
-            }
+            state.setPlayerDeck(state.sortHand(state.getDeck(playerNum+2)));
+
         }
         updateGUI();
 
     }
 
     private void updateGUI() {
+        //state.setPlayerDeck(state.sortHand(state.getDeck(playerNum+2)));
         playerNumber.setText("You are player " + playerNum);
 
         my3.setText(Integer.toString(state.three));
@@ -304,7 +304,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
             if (state.toPlay() == 0 || state.toPlay() == 3) {
                 state.setTeamOneRoundScore(state.getTeamOneRoundScore()+300);
             } else {
-                state.setTeamTwoRoundScore(state.getTeamOneRoundScore()+300);
+                state.setTeamTwoRoundScore(state.getTeamTwoRoundScore()+300);
             }
         }
 
@@ -319,7 +319,6 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         //System.out.println("Team two round: "+state.getTeamTwoRoundScore());
 
         surface.invalidate();
-
     }
 
     /**
