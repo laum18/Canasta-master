@@ -639,51 +639,51 @@ public class CanastaState extends GameState {
 						player.removeCard(selected[i]);
 					}
 
-					if (three >= 7 && canastaCheckerTwo[0] == 0) {
+					if (oppThree >= 7 && canastaCheckerTwo[0] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[0] = 1;
 					}
-					else if (four >= 7 && canastaCheckerTwo[1] == 0) {
+					else if (oppFour >= 7 && canastaCheckerTwo[1] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[1] = 1;
 					}
-					else if (five >= 7 && canastaCheckerTwo[2] == 0) {
+					else if (oppFive >= 7 && canastaCheckerTwo[2] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[2] = 1;
 					}
-					else if (six >= 7 && canastaCheckerTwo[3] == 0) {
+					else if (oppSix >= 7 && canastaCheckerTwo[3] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[3] = 1;
 					}
-					else if (seven >= 7 && canastaCheckerTwo[4] == 0) {
+					else if (oppSeven >= 7 && canastaCheckerTwo[4] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[4] = 1;
 					}
-					else if (eight >= 7 && canastaCheckerTwo[5] == 0) {
+					else if (oppEight >= 7 && canastaCheckerTwo[5] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[5] = 1;
 					}
-					else if (nine >= 7 && canastaCheckerTwo[6] == 0) {
+					else if (oppNine >= 7 && canastaCheckerTwo[6] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[6] = 1;
 					}
-					else if (ten >= 7 && canastaCheckerTwo[7] == 0) {
+					else if (oppTen >= 7 && canastaCheckerTwo[7] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[7] = 1;
 					}
-					else if (jack>= 7 && canastaCheckerTwo[8] == 0) {
+					else if (oppJack>= 7 && canastaCheckerTwo[8] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[8] = 1;
 					}
-					else if (queen >= 7 && canastaCheckerTwo[9] == 0) {
+					else if (oppQueen >= 7 && canastaCheckerTwo[9] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[0] = 1;
 					}
-					else if (king >= 7 && canastaCheckerTwo[10] == 0) {
+					else if (oppKing >= 7 && canastaCheckerTwo[10] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[10] = 1;
 					}
-					else if (ace >= 7 && canastaCheckerTwo[11] == 0) {
+					else if (oppAce >= 7 && canastaCheckerTwo[11] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[11] = 1;
 					}
@@ -911,51 +911,51 @@ public class CanastaState extends GameState {
 						player.removeCard(selected[i]);
 					}
 
-					if (three >= 7 && canastaCheckerTwo[0] == 0) {
+					if (oppThree >= 7 && canastaCheckerTwo[0] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[0] = 1;
 					}
-					else if (four >= 7 && canastaCheckerTwo[1] == 0) {
+					else if (oppFour >= 7 && canastaCheckerTwo[1] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[1] = 1;
 					}
-					else if (five >= 7 && canastaCheckerTwo[2] == 0) {
+					else if (oppFive >= 7 && canastaCheckerTwo[2] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[2] = 1;
 					}
-					else if (six >= 7 && canastaCheckerTwo[3] == 0) {
+					else if (oppSix >= 7 && canastaCheckerTwo[3] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[3] = 1;
 					}
-					else if (seven >= 7 && canastaCheckerTwo[4] == 0) {
+					else if (oppSeven >= 7 && canastaCheckerTwo[4] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[4] = 1;
 					}
-					else if (eight >= 7 && canastaCheckerTwo[5] == 0) {
+					else if (oppEight >= 7 && canastaCheckerTwo[5] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[5] = 1;
 					}
-					else if (nine >= 7 && canastaCheckerTwo[6] == 0) {
+					else if (oppNine >= 7 && canastaCheckerTwo[6] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[6] = 1;
 					}
-					else if (ten >= 7 && canastaCheckerTwo[7] == 0) {
+					else if (oppTen >= 7 && canastaCheckerTwo[7] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[7] = 1;
 					}
-					else if (jack>= 7 && canastaCheckerTwo[8] == 0) {
+					else if (oppJack>= 7 && canastaCheckerTwo[8] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[8] = 1;
 					}
-					else if (queen >= 7 && canastaCheckerTwo[9] == 0) {
+					else if (oppQueen >= 7 && canastaCheckerTwo[9] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[0] = 1;
 					}
-					else if (king >= 7 && canastaCheckerTwo[10] == 0) {
+					else if (oppKing >= 7 && canastaCheckerTwo[10] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[10] = 1;
 					}
-					else if (ace >= 7 && canastaCheckerTwo[11] == 0) {
+					else if (oppAce >= 7 && canastaCheckerTwo[11] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[11] = 1;
 					}
@@ -1413,51 +1413,51 @@ public class CanastaState extends GameState {
 
 					}
 
-					if (three >= 7 && canastaCheckerTwo[0] == 0) {
+					if (oppThree >= 7 && canastaCheckerTwo[0] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[0] = 1;
 					}
-					else if (four >= 7 && canastaCheckerTwo[1] == 0) {
+					else if (oppFour >= 7 && canastaCheckerTwo[1] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[1] = 1;
 					}
-					else if (five >= 7 && canastaCheckerTwo[2] == 0) {
+					else if (oppFive >= 7 && canastaCheckerTwo[2] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[2] = 1;
 					}
-					else if (six >= 7 && canastaCheckerTwo[3] == 0) {
+					else if (oppSix >= 7 && canastaCheckerTwo[3] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[3] = 1;
 					}
-					else if (seven >= 7 && canastaCheckerTwo[4] == 0) {
+					else if (oppSeven >= 7 && canastaCheckerTwo[4] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[4] = 1;
 					}
-					else if (eight >= 7 && canastaCheckerTwo[5] == 0) {
+					else if (oppEight >= 7 && canastaCheckerTwo[5] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[5] = 1;
 					}
-					else if (nine >= 7 && canastaCheckerTwo[6] == 0) {
+					else if (oppNine >= 7 && canastaCheckerTwo[6] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[6] = 1;
 					}
-					else if (ten >= 7 && canastaCheckerTwo[7] == 0) {
+					else if (oppTen >= 7 && canastaCheckerTwo[7] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[7] = 1;
 					}
-					else if (jack>= 7 && canastaCheckerTwo[8] == 0) {
+					else if (oppJack>= 7 && canastaCheckerTwo[8] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[8] = 1;
 					}
-					else if (queen >= 7 && canastaCheckerTwo[9] == 0) {
+					else if (oppQueen >= 7 && canastaCheckerTwo[9] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[0] = 1;
 					}
-					else if (king >= 7 && canastaCheckerTwo[10] == 0) {
+					else if (oppKing >= 7 && canastaCheckerTwo[10] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[10] = 1;
 					}
-					else if (ace >= 7 && canastaCheckerTwo[11] == 0) {
+					else if (oppAce >= 7 && canastaCheckerTwo[11] == 0) {
 						teamTwoRoundScore += 300;
 						canastaCheckerTwo[11] = 1;
 					}

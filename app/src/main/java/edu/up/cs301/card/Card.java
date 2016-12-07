@@ -44,8 +44,14 @@ public class Card implements Serializable {
     public Card(Rank r, Suit s) {
         rank = r;
         suit = s;
-		//selected = false;
+		selected = false;
     }
+
+	public Card(Card c) {
+		rank = c.rank;
+		suit = c.suit;
+		selected = c.getSelected();
+	}
 
     /**
      * Creates a Card from a String.  (Can be used instead of the
