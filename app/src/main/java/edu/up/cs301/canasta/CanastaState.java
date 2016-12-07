@@ -92,7 +92,7 @@ public class CanastaState extends GameState {
 		teamTwoRoundScore = 0;
 		teamOneTotalScore = 0;
 		teamTwoTotalScore = 0;
-		goal = 1000;
+		goal = 2000;
 		roundStarting = false;
 		firstRound = true;
 

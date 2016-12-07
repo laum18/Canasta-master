@@ -128,7 +128,7 @@ public class Card implements Serializable {
     	
     	// get the bitmap for the card
     	Bitmap bitmap = cardImages[this.getSuit().ordinal()][this.getRank().ordinal()];
-    	
+
     	// create the source rectangle
     	Rect r = new Rect(0,0,bitmap.getWidth(),bitmap.getHeight());
 
