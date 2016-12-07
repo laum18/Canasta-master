@@ -478,4 +478,12 @@
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView" />
 
-</RelativeLayout><!-- From: file:/P:/cs%20301/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="New Round"
+        android:id="@+id/newRound"
+        android:visibility="visible" />
+
+</RelativeLayout><!-- From: file:/C:/Users/banobi19/AndroidStudioProjects/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->

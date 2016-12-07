@@ -478,4 +478,12 @@
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="New Round"
+        android:id="@+id/newRound"
+        android:visibility="visible" />
+
 </RelativeLayout>

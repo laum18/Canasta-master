@@ -43,7 +43,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer {
 		CanastaDrawDeckAction drawDeck = new CanastaDrawDeckAction(this);
 
 		// wait half-second to start the turn
-		sleep(100);
+		sleep(500);
 
     	// if we don't have a game-state, ignore
     	if (!(info instanceof CanastaState)) {
@@ -66,7 +66,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer {
 			// draw a card
 			game.sendAction(drawDeck);
 			// delay half-second
-			sleep(100);
+			sleep(500);
 
 			// check that meld was found and contains at least three cards; if so, create and send meld action to the game
 			if(myMeldArray != null) {
@@ -80,6 +80,7 @@ public class CanastaComputerPlayer extends GameComputerPlayer {
 			// create and send discard action to the game
 			CanastaDiscardAction discard = new CanastaDiscardAction(this, savedState.getDeck(this.playerNum+2).peekAtTopCard());
 			game.sendAction(discard);
+			sleep(500);
 
 
     	}

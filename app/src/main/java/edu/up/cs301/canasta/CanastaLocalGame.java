@@ -148,12 +148,12 @@ public class CanastaLocalGame extends LocalGame {
             if (state.substage == 1) {
                 Card c = ((CanastaDiscardAction) canastaMA).getCard();
                 state.discardCard(c);
-                if (thisPlayerIdx == 3) {
-                    state.setToPlay(0);
-                } else {
-                    state.setToPlay(thisPlayerIdx + 1);
-
-                }
+//                if (thisPlayerIdx == 3) {
+//                    state.setToPlay(0);
+//                } else {
+//                    state.setToPlay(thisPlayerIdx + 1);
+//
+//                }
                 System.out.println(state.toPlay());
 
                 return true;
