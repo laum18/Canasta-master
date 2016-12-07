@@ -322,13 +322,17 @@ public class CanastaState extends GameState
 		// checks if the player selected at least three cards
 		if (cards != null && cards.length > 0) {
 			for (int i = 0; i < cards.length - 1; i++) {
+				if (cards[i].getRank().shortName() == 'R' || cards[i].getRank().shortName() == '2') {
+					wildCardCheck++;
+				}
 				for (int j = i; j < cards.length - 1; j++) {
-					if (cards[i].getRank().equals(cards[j + 1].getRank())) {
+					if (cards[i].getRank().equals(cards[j + 1].getRank()) && (cards[i].getRank().shortName() != 'R' || cards[i].getRank().shortName() != '2'
+							|| cards[j + 1].getRank().shortName() != 'R' || cards[j + 1].getRank().shortName() != '2')) {
 						check++;
 
 					} else if (cards[i].getRank().shortName() == 'R' || cards[i].getRank().shortName() == '2'
 							|| cards[j + 1].getRank().shortName() == 'R' || cards[j + 1].getRank().shortName() == '2') {
-						wildCardCheck++;
+//
 					} else {
 						r = false;
 						return r;
@@ -337,6 +341,9 @@ public class CanastaState extends GameState
 			}
 		}
 
+		if (cards[cards.length-1].getRank().shortName() == 'R' || cards[cards.length-1].getRank().shortName() == '2') {
+			wildCardCheck++;
+		}
 		// if there is at least one wildcard
 		if (check >= 1 && hasWildCard == true) {
 			if (wildCardCheck > check) {
