@@ -88,7 +88,7 @@ public class HardComputerPlayer extends GameComputerPlayer {
                         myMeldArray.remove(0);
                     }
                     //delay half-second
-                    sleep(1000);
+                    sleep(500);
                     myMeldArray = findMeld(myDeck);
                 }
 

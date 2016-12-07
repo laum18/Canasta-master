@@ -216,12 +216,12 @@ public class CanastaLocalGame extends LocalGame {
         }
         else if (canastaMA instanceof  CanastaSelectedAction) {
             CanastaSelectedAction a = (CanastaSelectedAction) canastaMA;
-            if (state.substage == 1) {
+            //if (state.substage == 0) {
                 state.getDeck(thisPlayerIdx+2).peekAtCards(a.getPosition()).setSelected(a.getSelected());
                 return true;
-            }
+            //}
 
-            return false;
+            //return false;
         }
 
 
