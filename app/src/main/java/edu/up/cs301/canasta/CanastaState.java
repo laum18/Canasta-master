@@ -416,8 +416,10 @@ public class CanastaState extends GameState {
 	public void discardCard(Card c) {
 		Deck player = getDeck(toPlay + 2);
 		Deck discard = getDeck(1);
+		System.out.println(c +" is selected");
 		player.removeCard(c);
-		//c.setSelected(true);
+		System.out.println(c +" is removed");
+		c.setSelected(true);
 
 		if(getDeck(0).size() == 0 || getDeck(toPlay+2).size() == 0){
 			System.out.println("Round Over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -425,10 +427,10 @@ public class CanastaState extends GameState {
 		}
 
 		if (toPlay == 3) {
-                    setToPlay(0);
-                } else {
-                    setToPlay(toPlay+ 1);
-                }
+			setToPlay(0);
+		} else {
+			setToPlay(toPlay + 1);
+		}
 		discard.add(c);
 	}
 

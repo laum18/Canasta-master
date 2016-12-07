@@ -44,7 +44,7 @@ public class Card implements Serializable {
     public Card(Rank r, Suit s) {
         rank = r;
         suit = s;
-		selected = false;
+		//selected = false;
     }
 
     /**
@@ -97,9 +97,14 @@ public class Card implements Serializable {
 	 *		true if the two card objects represent the same card, false
      *		otherwise.
      */
-    public boolean equals(Card other) {
-        return this.rank == other.rank && this.suit == other.suit;
-    }
+//	public boolean equals(Card other) {
+//		return this.rank == other.rank && this.suit == other.suit;
+//	}
+	public boolean equals(Object other) {
+		if (!(other instanceof Card)) return false;
+		Card c = (Card)other;
+		return this.rank == c.rank && this.suit == c.suit;
+	}
 
     /**
      * Draws the card on a Graphics object.  The card is drawn as a
