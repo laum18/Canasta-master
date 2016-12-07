@@ -416,18 +416,18 @@ public class CanastaState extends GameState {
 		Deck discard = getDeck(1);
 		player.removeCard(c);
 		//c.setSelected(true);
+
+		if(getDeck(0).size() == 0 || getDeck(toPlay+2).size() == 0){
+			System.out.println("Round Over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			newRound();
+		}
+
 		if (toPlay == 3) {
                     setToPlay(0);
                 } else {
                     setToPlay(toPlay+ 1);
                 }
 		discard.add(c);
-		if(getDeck(0).size() == 0 || getDeck(toPlay+2).size() == 0){
-			toPlay = -1;
-			System.out.println("Round Over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			newRound();
-		}
-
 	}
 
 	public boolean canDiscard(Card c) {
@@ -617,7 +617,7 @@ public class CanastaState extends GameState {
 						|| selected[selected.length - 1].getRank().shortName() == 'T' || selected[selected.length - 1].getRank().shortName() == 'J'
 						|| selected[selected.length - 1].getRank().shortName() == 'Q' || selected[selected.length - 1].getRank().shortName() == 'K') {
 					teamTwoRoundScore += 10;
-				} else if (selected[selected.length - 1].getRank().shortName() == 'R' || selected[selected.length - 1].getRank().shortName() == '2') {
+				} else if (selected[selected.length - 1].getRank().shortName() == '2' || selected[selected.length - 1].getRank().shortName() == 'A') {
 					teamTwoRoundScore += 20;
 				} else {
 					teamTwoRoundScore += 50;
@@ -670,7 +670,6 @@ public class CanastaState extends GameState {
 
 		if (canMeld(selected, wildCard)) {
 			Rank r = selected[0].getRank();
-			;
 
 			if (selected[0].getRank().shortName() == 'R' || selected[0].getRank().shortName() == '2') {
 				r = selected[1].getRank();
@@ -730,9 +729,7 @@ public class CanastaState extends GameState {
 
 						teamOneRoundScore +=10;
 						player.removeCard(selected[i]);
-					}
-					else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A'){
-						teamOneRoundScore +=20;
+
 					} else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A') {
 						teamOneTotalScore += 20;
 						player.removeCard(selected[i]);
@@ -755,15 +752,19 @@ public class CanastaState extends GameState {
 						teamTwoRoundScore +=10;
 						player.removeCard(selected[i]);
 					} else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A') {
-						teamTwoTotalScore += 20;
+						teamTwoRoundScore += 20;
 						player.removeCard(selected[i]);
 					} else {
-						teamTwoTotalScore += 50;
+						teamTwoRoundScore += 50;
 						player.removeCard(selected[i]);
 					}
 				}
 
 			}
+		}
+		if(getDeck(toPlay+2).size() == 0){
+			System.out.println("Round Over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			newRound();
 		}
 	}
 
@@ -951,6 +952,11 @@ public class CanastaState extends GameState {
 
 			}
 		}
+		if(getDeck(0).size() == 0 || getDeck(toPlay+2).size() == 0){
+			toPlay = -1;
+			System.out.println("Round Over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			newRound();
+		}
 	}
 
 
@@ -1045,7 +1051,7 @@ public class CanastaState extends GameState {
 		oppAce = 0;
 
 		teamOneTotalScore = teamOneRoundScore+teamOneTotalScore;
-		teamTwoRoundScore = teamTwoRoundScore+teamTwoTotalScore;
+		teamTwoTotalScore = teamTwoRoundScore+teamTwoTotalScore;
 
 		teamOneRoundScore = 0;
 		teamTwoRoundScore = 0;

@@ -243,7 +243,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                     selected.add(c);
                 }
                 if (selected.size() == 1) {
-                    game.sendAction(new CanastaDiscardAction(this, selected.get(0)));
+                    CanastaDiscardAction discard = new CanastaDiscardAction(this, selected.get(0));
+                    game.sendAction(discard);
                     break;
                 }
 
@@ -299,9 +300,11 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         oppa.setText(Integer.toString(state.oppAce));
 
         if(state.roundStarting == true){
-            newRound.setVisibility(View.VISIBLE);
-        }
-        else{ newRound.setVisibility(View.INVISIBLE);}
+           newRound.setVisibility(View.VISIBLE);
+            newRound.setText("!!!!!!!!!!!!!!");
+       }
+
+
         //int score = 5 * (state.three + state.four + state.five + state.six + state.seven + state.eight
                 //+ state.nine + state.ten + state.jack + state.queen + state.king + state.ace);
         //teamOneRound.setText("" + score);
@@ -700,6 +703,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
      */
     public void onTouch(MotionEvent event) {
 
+
+        CanastaDrawDeckAction drawCard = new CanastaDrawDeckAction(this);
+
         // ignore everything except down-touch events
         if (event.getAction() != MotionEvent.ACTION_DOWN) return;
 
@@ -754,7 +760,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         RectF drawDeck = deckCardLocation();
         if (drawDeck.contains(x, y)) {
             //surface.flash(Color.GRAY, 100);
-            game.sendAction(new CanastaDrawDeckAction(this));
+            game.sendAction(drawCard);
         }
         if (myTopCardLoc.contains(x, y)) {
             // it's on my pile: we're playing a card: send action to
