@@ -557,7 +557,7 @@ public class CanastaState extends GameState
 						player.removeCard(selected[i]);
 					}
 				}
-				else {
+				else  if (toPlay() == 1 || toPlay() == 3){
 					otherTeamMeld.add(selected[i]);
 					if (selected[i].getRank().shortName() == '3' || selected[i].getRank().shortName() == '4' ||
 							selected[i].getRank().shortName() == '5' || selected[i].getRank().shortName() == '6' ||
@@ -602,7 +602,7 @@ public class CanastaState extends GameState
 
 				getDeck(1).removeCard(selected[selected.length-1]);
 			}
-			else {
+			else if (toPlay() == 1 || toPlay() == 3) {
 				otherTeamMeld.add(selected[selected.length-1]);
 
 				if (selected[selected.length-1].getRank().shortName() == '3' || selected[selected.length-1].getRank().shortName() == '4'
@@ -743,7 +743,26 @@ public class CanastaState extends GameState
 				}
 				else {
 					otherTeamMeld.add(selected[i]);
-					teamTwoTotalScore += 5;
+					if (selected[i].getRank().shortName() == '3' || selected[i].getRank().shortName() == '4' ||
+							selected[i].getRank().shortName() == '5' || selected[i].getRank().shortName() == '6' ||
+							selected[i].getRank().shortName() == '7') {
+						teamTwoTotalScore +=5;
+						player.removeCard(selected[i]);
+					}
+					else if (selected[i].getRank().shortName() == '8' || selected[i].getRank().shortName() == '9'
+							|| selected[i].getRank().shortName() == 'T' || selected[i].getRank().shortName() == 'J'
+							|| selected[i].getRank().shortName() == 'Q' || selected[i].getRank().shortName() == 'K') {
+						teamTwoTotalScore +=10;
+						player.removeCard(selected[i]);
+					}
+					else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A'){
+						teamTwoTotalScore +=20;
+						player.removeCard(selected[i]);
+					}
+					else {
+						teamTwoTotalScore += 50;
+						player.removeCard(selected[i]);
+					}
 				}
 
 			}

@@ -82,6 +82,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     TextView teamTwoTotal;
     TextView deckSize;
     TextView discardSize;
+    TextView playerNumber;
 
     // text view for number of cards in team melds of each rank
     TextView my3;
@@ -184,6 +185,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         teamTwoTotal = (TextView) activity.findViewById(R.id.twoTotalText);
         deckSize = (TextView) activity.findViewById(R.id.deckSize);
         discardSize = (TextView) activity.findViewById(R.id.discardSize);
+        playerNumber = (TextView) activity.findViewById(R.id.playerNum);
 
         my3 = (TextView) activity.findViewById(R.id.myThree);
         my4 = (TextView) activity.findViewById(R.id.myFour);
@@ -266,6 +268,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     }
 
     private void updateGUI() {
+        playerNumber.setText("You are player " + playerNum);
+
         my3.setText(Integer.toString(state.three));
         my4.setText(Integer.toString(state.four));
         my5.setText(Integer.toString(state.five));

@@ -449,4 +449,33 @@
         android:layout_alignLeft="@+id/turnIndicator"
         android:layout_alignStart="@+id/turnIndicator" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player 0 &amp; 2&apos;s Score"
+        android:id="@+id/textView"
+        android:layout_above="@+id/turnIndicator"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_alignStart="@+id/linearLayout2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player 1 &amp; 3&apos;s Score"
+        android:id="@+id/textView3"
+        android:layout_marginLeft="39dp"
+        android:layout_marginStart="39dp"
+        android:layout_alignTop="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/playerNum"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
 </RelativeLayout><!-- From: file:/C:/Users/laum18/Desktop/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->
