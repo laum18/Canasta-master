@@ -249,13 +249,13 @@ public abstract class LocalGame implements Game, Tickable {
 					playerFinishedCount++;
 				}
 			}
-			else if (action instanceof RoundOverAckAction && gameStage == GameStage.ROUND_OVER) {
-				int playerIdx = getPlayerIdx(action.getPlayer());
-				if (playerIdx >= 0 && !playersFinished[playerIdx]) {
-					playersFinished[playerIdx] = true;
-					playerFinishedCount++;
-				}
-			}
+//			else if (action instanceof RoundOverAckAction && gameStage == GameStage.ROUND_OVER) {
+//				int playerIdx = getPlayerIdx(action.getPlayer());
+//				if (playerIdx >= 0 && !playersFinished[playerIdx]) {
+//					playersFinished[playerIdx] = true;
+//					playerFinishedCount++;
+//				}
+//			}
 		}
 	}
 	
@@ -290,10 +290,10 @@ public abstract class LocalGame implements Game, Tickable {
 		// changed. Send all players the updated state. 
 		sendAllUpdatedState();
 
-		String roundMsg = checkIfRoundOver();
-		if (roundMsg != null) {
-			finishUpRound(roundMsg);
-		}
+//		String roundMsg = checkIfRoundOver();
+//		if (roundMsg != null) {
+//			finishUpRound(roundMsg);
+//		}
 		// determine whether there is a winner; if so, finish up the game
 		String overMsg = checkIfGameOver();
 		if (overMsg != null) {
@@ -345,22 +345,22 @@ public abstract class LocalGame implements Game, Tickable {
 		}
 	}
 
-	private final void finishUpRound(String msg) {
-
-		// set the game-stage to ????
-		gameStage = GameStage.ROUND_OVER;
-
-		// set up the array and count so that we can keep track of
-		// whether everyone has replied
-		playersFinished = new boolean[players.length];
-		playerFinishedCount = 0;
-
-		// send all players a "round over" message
-		for (GamePlayer p: players) {
-			p.sendInfo(new RoundOverInfo(msg));
-		}
-
-	}
+//	private final void finishUpRound(String msg) {
+//
+//		// set the game-stage to ????
+//		gameStage = GameStage.ROUND_OVER;
+//
+//		// set up the array and count so that we can keep track of
+//		// whether everyone has replied
+//		playersFinished = new boolean[players.length];
+//		playerFinishedCount = 0;
+//
+//		// send all players a "round over" message
+//		for (GamePlayer p: players) {
+//			p.sendInfo(new RoundOverInfo(msg));
+//		}
+//
+//	}
 	
 	/**
 	 * Makes a move on behalf of a player.
@@ -404,7 +404,7 @@ public abstract class LocalGame implements Game, Tickable {
 	
 	// an enum-class that itemizes the game stages
 	private static enum GameStage {
-		BEFORE_GAME, WAITING_FOR_NAMES, WAITING_FOR_READY, DURING_GAME, ROUND_OVER, GAME_OVER
+		BEFORE_GAME, WAITING_FOR_NAMES, WAITING_FOR_READY, DURING_GAME, GAME_OVER
 	}
 	
 	// a handler class for the game's thread
