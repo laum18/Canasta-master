@@ -740,10 +740,6 @@ View.OnClickListener {
 	public void setGameOver(boolean b) {
 		gameIsOver = b;
 	}// setGameOver
-
-	public void setRoundOver(boolean b) {
-		gameIsOver = b;
-	}// setRoundOver
 	
 	/**
 	 *  the label for the local tab header

@@ -42,7 +42,7 @@ public class CanastaMainActivity extends GameMainActivity {
 		});
 		playerTypes.add(new GamePlayerType("computer player (hard)") {
 			public GamePlayer createPlayer(String name) {
-				return new CanastaComputerPlayer(name);
+				return new HardComputerPlayer(name);
 			}
 		});
 

@@ -76,7 +76,8 @@ public class CanastaComputerPlayer extends GameComputerPlayer {
 				}
 				//delay half-second
 				sleep(500);
-		}
+			}
+
 			// create and send discard action to the game
 			CanastaDiscardAction discard = new CanastaDiscardAction(this, savedState.getDeck(this.playerNum+2).peekAtTopCard());
 			game.sendAction(discard);

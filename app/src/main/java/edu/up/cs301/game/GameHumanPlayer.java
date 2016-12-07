@@ -243,10 +243,6 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 				myActivity.setGameOver(true);
 				return;
 			}
-
-			if (roundOver) {
-				myActivity.setRoundOver(true);
-			}
 			
 			if (game == null) {
 				// game has not been bound: the only thing we're looking for is
@@ -276,21 +272,6 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 					// tell the game we're ready to play the game
 					game.sendAction(new ReadyAction(GameHumanPlayer.this));
 				}
-			}
-			else if (myInfo instanceof RoundOverInfo) {
-				// if we're being notified the game is over, finish up
-
-				// perform the "gave over" behavior--by default, to show pop-up message
-				roundIsOver(((RoundOverInfo)myInfo).getMessage());
-
-				// if our activity is non-null (which it should be), mark the activity as over
-				if (myActivity != null) myActivity.setRoundOver(true);
-
-				// acknowledge to the game that the game is over
-				game.sendAction(new RoundOverAckAction(GameHumanPlayer.this));
-
-				// set our instance variable, to indicate the game as over
-				roundOver = true;
 			}
 			else if (myInfo instanceof GameOverInfo) {
 				// if we're being notified the game is over, finish up

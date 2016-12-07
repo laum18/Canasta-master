@@ -321,7 +321,6 @@ public abstract class LocalGame implements Game, Tickable {
 	 * 			game is not over
 	 */
 	protected abstract String checkIfGameOver();
-	protected abstract String checkIfRoundOver();
 
 	/**
 	 * Finishes up the game

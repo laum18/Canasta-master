@@ -225,23 +225,6 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 					// mark game as being over
 					gameOver = true;
 				}
-				else if (myInfo instanceof RoundOverInfo) {
-
-					// CASE 3: we get a "game over" message
-
-					// if we are the GUI, pop up a message box and tell the
-					// activity that the game is over
-					if (myActivity != null) {
-						roundIsOver(((GameOverInfo)myInfo).getMessage());
-						myActivity.setRoundOver(true);
-					}
-
-					// acknowledge to the game that we have receive the message
-					game.sendAction(new GameOverAckAction(GameComputerPlayer.this));
-
-					// mark game as being over
-					gameOver = true;
-				}
 				else if (myInfo instanceof TimerInfo) {
 
 					// CASE 4: we have a timer "tick"

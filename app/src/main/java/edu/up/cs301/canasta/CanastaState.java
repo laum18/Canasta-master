@@ -43,6 +43,8 @@ public class CanastaState extends GameState {
 	public ArrayList<Card> myTeamMeld = new ArrayList<Card>();
 	public ArrayList<Card> otherTeamMeld = new ArrayList<Card>();
 	public Card[] temp;
+	int[] canastaCheckerOne = new int[12];
+	int[] canastaCheckerTwo = new int[12];
 
 	public int three = 0;
 	public int four = 0;
@@ -566,6 +568,57 @@ public class CanastaState extends GameState {
 						player.removeCard(selected[i]);
 					}
 				} else if (toPlay() == 1 || toPlay() == 3) {
+
+					if (three >= 7 && canastaCheckerOne[0] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[0] = 1;
+					}
+					else if (four >= 7 && canastaCheckerOne[1] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[1] = 1;
+					}
+					else if (five >= 7 && canastaCheckerOne[2] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[2] = 1;
+					}
+					else if (six >= 7 && canastaCheckerOne[3] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[3] = 1;
+					}
+					else if (seven >= 7 && canastaCheckerOne[4] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[4] = 1;
+					}
+					else if (eight >= 7 && canastaCheckerOne[5] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[5] = 1;
+					}
+					else if (nine >= 7 && canastaCheckerOne[6] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[6] = 1;
+					}
+					else if (ten >= 7 && canastaCheckerOne[7] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[7] = 1;
+					}
+					else if (jack>= 7 && canastaCheckerOne[8] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[8] = 1;
+					}
+					else if (queen >= 7 && canastaCheckerOne[9] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[0] = 1;
+					}
+					else if (king >= 7 && canastaCheckerOne[10] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[10] = 1;
+					}
+					else if (ace >= 7 && canastaCheckerOne[11] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[11] = 1;
+					}
+				}
+				else  if (toPlay() == 1 || toPlay() == 3){
 					otherTeamMeld.add(selected[i]);
 					if (selected[i].getRank().shortName() == '3' || selected[i].getRank().shortName() == '4' ||
 							selected[i].getRank().shortName() == '5' || selected[i].getRank().shortName() == '6' ||
@@ -583,6 +636,55 @@ public class CanastaState extends GameState {
 					} else {
 						teamTwoRoundScore += 50;
 						player.removeCard(selected[i]);
+					}
+
+					if (three >= 7 && canastaCheckerTwo[0] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[0] = 1;
+					}
+					else if (four >= 7 && canastaCheckerTwo[1] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[1] = 1;
+					}
+					else if (five >= 7 && canastaCheckerTwo[2] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[2] = 1;
+					}
+					else if (six >= 7 && canastaCheckerTwo[3] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[3] = 1;
+					}
+					else if (seven >= 7 && canastaCheckerTwo[4] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[4] = 1;
+					}
+					else if (eight >= 7 && canastaCheckerTwo[5] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[5] = 1;
+					}
+					else if (nine >= 7 && canastaCheckerTwo[6] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[6] = 1;
+					}
+					else if (ten >= 7 && canastaCheckerTwo[7] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[7] = 1;
+					}
+					else if (jack>= 7 && canastaCheckerTwo[8] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[8] = 1;
+					}
+					else if (queen >= 7 && canastaCheckerTwo[9] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[0] = 1;
+					}
+					else if (king >= 7 && canastaCheckerTwo[10] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[10] = 1;
+					}
+					else if (ace >= 7 && canastaCheckerTwo[11] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[11] = 1;
 					}
 				}
 			}
@@ -731,15 +833,64 @@ public class CanastaState extends GameState {
 						player.removeCard(selected[i]);
 
 					} else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A') {
-						teamOneTotalScore += 20;
+						teamOneRoundScore += 20;
 						player.removeCard(selected[i]);
 					}
 					else {
-						teamOneTotalScore += 50;
+						teamOneRoundScore += 50;
 						player.removeCard(selected[i]);
 					}
 
-				} else {
+					if (three >= 7 && canastaCheckerOne[0] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[0] = 1;
+					}
+					else if (four >= 7 && canastaCheckerOne[1] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[1] = 1;
+					}
+					else if (five >= 7 && canastaCheckerOne[2] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[2] = 1;
+					}
+					else if (six >= 7 && canastaCheckerOne[3] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[3] = 1;
+					}
+					else if (seven >= 7 && canastaCheckerOne[4] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[4] = 1;
+					}
+					else if (eight >= 7 && canastaCheckerOne[5] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[5] = 1;
+					}
+					else if (nine >= 7 && canastaCheckerOne[6] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[6] = 1;
+					}
+					else if (ten >= 7 && canastaCheckerOne[7] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[7] = 1;
+					}
+					else if (jack>= 7 && canastaCheckerOne[8] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[8] = 1;
+					}
+					else if (queen >= 7 && canastaCheckerOne[9] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[0] = 1;
+					}
+					else if (king >= 7 && canastaCheckerOne[10] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[10] = 1;
+					}
+					else if (ace >= 7 && canastaCheckerOne[11] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[11] = 1;
+					}
+				}
+				else {
 					otherTeamMeld.add(selected[i]);
 					if (selected[i].getRank().shortName() == '3' || selected[i].getRank().shortName() == '4' ||
 							selected[i].getRank().shortName() == '5' || selected[i].getRank().shortName() == '6' ||
@@ -758,6 +909,55 @@ public class CanastaState extends GameState {
 						teamTwoRoundScore += 50;
 						player.removeCard(selected[i]);
 					}
+
+					if (three >= 7 && canastaCheckerTwo[0] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[0] = 1;
+					}
+					else if (four >= 7 && canastaCheckerTwo[1] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[1] = 1;
+					}
+					else if (five >= 7 && canastaCheckerTwo[2] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[2] = 1;
+					}
+					else if (six >= 7 && canastaCheckerTwo[3] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[3] = 1;
+					}
+					else if (seven >= 7 && canastaCheckerTwo[4] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[4] = 1;
+					}
+					else if (eight >= 7 && canastaCheckerTwo[5] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[5] = 1;
+					}
+					else if (nine >= 7 && canastaCheckerTwo[6] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[6] = 1;
+					}
+					else if (ten >= 7 && canastaCheckerTwo[7] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[7] = 1;
+					}
+					else if (jack>= 7 && canastaCheckerTwo[8] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[8] = 1;
+					}
+					else if (queen >= 7 && canastaCheckerTwo[9] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[0] = 1;
+					}
+					else if (king >= 7 && canastaCheckerTwo[10] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[10] = 1;
+					}
+					else if (ace >= 7 && canastaCheckerTwo[11] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[11] = 1;
+					}
 				}
 
 			}
@@ -768,22 +968,216 @@ public class CanastaState extends GameState {
 		}
 	}
 
-	public void computerMeld(ArrayList<Card> c) {
-		Deck player = getDeck(toPlay + 2);
-		int count = 0;
+//	public void computerMeld(ArrayList<Card> c){
+//		Deck player = getDeck(toPlay + 2);
+//		int count = 0;
+//		boolean wildCard = false;
+//
+//		for (int i = 0; i < c.size(); i++) {
+//			count++;
+//		}
+//
+//
+//		Card[] selected = new Card[count];
+//
+//		int temp = 0;
+//		for (int i =0; i < c.size(); i++) {
+//			selected[temp] = c.get(i);
+//			temp++;
+//		}
+//
+//		for (int i = 0; i < selected.length; i++) {
+//			if (selected[i].getRank().shortName() == 'R' || selected[i].getRank().shortName() == '2') {
+//				wildCard = true;
+//			}
+//		}
+//
+//		if (canMeld(selected, wildCard) == true) {
+//			Rank r = selected[0].getRank();
+//			int rank = 0;
+//
+//			if(toPlay() == 0 || toPlay() == 2){
+//				if (r.shortName() == '2') {
+//					rank = 2;
+//				} else if (r.shortName() == '3') {
+//					rank = 3;
+//					three += count;
+//					System.out.println(""+three);
+//				} else if (r.shortName() == '4') {
+//					rank = 4;
+//					four += count;
+//					System.out.println(""+four);
+//				} else if (r.shortName() == '5') {
+//					rank = 5;
+//					five += count;
+//					System.out.println(""+five);
+//				} else if (r.shortName() == '6') {
+//					rank = 6;
+//					six += count;
+//					System.out.println(""+six);
+//				} else if (r.shortName() == '7') {
+//					rank = 7;
+//					seven += count;
+//					System.out.println(""+seven);
+//				} else if (r.shortName() == '8') {
+//					rank = 8;
+//					eight += count;
+//					System.out.println(""+eight);
+//				} else if (r.shortName() == '9') {
+//					rank = 9;
+//					nine += count;
+//					System.out.println(""+nine);
+//				} else if (r.shortName() == 'T') {
+//					rank = 10;
+//					ten += count;
+//					System.out.println(""+ten);
+//				}
+//				else if (r.shortName() == 'J') {
+//					rank = 11;
+//					jack += count;
+//					System.out.println(""+jack);
+//				}
+//				else if (r.shortName() == 'Q') {
+//					rank = 12;
+//					queen += count;
+//					System.out.println(""+queen);
+//				}
+//				else if (r.shortName() == 'K') {
+//					rank = 13;
+//					king += count;
+//					System.out.println(""+king);
+//				}
+//				else if (r.shortName() == 'A') {
+//					rank = 14;
+//					ace += count;
+//					System.out.println(""+ace);
+//				}
+//			}
+//			else if(toPlay() == 1 || toPlay() == 3){
+//				if (r.shortName() == '2') {
+//					rank = 2;
+//				} else if (r.shortName() == '3') {
+//					rank = 3;
+//					oppThree += count;
+//					System.out.println(""+three);
+//				} else if (r.shortName() == '4') {
+//					rank = 4;
+//					oppFour += count;
+//					System.out.println(""+four);
+//				} else if (r.shortName() == '5') {
+//					rank = 5;
+//					oppFive += count;
+//					System.out.println(""+five);
+//				} else if (r.shortName() == '6') {
+//					rank = 6;
+//					oppSix += count;
+//					System.out.println(""+six);
+//				} else if (r.shortName() == '7') {
+//					rank = 7;
+//					oppSeven += count;
+//					System.out.println(""+seven);
+//				} else if (r.shortName() == '8') {
+//					rank = 8;
+//					oppEight += count;
+//					System.out.println(""+eight);
+//				} else if (r.shortName() == '9') {
+//					rank = 9;
+//					oppNine += count;
+//					System.out.println(""+nine);
+//				} else if (r.shortName() == 'T') {
+//					rank = 10;
+//					oppTen += count;
+//					System.out.println(""+ten);
+//				}
+//				else if (r.shortName() == 'J') {
+//					rank = 11;
+//					oppJack += count;
+//					System.out.println(""+jack);
+//				}
+//				else if (r.shortName() == 'Q') {
+//					rank = 12;
+//					oppQueen += count;
+//					System.out.println(""+queen);
+//				}
+//				else if (r.shortName() == 'K') {
+//					rank = 13;
+//					oppKing += count;
+//					System.out.println(""+king);
+//				}
+//				else if (r.shortName() == 'A') {
+//					rank = 14;
+//					oppAce += count;
+//					System.out.println(""+ace);
+//				}
+//			}
+//
+//
+//
+//			for (int i = 0; i < selected.length; i++) {
+//				System.out.println("I'm looking at deck number " +player);
+//				//player.removeCard(selected[i]);
+//				if (toPlay() == 0 || toPlay() == 2) {
+//					myTeamMeld.add(selected[i]);
+//					if (selected[i].getRank().shortName() == '3' || selected[i].getRank().shortName() == '4' ||
+//							selected[i].getRank().shortName() == '5' || selected[i].getRank().shortName() == '6' ||
+//							selected[i].getRank().shortName() == '7') {
+//						teamOneRoundScore +=5;
+//						player.removeCard(selected[i]);
+//					}
+//					else if (selected[i].getRank().shortName() == '8' || selected[i].getRank().shortName() == '9'
+//							|| selected[i].getRank().shortName() == 'T' || selected[i].getRank().shortName() == 'J'
+//							|| selected[i].getRank().shortName() == 'Q' || selected[i].getRank().shortName() == 'K') {
+//						teamOneRoundScore +=10;
+//						player.removeCard(selected[i]);
+//					}
+//					else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A'){
+//						teamOneRoundScore +=20;
+//						player.removeCard(selected[i]);
+//					}
+//					else {
+//						teamOneRoundScore += 50;
+//						player.removeCard(selected[i]);
+//					}
+//
+//				}
+//
+//				// else team two made the meld
+//				else if (toPlay() == 1 || toPlay() == 3){
+//					otherTeamMeld.add(selected[i]);
+//					if (selected[i].getRank().shortName() == '3' || selected[i].getRank().shortName() == '4' ||
+//							selected[i].getRank().shortName() == '5' || selected[i].getRank().shortName() == '6' ||
+//							selected[i].getRank().shortName() == '7') {
+//						teamTwoRoundScore +=5;
+//						player.removeCard(selected[i]);
+//					}
+//					else if (selected[i].getRank().shortName() == '8' || selected[i].getRank().shortName() == '9'
+//							|| selected[i].getRank().shortName() == 'T' || selected[i].getRank().shortName() == 'J'
+//							|| selected[i].getRank().shortName() == 'Q' || selected[i].getRank().shortName() == 'K') {
+//						teamTwoRoundScore +=10;
+//						player.removeCard(selected[i]);
+//					}
+//					else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A'){
+//						teamTwoRoundScore +=20;
+//						player.removeCard(selected[i]);
+//					}
+//					else if(selected[i].getRank().shortName() == 'R'){
+//						teamTwoRoundScore += 50;
+//						player.removeCard(selected[i]);
+//					}
+//				}
+//
+//			}
+//		}
+//	}
+
+	public void computerMeld(ArrayList<Card> c, int playerNumber){
+		Deck player = getDeck(playerNumber + 2);
+
 		boolean wildCard = false;
 
-		for (int i = 0; i < c.size(); i++) {
-			count++;
-		}
-
-
-		Card[] selected = new Card[count];
-
-		int temp = 0;
-		for (int i = 0; i < c.size(); i++) {
-			selected[temp] = c.get(i);
-			temp++;
+		Card[] selected = new Card[c.size()];
+		for (int i =0; i < c.size(); i++) {
+			selected[i] = c.get(i);
 		}
 
 		for (int i = 0; i < selected.length; i++) {
@@ -796,115 +1190,122 @@ public class CanastaState extends GameState {
 			Rank r = selected[0].getRank();
 			int rank = 0;
 
-			if (toPlay() == 0 || toPlay() == 2) {
-				if (r.shortName() == '2') {
-					rank = 2;
-				} else if (r.shortName() == '3') {
+			if(toPlay() == 0 || toPlay() == 2){
+				if (r.shortName() == '3') {
 					rank = 3;
-					three += count;
-					System.out.println("" + three);
+					three += selected.length;
+					System.out.println(""+three);
 				} else if (r.shortName() == '4') {
 					rank = 4;
-					four += count;
-					System.out.println("" + four);
+					four += selected.length;
+					System.out.println(""+four);
 				} else if (r.shortName() == '5') {
 					rank = 5;
-					five += count;
-					System.out.println("" + five);
+					five += selected.length;
+					System.out.println(""+five);
 				} else if (r.shortName() == '6') {
 					rank = 6;
-					six += count;
-					System.out.println("" + six);
+					six += selected.length;
+					System.out.println(""+six);
 				} else if (r.shortName() == '7') {
 					rank = 7;
-					seven += count;
-					System.out.println("" + seven);
+					seven += selected.length;
+					System.out.println(""+seven);
 				} else if (r.shortName() == '8') {
 					rank = 8;
-					eight += count;
-					System.out.println("" + eight);
+					eight += selected.length;
+					System.out.println(""+eight);
 				} else if (r.shortName() == '9') {
 					rank = 9;
-					nine += count;
-					System.out.println("" + nine);
+					nine += selected.length;
+					System.out.println(""+nine);
 				} else if (r.shortName() == 'T') {
 					rank = 10;
-					ten += count;
-					System.out.println("" + ten);
-				} else if (r.shortName() == 'J') {
-					rank = 11;
-					jack += count;
-					System.out.println("" + jack);
-				} else if (r.shortName() == 'Q') {
-					rank = 12;
-					queen += count;
-					System.out.println("" + queen);
-				} else if (r.shortName() == 'K') {
-					rank = 13;
-					king += count;
-					System.out.println("" + king);
-				} else if (r.shortName() == 'A') {
-					rank = 14;
-					ace += count;
-					System.out.println("" + ace);
+					ten += selected.length;
+					System.out.println(""+ten);
 				}
-			} else if (toPlay() == 1 || toPlay() == 3) {
+				else if (r.shortName() == 'J') {
+					rank = 11;
+					jack += selected.length;
+					System.out.println(""+jack);
+				}
+				else if (r.shortName() == 'Q') {
+					rank = 12;
+					queen += selected.length;
+					System.out.println(""+queen);
+				}
+				else if (r.shortName() == 'K') {
+					rank = 13;
+					king += selected.length;
+					System.out.println(""+king);
+				}
+				else if (r.shortName() == 'A') {
+					rank = 14;
+					ace += selected.length;
+					System.out.println(""+ace);
+				}
+			}
+			else if(toPlay() == 1 || toPlay() == 3){
 				if (r.shortName() == '2') {
 					rank = 2;
 				} else if (r.shortName() == '3') {
 					rank = 3;
-					oppThree += count;
-					System.out.println("" + three);
+					oppThree += selected.length;
+					System.out.println(""+three);
 				} else if (r.shortName() == '4') {
 					rank = 4;
-					oppFour += count;
-					System.out.println("" + four);
+					oppFour += selected.length;
+					System.out.println(""+four);
 				} else if (r.shortName() == '5') {
 					rank = 5;
-					oppFive += count;
-					System.out.println("" + five);
+					oppFive += selected.length;
+					System.out.println(""+five);
 				} else if (r.shortName() == '6') {
 					rank = 6;
-					oppSix += count;
-					System.out.println("" + six);
+					oppSix += selected.length;
+					System.out.println(""+six);
 				} else if (r.shortName() == '7') {
 					rank = 7;
-					oppSeven += count;
-					System.out.println("" + seven);
+					oppSeven += selected.length;
+					System.out.println(""+seven);
 				} else if (r.shortName() == '8') {
 					rank = 8;
-					oppEight += count;
-					System.out.println("" + eight);
+					oppEight += selected.length;
+					System.out.println(""+eight);
 				} else if (r.shortName() == '9') {
 					rank = 9;
-					oppNine += count;
-					System.out.println("" + nine);
+					oppNine += selected.length;
+					System.out.println(""+nine);
 				} else if (r.shortName() == 'T') {
 					rank = 10;
-					oppTen += count;
-					System.out.println("" + ten);
-				} else if (r.shortName() == 'J') {
+					oppTen += selected.length;
+					System.out.println(""+ten);
+				}
+				else if (r.shortName() == 'J') {
 					rank = 11;
-					oppJack += count;
-					System.out.println("" + jack);
-				} else if (r.shortName() == 'Q') {
+					oppJack += selected.length;
+					System.out.println(""+jack);
+				}
+				else if (r.shortName() == 'Q') {
 					rank = 12;
-					oppQueen += count;
-					System.out.println("" + queen);
-				} else if (r.shortName() == 'K') {
+					oppQueen += selected.length;
+					System.out.println(""+queen);
+				}
+				else if (r.shortName() == 'K') {
 					rank = 13;
-					oppKing += count;
-					System.out.println("" + king);
-				} else if (r.shortName() == 'A') {
+					oppKing += selected.length;
+					System.out.println(""+king);
+				}
+				else if (r.shortName() == 'A') {
 					rank = 14;
-					oppAce += count;
-					System.out.println("" + ace);
+					oppAce += selected.length;
+					System.out.println(""+ace);
 				}
 			}
 
 
 			for (int i = 0; i < selected.length; i++) {
-				System.out.println("I'm looking at deck number " + player);
+				//System.out.println("I'm looking at deck number " +player);
 				//player.removeCard(selected[i]);
 				if (toPlay() == 0 || toPlay() == 2) {
 					myTeamMeld.add(selected[i]);
@@ -913,40 +1314,54 @@ public class CanastaState extends GameState {
 							selected[i].getRank().shortName() == '7') {
 						teamOneRoundScore += 5;
 						player.removeCard(selected[i]);
-					} else if (selected[i].getRank().shortName() == '8' || selected[i].getRank().shortName() == '9'
+
+					}
+					else if (selected[i].getRank().shortName() == '8' || selected[i].getRank().shortName() == '9'
 							|| selected[i].getRank().shortName() == 'T' || selected[i].getRank().shortName() == 'J'
 							|| selected[i].getRank().shortName() == 'Q' || selected[i].getRank().shortName() == 'K') {
-						teamOneRoundScore += 10;
+						teamOneRoundScore +=10;
 						player.removeCard(selected[i]);
-					} else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A') {
-						teamOneRoundScore += 20;
+
+					}
+					else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A'){
+						teamOneRoundScore +=20;
 						player.removeCard(selected[i]);
-					} else {
+
+					}
+					else {
 						teamOneRoundScore += 50;
 						player.removeCard(selected[i]);
+
 					}
 
 				}
 
 				// else team two made the meld
-				else if (toPlay() == 1 || toPlay() == 3) {
+				else if (toPlay() == 1 || toPlay() == 3){
 					otherTeamMeld.add(selected[i]);
 					if (selected[i].getRank().shortName() == '3' || selected[i].getRank().shortName() == '4' ||
 							selected[i].getRank().shortName() == '5' || selected[i].getRank().shortName() == '6' ||
 							selected[i].getRank().shortName() == '7') {
-						teamTwoRoundScore += 5;
+						teamTwoRoundScore +=5;
 						player.removeCard(selected[i]);
-					} else if (selected[i].getRank().shortName() == '8' || selected[i].getRank().shortName() == '9'
+
+					}
+					else if (selected[i].getRank().shortName() == '8' || selected[i].getRank().shortName() == '9'
 							|| selected[i].getRank().shortName() == 'T' || selected[i].getRank().shortName() == 'J'
 							|| selected[i].getRank().shortName() == 'Q' || selected[i].getRank().shortName() == 'K') {
-						teamTwoRoundScore += 10;
+						teamTwoRoundScore +=10;
 						player.removeCard(selected[i]);
-					} else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A') {
-						teamTwoRoundScore += 20;
+
+					}
+					else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A'){
+						teamTwoRoundScore +=20;
 						player.removeCard(selected[i]);
-					} else if (selected[i].getRank().shortName() == 'R') {
+
+					}
+					else if(selected[i].getRank().shortName() == 'R'){
 						teamTwoRoundScore += 50;
 						player.removeCard(selected[i]);
+
 					}
 				}
 
@@ -956,6 +1371,259 @@ public class CanastaState extends GameState {
 			toPlay = -1;
 			System.out.println("Round Over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			newRound();
+		}
+	}
+
+	public void computerMeldDiscard(ArrayList<Card> hand, Card c, int playerNumber){
+		Log.i("COMPUTER DRAW DISCARD", "YAY");
+		Rank discardRank = c.getRank();
+		Rank handRank = hand.get(0).getRank();
+		boolean meldDiscard = false;
+
+		if (discardRank == Rank.TWO || discardRank == Rank.RJOKER) {
+			if(toPlay() == 0 || toPlay() == 2){
+				if (handRank.shortName() == '3') {
+					three += hand.size()+1;
+					System.out.println(""+three);
+				} else if (handRank.shortName() == '4') {
+					four += hand.size()+1;
+					System.out.println(""+four);
+				} else if (handRank.shortName() == '5') {
+					five += hand.size()+1;
+					System.out.println(""+five);
+				} else if (handRank.shortName() == '6') {
+					six += hand.size()+1;
+					System.out.println(""+six);
+				} else if (handRank.shortName() == '7') {
+					seven += hand.size()+1;
+					System.out.println(""+seven);
+				} else if (handRank.shortName() == '8') {
+					eight += hand.size()+1;
+					System.out.println(""+eight);
+				} else if (handRank.shortName() == '9') {
+					nine += hand.size()+1;
+					System.out.println(""+nine);
+				} else if (handRank.shortName() == 'T') {
+					ten += hand.size()+1;
+					System.out.println(""+ten);
+				}
+				else if (handRank.shortName() == 'J') {
+					jack += hand.size()+1;
+					System.out.println(""+jack);
+				}
+				else if (handRank.shortName() == 'Q') {
+					queen += hand.size()+1;
+					System.out.println(""+queen);
+				}
+				else if (handRank.shortName() == 'K') {
+					king += hand.size()+1;
+					System.out.println(""+king);
+				}
+				else if (handRank.shortName() == 'A') {
+					ace += hand.size()+1;
+					System.out.println(""+ace);
+				}
+			}
+			else if(toPlay() == 1 || toPlay() == 3){
+				if (handRank.shortName() == '3') {
+					oppThree += hand.size()+1;
+					System.out.println(""+three);
+				} else if (handRank.shortName() == '4') {
+					oppFour += hand.size()+1;
+					System.out.println(""+four);
+				} else if (handRank.shortName() == '5') {
+					oppFive += hand.size()+1;
+					System.out.println(""+five);
+				} else if (handRank.shortName() == '6') {
+					oppSix += hand.size()+1;
+					System.out.println(""+six);
+				} else if (handRank.shortName() == '7') {
+					oppSeven += hand.size()+1;
+					System.out.println(""+seven);
+				} else if (handRank.shortName() == '8') {
+					oppEight += hand.size()+1;
+					System.out.println(""+eight);
+				} else if (handRank.shortName() == '9') {
+					oppNine += hand.size()+1;
+					System.out.println(""+nine);
+				} else if (handRank.shortName() == 'T') {
+					oppTen += hand.size()+1;
+					System.out.println(""+ten);
+				}
+				else if (handRank.shortName() == 'J') {
+					oppJack += hand.size()+1;
+					System.out.println(""+jack);
+				}
+				else if (handRank.shortName() == 'Q') {
+					oppQueen += hand.size()+1;
+					System.out.println(""+queen);
+				}
+				else if (handRank.shortName() == 'K') {
+					oppKing += count;
+					System.out.println(""+king);
+				}
+				else if (handRank.shortName() == 'A') {
+					oppAce += count;
+					System.out.println(""+ace);
+				}
+			}
+
+			meldDiscard = true;
+		}
+		else if (handRank == discardRank){
+			if(toPlay() == 0 || toPlay() == 2){
+				if (handRank.shortName() == '3') {
+					three += hand.size()+1;
+					System.out.println(""+three);
+				} else if (handRank.shortName() == '4') {
+					four += hand.size()+1;
+					System.out.println(""+four);
+				} else if (handRank.shortName() == '5') {
+					five += hand.size()+1;
+					System.out.println(""+five);
+				} else if (handRank.shortName() == '6') {
+					six += hand.size()+1;
+					System.out.println(""+six);
+				} else if (handRank.shortName() == '7') {
+					seven += hand.size()+1;
+					System.out.println(""+seven);
+				} else if (handRank.shortName() == '8') {
+					eight += hand.size()+1;
+					System.out.println(""+eight);
+				} else if (handRank.shortName() == '9') {
+					nine += hand.size()+1;
+					System.out.println(""+nine);
+				} else if (handRank.shortName() == 'T') {
+					ten += hand.size()+1;
+					System.out.println(""+ten);
+				}
+				else if (handRank.shortName() == 'J') {
+					jack += hand.size()+1;
+					System.out.println(""+jack);
+				}
+				else if (handRank.shortName() == 'Q') {
+					queen += hand.size()+1;
+					System.out.println(""+queen);
+				}
+				else if (handRank.shortName() == 'K') {
+					king += hand.size()+1;
+					System.out.println(""+king);
+				}
+				else if (handRank.shortName() == 'A') {
+					ace += hand.size()+1;
+					System.out.println(""+ace);
+				}
+			}
+			else if(toPlay() == 1 || toPlay() == 3){
+				if (handRank.shortName() == '3') {
+					oppThree += hand.size()+1;
+					System.out.println(""+three);
+				} else if (handRank.shortName() == '4') {
+					oppFour += hand.size()+1;
+					System.out.println(""+four);
+				} else if (handRank.shortName() == '5') {
+					oppFive += hand.size()+1;
+					System.out.println(""+five);
+				} else if (handRank.shortName() == '6') {
+					oppSix += hand.size()+1;
+					System.out.println(""+six);
+				} else if (handRank.shortName() == '7') {
+					oppSeven += hand.size()+1;
+					System.out.println(""+seven);
+				} else if (handRank.shortName() == '8') {
+					oppEight += hand.size()+1;
+					System.out.println(""+eight);
+				} else if (handRank.shortName() == '9') {
+					oppNine += hand.size()+1;
+					System.out.println(""+nine);
+				} else if (handRank.shortName() == 'T') {
+					oppTen += hand.size()+1;
+					System.out.println(""+ten);
+				}
+				else if (handRank.shortName() == 'J') {
+					oppJack += hand.size()+1;
+					System.out.println(""+jack);
+				}
+				else if (handRank.shortName() == 'Q') {
+					oppQueen += hand.size()+1;
+					System.out.println(""+queen);
+				}
+				else if (handRank.shortName() == 'K') {
+					oppKing += count;
+					System.out.println(""+king);
+				}
+				else if (handRank.shortName() == 'A') {
+					oppAce += count;
+					System.out.println(""+ace);
+				}
+			}
+
+			meldDiscard = true;
+		}
+
+		if (meldDiscard) {
+			hand.add(c);
+
+			for (int i = 0; i < hand.size(); i++) {
+				if (toPlay() == 0 || toPlay() == 2) {
+					myTeamMeld.add(hand.get(i));
+					if (hand.get(i).getRank().shortName() == '3' || hand.get(i).getRank().shortName() == '4' ||
+							hand.get(i).getRank().shortName() == '5' || hand.get(i).getRank().shortName() == '6' ||
+							hand.get(i).getRank().shortName() == '7') {
+						teamOneRoundScore +=5;
+						hand.remove(i);
+					}
+					else if (hand.get(i).getRank().shortName() == '8' || hand.get(i).getRank().shortName() == '9'
+							|| hand.get(i).getRank().shortName() == 'T' || hand.get(i).getRank().shortName() == 'J'
+							|| hand.get(i).getRank().shortName() == 'Q' || hand.get(i).getRank().shortName() == 'K') {
+						teamOneRoundScore +=10;
+						hand.remove(i);
+					}
+					else if (hand.get(i).getRank().shortName() == '2' || hand.get(i).getRank().shortName() == 'A'){
+						teamOneRoundScore +=20;
+						hand.remove(i);
+					}
+					else {
+						teamOneRoundScore += 50;
+						hand.remove(i);
+					}
+
+				}
+				// else team two made the meld
+				else if (toPlay() == 1 || toPlay() == 3){
+					otherTeamMeld.add(hand.get(i));
+					if (hand.get(i).getRank().shortName() == '3' || hand.get(i).getRank().shortName() == '4' ||
+							hand.get(i).getRank().shortName() == '5' || hand.get(i).getRank().shortName() == '6' ||
+							hand.get(i).getRank().shortName() == '7') {
+						teamTwoRoundScore +=5;
+						hand.remove(i);
+					}
+					else if (hand.get(i).getRank().shortName() == '8' || hand.get(i).getRank().shortName() == '9'
+							|| hand.get(i).getRank().shortName() == 'T' || hand.get(i).getRank().shortName() == 'J'
+							|| hand.get(i).getRank().shortName() == 'Q' || hand.get(i).getRank().shortName() == 'K') {
+						teamTwoRoundScore +=10;
+						hand.remove(i);
+					}
+					else if (hand.get(i).getRank().shortName() == '2' || hand.get(i).getRank().shortName() == 'A'){
+						teamTwoRoundScore +=20;
+						hand.remove(i);
+					}
+					else if(hand.get(i).getRank().shortName() == 'R'){
+						teamTwoRoundScore += 50;
+						hand.remove(i);
+					}
+				}
+			}
+
+			// add card to player's hand
+			int discardSize = getDeck(1).size();
+			for (int i = 0; i < discardSize; i++) {
+				getDeck(1).peekAtTopCard().setSelected(false);
+				getDeck(playerNumber + 2).add(getDeck(1).removeTopCard());
+
+			}
+
+			substage = 1;
 		}
 	}
 

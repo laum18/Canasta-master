@@ -92,7 +92,7 @@ public class CanastaLocalGame extends LocalGame {
         // make a copy of the state; null out all cards except for the
         // top card in the middle deck
         CanastaState stateForPlayer = new CanastaState(state); // copy of state
-        stateForPlayer.nullAllButTopOf2(); // put nulls except for visible card
+        //stateForPlayer.nullAllButTopOf2(); // put nulls except for visible card
 
         // send the modified copy of the state to the player
         p.sendInfo(stateForPlayer);
@@ -139,16 +139,18 @@ public class CanastaLocalGame extends LocalGame {
         }
 
         if (canastaMA instanceof CanastaDrawDeckAction) {
-            if (state.getDeck(0) == null) {
-                //state.getDeck(0).getTopCard(state.getDeck(0)
-                return false;
-            } else if (state.substage == 0) {
-                state.drawCard(state.getDeck(0).getTopCard(state.getDeck(0)));
-                state.getDeck(thisPlayerIdx);
-                state.substage = 1;
-                return true;
-            } else {
-                return false;
+            if (state.substage == 0) {
+                if (state.getDeck(0) == null) {
+                    //state.getDeck(0).getTopCard(state.getDeck(0)
+                    return false;
+                } else if (state.substage == 0) {
+                    state.drawCard(state.getDeck(0).getTopCard(state.getDeck(0)));
+                    state.getDeck(thisPlayerIdx);
+                    state.substage = 1;
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
         } else if (canastaMA instanceof CanastaDiscardAction) { // we have a "play" action
@@ -189,13 +191,23 @@ public class CanastaLocalGame extends LocalGame {
 
 		else if (canastaMA instanceof CanastaComputerMeldAction) {
 			if (state.substage == 1) {
-				state.computerMeld(((CanastaComputerMeldAction) canastaMA).getMeld());
+				state.computerMeld(((CanastaComputerMeldAction) canastaMA).getMeld(), thisPlayerIdx);
 				return true;
 			}
 			else{
 				return false;
 			}
 		}
+         else if (canastaMA instanceof CanastaComputerDrawDiscardAction) {
+            if (state.substage == 0) {
+                state.computerMeldDiscard(((CanastaComputerDrawDiscardAction) canastaMA).getMeld(),
+                        state.getDeck(1).peekAtTopCard(), thisPlayerIdx);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 
 		// return true, because the move was successful if we get here
 		return true;
