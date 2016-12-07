@@ -1,6 +1,7 @@
 package edu.up.cs301.canasta;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -161,6 +162,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         // remember the activity
         myActivity = activity;
 
+        myActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         // Load the layout resource for the new configuration
         activity.setContentView(R.layout.canasta_human_player);
 
@@ -216,6 +219,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         oppa = (TextView) activity.findViewById(R.id.oppAce);
 
 
+        sortButton.setVisibility(View.GONE);
+
         // read in the card images
         Card.initImages(activity);
 
@@ -262,10 +267,10 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
             surface.invalidate();
         } else if (v == drawDiscardButton) {
             game.sendAction((new CanastaDrawDiscardAction(this)));
-        } else if (v == sortButton) {
+        } /*else if (v == sortButton) {
             state.setPlayerDeck(state.sortHand(state.getDeck(playerNum+2)));
 
-        }
+        }*/
         updateGUI();
 
     }
@@ -703,6 +708,9 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
      * @param event the motion-event
      */
     public void onTouch(MotionEvent event) {
+        if (state.toPlay() != playerNum) {
+            return;
+        }
 
 
         CanastaDrawDeckAction drawCard = new CanastaDrawDeckAction(this);

@@ -1,5 +1,6 @@
 package edu.up.cs301.game;
 
+import edu.up.cs301.canasta.CanastaHumanPlayer;
 import edu.up.cs301.game.actionMsg.GameAction;
 import edu.up.cs301.game.infoMsg.BindGameInfo;
 import edu.up.cs301.game.infoMsg.GameInfo;
@@ -36,7 +37,7 @@ public class ProxyPlayer implements GamePlayer {
      * 		the port number through which we connect to our client
      */
     public ProxyPlayer(int portNum) {
-    	
+
     	Log.i("ProxyPlayer", "creating Proxy Player");
         
         // set instance variables to their initial values

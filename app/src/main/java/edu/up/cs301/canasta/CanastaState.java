@@ -901,7 +901,7 @@ public class CanastaState extends GameState {
 					} else if (selected[i].getRank().shortName() == '8' || selected[i].getRank().shortName() == '9'
 							|| selected[i].getRank().shortName() == 'T' || selected[i].getRank().shortName() == 'J'
 							|| selected[i].getRank().shortName() == 'Q' || selected[i].getRank().shortName() == 'K') {
-						teamTwoRoundScore +=10;
+						teamTwoRoundScore += 10;
 						player.removeCard(selected[i]);
 					} else if (selected[i].getRank().shortName() == '2' || selected[i].getRank().shortName() == 'A') {
 						teamTwoRoundScore += 20;
