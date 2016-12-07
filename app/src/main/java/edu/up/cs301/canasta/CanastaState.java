@@ -508,6 +508,12 @@ public class CanastaState extends GameState {
 			if (selected[0].getRank().shortName() == 'R' || selected[0].getRank().shortName() == '2') {
 				r = selected[1].getRank();
 			}
+			if(r.shortName()== 'R' || r.shortName() == '2'){
+				r = selected[2].getRank();
+			}
+			if(r.shortName()== 'R' || r.shortName() == '2'){
+				r = selected[3].getRank();
+			}
 
 			// update the gui according to the melded card's rank
 			if (r.shortName() == '3') {

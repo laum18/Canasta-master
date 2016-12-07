@@ -221,6 +221,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
         sortButton.setVisibility(View.GONE);
 
+        newRound.setVisibility(View.GONE);
         // read in the card images
         Card.initImages(activity);
 
