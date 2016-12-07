@@ -36,6 +36,12 @@ public class CanastaLocalGame extends LocalGame {
         else if (state.getTeamTwoTotalScore() >= state.getGoal()) {
             return this.playerNames[1] + "," + this.playerNames[3] + " is the winner";
         }
+        else if(state.getTeamOneTotalScore() > state.getTeamTwoTotalScore()){
+            return this.playerNames[0] + "," + this.playerNames[2] + " is the winner";
+        }
+        else if(state.getTeamTwoTotalScore() > state.getTeamOneTotalScore()){
+            return this.playerNames[1] + "," + this.playerNames[3] + " is the winner";
+        }
         // the game is not over
         else {
             return null;
@@ -117,7 +123,8 @@ public class CanastaLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
-
+        Log.i("","Removed card " );
+        System.out.println("Removed card " );
         // check that we have slap-jack action; if so cast it
         if (!(action instanceof CanastaMoveAction)) {
             return false;

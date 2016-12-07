@@ -231,6 +231,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
             game.sendAction((new CanastaMeldAction(this)));
 
         } else if (v == discardButton) {
+
             //discard card
             ArrayList<Card> selected = new ArrayList<Card>();
             ArrayList<Card> hand = state.getDeck(playerNum + 2).getCards();
@@ -309,14 +310,6 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                 //+ state.nine + state.ten + state.jack + state.queen + state.king + state.ace);
         //teamOneRound.setText("" + score);
 
-        if(state.three >= 7 || state.four >= 7 || state.five >= 7 || state.six >= 7 || state.seven >= 7 || state.eight
-                >= 7 || state.nine >= 7 || state.ten >= 7 || state.jack >= 7 || state.queen >= 7 || state.king >= 7 || state.ace >=7) {
-            if (state.toPlay() == 0 || state.toPlay() == 3) {
-                state.setTeamOneRoundScore(state.getTeamOneRoundScore()+300);
-            } else {
-                state.setTeamTwoRoundScore(state.getTeamTwoRoundScore()+300);
-            }
-        }
 
         teamOneRound.setText(" " + state.getTeamOneRoundScore());
         teamOneTotal.setText(" " + state.getTeamOneTotalScore());

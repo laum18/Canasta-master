@@ -431,7 +431,7 @@ public class CanastaState extends GameState {
 	}
 
 	public boolean canDiscard(Card c) {
-		Deck player = getDeck(toPlay);
+		Deck player = getDeck(toPlay+2);
 		if (player.containsCard(c)) {
 			return true;
 		} else {
