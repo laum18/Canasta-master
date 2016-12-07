@@ -29,19 +29,21 @@ public class CanastaLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         // human player and teammate are the winner
-        if (state.getTeamOneTotalScore() >= state.getGoal()) {
+
+        if((state.getTeamOneTotalScore() > state.getTeamTwoTotalScore()) && (state.getTeamOneRoundScore() >= state.getGoal())){
+            return this.playerNames[0] + "," + this.playerNames[2] + " is the winner";
+        }
+        else if(state.getTeamTwoTotalScore() > state.getTeamOneTotalScore() && (state.getTeamTwoRoundScore() >= state.getGoal())){
+            return this.playerNames[1] + "," + this.playerNames[3] + " is the winner";
+        }
+        else if (state.getTeamOneTotalScore() >= state.getGoal()) {
             return this.playerNames[0] + "," + this.playerNames[2] + " is the winner";
         }
         // computer players are the winner
         else if (state.getTeamTwoTotalScore() >= state.getGoal()) {
             return this.playerNames[1] + "," + this.playerNames[3] + " is the winner";
         }
-        else if(state.getTeamOneTotalScore() > state.getTeamTwoTotalScore()){
-            return this.playerNames[0] + "," + this.playerNames[2] + " is the winner";
-        }
-        else if(state.getTeamTwoTotalScore() > state.getTeamOneTotalScore()){
-            return this.playerNames[1] + "," + this.playerNames[3] + " is the winner";
-        }
+
         // the game is not over
         else {
             return null;

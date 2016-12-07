@@ -567,7 +567,6 @@ public class CanastaState extends GameState {
 						teamOneRoundScore += 50;
 						player.removeCard(selected[i]);
 					}
-				} else if (toPlay() == 1 || toPlay() == 3) {
 
 					if (three >= 7 && canastaCheckerOne[0] == 0) {
 						teamOneRoundScore += 300;
@@ -1334,6 +1333,54 @@ public class CanastaState extends GameState {
 
 					}
 
+					if (three >= 7 && canastaCheckerOne[0] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[0] = 1;
+					}
+					else if (four >= 7 && canastaCheckerOne[1] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[1] = 1;
+					}
+					else if (five >= 7 && canastaCheckerOne[2] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[2] = 1;
+					}
+					else if (six >= 7 && canastaCheckerOne[3] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[3] = 1;
+					}
+					else if (seven >= 7 && canastaCheckerOne[4] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[4] = 1;
+					}
+					else if (eight >= 7 && canastaCheckerOne[5] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[5] = 1;
+					}
+					else if (nine >= 7 && canastaCheckerOne[6] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[6] = 1;
+					}
+					else if (ten >= 7 && canastaCheckerOne[7] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[7] = 1;
+					}
+					else if (jack>= 7 && canastaCheckerOne[8] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[8] = 1;
+					}
+					else if (queen >= 7 && canastaCheckerOne[9] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[0] = 1;
+					}
+					else if (king >= 7 && canastaCheckerOne[10] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[10] = 1;
+					}
+					else if (ace >= 7 && canastaCheckerOne[11] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[11] = 1;
+					}
 				}
 
 				// else team two made the meld
@@ -1362,6 +1409,55 @@ public class CanastaState extends GameState {
 						teamTwoRoundScore += 50;
 						player.removeCard(selected[i]);
 
+					}
+
+					if (three >= 7 && canastaCheckerTwo[0] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[0] = 1;
+					}
+					else if (four >= 7 && canastaCheckerTwo[1] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[1] = 1;
+					}
+					else if (five >= 7 && canastaCheckerTwo[2] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[2] = 1;
+					}
+					else if (six >= 7 && canastaCheckerTwo[3] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[3] = 1;
+					}
+					else if (seven >= 7 && canastaCheckerTwo[4] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[4] = 1;
+					}
+					else if (eight >= 7 && canastaCheckerTwo[5] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[5] = 1;
+					}
+					else if (nine >= 7 && canastaCheckerTwo[6] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[6] = 1;
+					}
+					else if (ten >= 7 && canastaCheckerTwo[7] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[7] = 1;
+					}
+					else if (jack>= 7 && canastaCheckerTwo[8] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[8] = 1;
+					}
+					else if (queen >= 7 && canastaCheckerTwo[9] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[0] = 1;
+					}
+					else if (king >= 7 && canastaCheckerTwo[10] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[10] = 1;
+					}
+					else if (ace >= 7 && canastaCheckerTwo[11] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[11] = 1;
 					}
 				}
 
@@ -1724,7 +1820,7 @@ public class CanastaState extends GameState {
 		teamOneRoundScore = 0;
 		teamTwoRoundScore = 0;
 
-		for (int d = 0; d < 6; d++) {
+		for (int d = 0; d < 7; d++) {
 			getDeck(d).nullifyDeck();
 		}
 
@@ -1742,6 +1838,21 @@ public class CanastaState extends GameState {
 				piles[0].moveTopCardTo(piles[j+2]);
 			}
 		}
+
+		piles[6] = new Deck();
+		piles[6].add(Card.fromString("3" + "D"));
+		piles[6].add(Card.fromString("4" + "D"));
+		piles[6].add(Card.fromString("5" + "D"));
+		piles[6].add(Card.fromString("6" + "D"));
+		piles[6].add(Card.fromString("7" + "D"));
+		piles[6].add(Card.fromString("8" + "D"));
+		piles[6].add(Card.fromString("9" + "D"));
+		piles[6].add(Card.fromString("T" + "D"));
+		piles[6].add(Card.fromString("J" + "D"));
+		piles[6].add(Card.fromString("Q" + "D"));
+		piles[6].add(Card.fromString("K" + "D"));
+		piles[6].add(Card.fromString("A" + "D"));
+
 		roundStarting = true;
 	}
 }
