@@ -69,14 +69,14 @@ public class CanastaComputerPlayer extends GameComputerPlayer {
 			sleep(500);
 
 			// check that meld was found and contains at least three cards; if so, create and send meld action to the game
-			if(myMeldArray != null) {
-				if (myMeldArray.size() >= 3) {
-					CanastaComputerMeldAction computerMeld = new CanastaComputerMeldAction(this, myMeldArray);
-					game.sendAction(computerMeld);
-				}
-				//delay half-second
-				sleep(500);
-			}
+//			if(myMeldArray != null) {
+//				if (myMeldArray.size() >= 3) {
+//					CanastaComputerMeldAction computerMeld = new CanastaComputerMeldAction(this, myMeldArray);
+//					game.sendAction(computerMeld);
+//				}
+//				//delay half-second
+//				sleep(500);
+//			}
 			// create and send discard action to the game
 			CanastaDiscardAction discard = new CanastaDiscardAction(this, savedState.getDeck(this.playerNum+2).peekAtTopCard());
 			game.sendAction(discard);

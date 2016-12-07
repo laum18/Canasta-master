@@ -318,18 +318,35 @@ public class CanastaState extends GameState
 		int check = 0;
 		boolean r = false;
 		int wildCardCheck = 0;
+		int numWild = 0;
 
 		// checks if the player selected at least three cards
 		if (cards != null && cards.length > 0) {
+
+			// trying to meld all wildcards
+			for (int i = 0; i < cards.length; i++) {
+				if (cards[i].getRank().shortName() == 'R' || cards[i].getRank().shortName() == '2') {
+					numWild++;
+				}
+			}
+
+			if (numWild == cards.length) {
+				return false;
+			}
+
 			for (int i = 0; i < cards.length - 1; i++) {
 				if (cards[i].getRank().shortName() == 'R' || cards[i].getRank().shortName() == '2') {
 					wildCardCheck++;
 				}
 				for (int j = i; j < cards.length - 1; j++) {
-					if (cards[i].getRank().equals(cards[j + 1].getRank()) && (cards[i].getRank().shortName() != 'R' || cards[i].getRank().shortName() != '2'
-							|| cards[j + 1].getRank().shortName() != 'R' || cards[j + 1].getRank().shortName() != '2')) {
-						check++;
+					if (cards[i].getRank().equals(cards[j + 1].getRank())) {
+						if (cards[i].getRank().shortName() == 'R' || cards[i].getRank().shortName() == '2'
+								|| cards[j + 1].getRank().shortName() == 'R' || cards[j + 1].getRank().shortName() == '2') {
 
+						}
+						else {
+							check++;
+						}
 					} else if (cards[i].getRank().shortName() == 'R' || cards[i].getRank().shortName() == '2'
 							|| cards[j + 1].getRank().shortName() == 'R' || cards[j + 1].getRank().shortName() == '2') {
 //
@@ -700,7 +717,7 @@ public class CanastaState extends GameState
 
 			for (int i = 0; i < selected.length; i++) {
 				//player.removeCard(selected[i]);
-				if (toPlay() == 0 || toPlay() == 3) {
+				if (toPlay() == 0 || toPlay() == 2) {
 					myTeamMeld.add(selected[i]);
 					if (selected[i].getRank().shortName() == '3' || selected[i].getRank().shortName() == '4' ||
 							selected[i].getRank().shortName() == '5' || selected[i].getRank().shortName() == '6' ||
