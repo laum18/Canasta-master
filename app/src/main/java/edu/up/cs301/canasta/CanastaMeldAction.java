@@ -3,20 +3,20 @@ package edu.up.cs301.canasta;
 import edu.up.cs301.game.GamePlayer;
 
 /**
- * A SJSlapAction is an action that represents slapping the card that is
- * on the "up" pile.
- * 
- * @author Steven R. Vegdahl
- * @version 31 July 2002
+ * A game-move action that a Canasta player sends to the game to make
+ * a meld move.
+ *
+ * @author Nick Edwards, Aaron Banobi, Michelle Lau, and David Vandeward
+ * @version November 8, 2016
  */
 public class CanastaMeldAction extends CanastaMoveAction
 {
 	private static final long serialVersionUID = 2134321631283669359L;
 
 	/**
-     * Constructor for the SJSlapMoveAction class.
+     * Constructor for the CanastaMeldAction class.
      * 
-     * @param player  the player making the move
+     * @param player The player making the move
      */
     public CanastaMeldAction(GamePlayer player)
     {
@@ -24,11 +24,4 @@ public class CanastaMeldAction extends CanastaMoveAction
         super(player);
     }
 
-    /**
-	 * @return whether this action is a "meld" move
-     */
-//    public boolean isMeld() {
-//        return true;
-//    }
-    
 }

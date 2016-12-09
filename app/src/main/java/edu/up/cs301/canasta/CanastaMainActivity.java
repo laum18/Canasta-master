@@ -46,9 +46,7 @@ public class CanastaMainActivity extends GameMainActivity {
 			}
 		});
 
-
-
-
+		
 		// Create a game configuration class for SlapJack
 		GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "Canasta", PORT_NUMBER);
 
