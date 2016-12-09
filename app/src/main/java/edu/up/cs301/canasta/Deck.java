@@ -46,8 +46,9 @@ public class Deck implements Serializable {
 	}
 	
 	/**
-	 * adds one of each card, increasing the size of the deck by 52. Cards are added
-	 * spades first (King to Ace), then similarly with hearts, diamonds and clubs.
+	 * adds one of each card, increasing the size of the deck by 108. Cards are added
+	 * spades first (King to Ace), then similarly with hearts, diamonds and clubs. It also adds
+	 * 2 of each joker of diamonds and clubs. should be renamed to add108
 	 * 
 	 * @return
 	 * 		the deck
@@ -271,8 +272,10 @@ public class Deck implements Serializable {
 		return cards;
 	}
 
+	//swaps two cards in a deck and returns the new deck
 	public Deck swapCards(Deck d, Card c1, Card c2, int index1, int index2) {
 
+		//check to make ure that c2 is really smaller than c1
 		if (c1.getCardValue(c1.getRank()) > c2.getCardValue(c2.getRank())) {
 			Card temp = c2;
 			d.getCards().set(index2, c1);

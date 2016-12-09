@@ -24,19 +24,11 @@ public abstract class CanastaMoveAction extends GameAction {
         // invoke superclass constructor to set source
         super(player);
     }
-    
-    /**
-     * @return
-     * 		whether the move was a slap
-     */
+
 //    public boolean isMeld() {
 //    	return false;
 //    }
 //
-//    /**
-//     * @return
-//     * 		whether the move was a "play"
-//     */
 //    public boolean isDrawDeck() {
 //    	return false;
 //    }

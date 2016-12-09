@@ -12,7 +12,7 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * The LocalGame class for a slapjack game.  Defines and enforces
  * the game rules; handles interactions between players.
  *
- * @author Steven R. Vegdahl
+ * @author Steven R. Vegdahl, Nick Edwards, Aaron Banobi, Michele Lau, David Vandewark
  * @version July 2013
  */
 
@@ -163,12 +163,6 @@ public class CanastaLocalGame extends LocalGame {
                 System.out.println("------------------------------------------");
                 state.discardCard(c);
                 System.out.println(c);
-//                if (thisPlayerIdx == 3) {
-//                    state.setToPlay(0);
-//                } else {
-//                    state.setToPlay(thisPlayerIdx + 1);
-//
-//                }
                 System.out.println(state.toPlay());
 
                 return true;
@@ -177,9 +171,6 @@ public class CanastaLocalGame extends LocalGame {
             }
 
         } else if (canastaMA instanceof CanastaDrawDiscardAction) {
-            //if (state.canMeld())
-            //state.drawDiscard(state.getDeck(1).getTopCard(state.getDeck(0)), state.getDeck(thisPlayerIdx+2).getCards());
-//
             if (state.substage == 0 && state.getDeck(1) != null) {
                 state.drawDiscard(state.getDeck(1).peekAtTopCard(), state.getDeck(thisPlayerIdx + 2).getCards());
                 return true;
@@ -216,34 +207,12 @@ public class CanastaLocalGame extends LocalGame {
         }
         else if (canastaMA instanceof  CanastaSelectedAction) {
             CanastaSelectedAction a = (CanastaSelectedAction) canastaMA;
-            //if (state.substage == 0) {
                 state.getDeck(thisPlayerIdx+2).peekAtCards(a.getPosition()).setSelected(a.getSelected());
                 return true;
-            //}
-
-            //return false;
         }
 
 
 		// return true, because the move was successful if we get here
 		return true;
 	}
-
-//	/**
-//	 * helper method that gives all the cards in the middle deck to
-//	 * a given player; also shuffles the target deck
-//	 *
-//	 * @param idx
-//	 * 		the index of the player to whom the cards should be given
-//	 */
-//	private void giveMiddleCardsToPlayer(int idx) {
-//		// illegal player: ignore
-//		if (idx < 0 || idx > 1) return;
-//
-//		// move all cards from the middle deck to the target deck
-//		state.getDeck(2).moveAllCardsTo(state.getDeck(idx));
-//
-//		// shuffle the target deck
-//		state.getDeck(idx).shuffle();
-//	}
 }

@@ -119,6 +119,7 @@ public class CanastaState extends GameState {
     		piles[toPlay].moveTopCardTo(piles[1-toPlay]);
     	}*/
 
+		//the meld pile
 		piles[6] = new Deck();
 		piles[6].add(Card.fromString("3" + "D"));
 		piles[6].add(Card.fromString("4" + "D"));
@@ -413,6 +414,8 @@ public class CanastaState extends GameState {
 		return r;
 	}
 
+	//removes the card from the players hand and adds it to the dicard pile
+	//also increments whose turn it is
 	public void discardCard(Card c) {
 		Deck player = getDeck(toPlay + 2);
 		Deck discard = getDeck(1);
@@ -434,6 +437,7 @@ public class CanastaState extends GameState {
 		discard.add(c);
 	}
 
+	//check to make sure the card to be discarded is in fact in the players hand
 	public boolean canDiscard(Card c) {
 		Deck player = getDeck(toPlay+2);
 		if (player.containsCard(c)) {
@@ -1736,12 +1740,13 @@ public class CanastaState extends GameState {
 		return this;
 	}
 
+	//sorts the cards in a given deck
 	public Deck sortHand(Deck d) {
-		int c1 = 0;
-		int smallest = 0;
-		int c2 = 0;
-		ArrayList<Card> cs1 = d.getCards();
-		//ArrayList<Card> cs2 = d.getCards();
+		int c1 = 0; //first card being compared
+		int smallest = 0; //the smallest card that got compared to c1
+		int c2 = 0; //second card being compared
+		ArrayList<Card> cs1 = d.getCards(); //cards in the given deck
+
 		ifNull:
 		for (int i = 0; i < d.size() - 1; i++) {
 			int index2 = i + 1;
@@ -1769,16 +1774,18 @@ public class CanastaState extends GameState {
 					smallest = c2;
 					index2 = j;
 				} else if (c2 > smallest) {
-
+					//do nothing
 				}
 			}
+			//helper method that does the actual swapping
 			piles[toPlay + 2] = piles[toPlay + 2].swapCards(d, cs1.get(i), cs1.get(index2), i, index2);
 		}
 
-
+		//returns a deck
 		return piles[toPlay + 2];
 	}
 
+	//method to set the contents of a deck equal to a different deck
 	public void setPlayerDeck(Deck d) {
 		piles[toPlay+2] = d;
 	}

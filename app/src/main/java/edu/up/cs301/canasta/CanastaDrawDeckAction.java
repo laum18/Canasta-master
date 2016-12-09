@@ -14,9 +14,7 @@ public class CanastaDrawDeckAction extends CanastaMoveAction {
     }
 
 
-//    public boolean isDrawDeck() {
-//        return true;
-//    }
+
 
 
 }

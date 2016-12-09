@@ -22,7 +22,4 @@ public class CanastaDiscardAction extends CanastaMoveAction {
       return card;
     }
 
-//    public boolean isDiscard() {
-//        return true;
-//    }
 }
