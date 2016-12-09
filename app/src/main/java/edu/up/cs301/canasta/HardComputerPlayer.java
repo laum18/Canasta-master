@@ -49,27 +49,27 @@ public class HardComputerPlayer extends GameComputerPlayer {
         }
 
         // update our state variable
-        savedState = (CanastaState)info;
+        savedState = (CanastaState) info;
 
         // access deck of the player whose turn it is
         Deck myDeck = savedState.getDeck(savedState.toPlay() + 2);
 
 		/* array list containing the cards from the players hand that will be melded, uses the
-		canMeld method to find a possible meld with discard pile in the players hand */
+        canMeld method to find a possible meld with discard pile in the players hand */
         ArrayList<Card> meldDiscard = canMeld(myDeck);
 
         // check that it is the players turn
         if (savedState.toPlay() == this.playerNum) {
 
             // check if the meldDiscard is null
-           if (meldDiscard != null) {
-               // then create a CanastaComputerDrawDiscardAction on this player and meldDiscard
-               CanastaComputerDrawDiscardAction computerDrawDiscard = new CanastaComputerDrawDiscardAction(this, meldDiscard);
-               // send the computerDrawDiscard action to the game
-               game.sendAction(computerDrawDiscard);
+            if (meldDiscard != null) {
+                // then create a CanastaComputerDrawDiscardAction on this player and meldDiscard
+                CanastaComputerDrawDiscardAction computerDrawDiscard = new CanastaComputerDrawDiscardAction(this, meldDiscard);
+                // send the computerDrawDiscard action to the game
+                game.sendAction(computerDrawDiscard);
             }
-               // send the drawDeck action to the game
-               game.sendAction(drawDeck);
+            // send the drawDeck action to the game
+            game.sendAction(drawDeck);
 
             // delay half-second
             sleep(500);
@@ -132,7 +132,7 @@ public class HardComputerPlayer extends GameComputerPlayer {
     /* method to find a legal meld in a given deck of cards
 	* iterates through given deck and compares each card to all the other cards in the deck
 	* looking for three cards of the same rank including wild cards*/
-    private ArrayList<Card> findMeld(Deck d){
+    private ArrayList<Card> findMeld(Deck d) {
 
         // get d and put it into an arraylist, myHand
         ArrayList<Card> myHand = d.getCards();
@@ -140,7 +140,7 @@ public class HardComputerPlayer extends GameComputerPlayer {
         ArrayList<Card> meldArray;
 
         // loop through myHand
-        for (int i = 0; i < myHand.size(); i++){
+        for (int i = 0; i < myHand.size(); i++) {
             // initialize meldArray
             meldArray = new ArrayList<Card>();
 
@@ -148,16 +148,16 @@ public class HardComputerPlayer extends GameComputerPlayer {
             Rank rank = myHand.get(i).getRank();
 
             // search for sets of three of the same rank or wild cards
-            for (int j = i+1; j < myHand.size(); j++){
+            for (int j = i; j < myHand.size(); j++) {
                 // check that the card we are comparing to is the same rank or a wild card
-                if (myHand.get(j).getRank() == rank || myHand.get(j).getRank() == Rank.TWO || myHand.get(j).getRank() == Rank.RJOKER){
+                if (myHand.get(j).getRank() == rank || myHand.get(j).getRank() == Rank.TWO || myHand.get(j).getRank() == Rank.RJOKER) {
                     // if it is, then add that card to meldArray
                     meldArray.add(myHand.get(j));
                 }
             }
 
             // if set of three or more found
-            if (meldArray.size() >= 3){
+            if (meldArray.size() >= 3) {
                 // return meldArray
                 return meldArray;
             }
@@ -174,7 +174,7 @@ public class HardComputerPlayer extends GameComputerPlayer {
      *
      * @param d The deck being passed in to find meld cards
      */
-    private ArrayList<Card> canMeld(Deck d){
+    private ArrayList<Card> canMeld(Deck d) {
 
         // put the cards in d into an arraylist, myHand, of Cards
         ArrayList<Card> myHand = d.getCards();
@@ -182,7 +182,7 @@ public class HardComputerPlayer extends GameComputerPlayer {
         ArrayList<Card> meldArray;
 
         // loop through myHand
-        for (int i = 0; i < myHand.size(); i++){
+        for (int i = 0; i < myHand.size(); i++) {
             // initialize meldArray
             meldArray = new ArrayList<Card>();
 
@@ -190,16 +190,16 @@ public class HardComputerPlayer extends GameComputerPlayer {
             Rank rank = myHand.get(i).getRank();
 
             // loop through myHand starting at the next card of i
-            for(int j = i+1; j<myHand.size(); j++){
+            for (int j = i + 1; j < myHand.size(); j++) {
                 // if it is the same rank
-                if(myHand.get(j).getRank() == rank){
+                if (myHand.get(j).getRank() == rank) {
                     // add that card into meldArray
                     meldArray.add(myHand.get(j));
                 }
             }
 
             // if set of two or more found
-            if (meldArray.size() >= 2){
+            if (meldArray.size() >= 2) {
                 // return meldArray
                 return meldArray;
             }
@@ -239,7 +239,7 @@ public class HardComputerPlayer extends GameComputerPlayer {
             // if it is not
             else {
                 // loop through myHand starting with the card after i
-                for (int j = i+1; j < myHand.size(); j++) {
+                for (int j = i + 1; j < myHand.size(); j++) {
                     // if this card is the same rank as r
                     if (r == myHand.get(j).getRank()) {
                         // set pair to true
