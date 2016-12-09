@@ -52,10 +52,12 @@ public class HardComputerPlayer extends GameComputerPlayer {
         savedState = (CanastaState) info;
 
         // access deck of the player whose turn it is
-        Deck myDeck = savedState.getDeck(savedState.toPlay() + 2);
+        Deck myDeck;
+                //= savedState.getDeck(savedState.toPlay() + 2);
 
 		/* array list containing the cards from the players hand that will be melded, uses the
         canMeld method to find a possible meld with discard pile in the players hand */
+        myDeck = savedState.getDeck(playerNum+2);
         ArrayList<Card> meldDiscard = canMeld(myDeck);
 
         // check that it is the players turn
@@ -110,6 +112,11 @@ public class HardComputerPlayer extends GameComputerPlayer {
             }
             // do this while myMeldArray is not null
             while (myMeldArray != null);
+
+            myDeck = savedState.getDeck(playerNum+2);
+            CanastaComputerMeldCardAction meldCard = new CanastaComputerMeldCardAction(this, savedState.getDeck(playerNum+2));
+            game.sendAction(meldCard);
+
 
             // call the discard method to find a card to discard from the player's deck
             Card discardCard = discard(savedState.getDeck(this.playerNum + 2));
@@ -190,7 +197,7 @@ public class HardComputerPlayer extends GameComputerPlayer {
             Rank rank = myHand.get(i).getRank();
 
             // loop through myHand starting at the next card of i
-            for (int j = i + 1; j < myHand.size(); j++) {
+            for (int j = i; j < myHand.size(); j++) {
                 // if it is the same rank
                 if (myHand.get(j).getRank() == rank) {
                     // add that card into meldArray

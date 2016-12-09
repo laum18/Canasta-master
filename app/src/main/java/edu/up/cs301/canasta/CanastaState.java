@@ -1425,6 +1425,269 @@ public class CanastaState extends GameState {
 	}
 
 	/**
+	 * A computer meld method to meld single cards that already have meld piles
+     *
+	 * @param c The card trying to be melded into an existing meld pile
+	 * @param playerNumber The player's number
+     */
+	public void computerMeldCard(ArrayList<Card> c, int playerNumber){
+
+		// declare an instance variable r
+		Rank r;
+		// decalre a canMeldCard boolean and assign it to false
+		boolean canMeldCard = false;
+
+		// loop through c
+		for (int i = 0; i < c.size(); i++) {
+			// get the rank of the i-th card
+			r = c.get(i).getRank();
+			// check what team the player is on
+			if (playerNumber == 0 || playerNumber == 2) {
+				// check what rank the i-th card is and check if the meld pile exists
+				// if it does exist, set the canMeldCard boolean to true
+				if (r.shortName() == '3' && three > 0) {
+					three++;
+					canMeldCard = true;
+				} else if (r.shortName() == '4' && four > 0) {
+					four++;
+					canMeldCard = true;
+				} else if (r.shortName() == '5' && five > 0) {
+					five++;
+					canMeldCard = true;
+				} else if (r.shortName() == '6' && six > 0) {
+					six++;
+					canMeldCard = true;
+				} else if (r.shortName() == '7' && seven > 0) {
+					seven++;
+					canMeldCard = true;
+				} else if (r.shortName() == '8' && eight > 0) {
+					eight++;
+					canMeldCard = true;
+				} else if (r.shortName() == '9' && nine > 0) {
+					nine++;
+					canMeldCard = true;
+				} else if (r.shortName() == 'T' && ten > 0) {
+					ten++;
+					canMeldCard = true;
+				} else if (r.shortName() == 'J' && jack > 0) {
+					jack++;
+					canMeldCard = true;
+				} else if (r.shortName() == 'Q' && queen > 0) {
+					queen++;
+					canMeldCard = true;
+				} else if (r.shortName() == 'K' && king > 0) {
+					king++;
+					canMeldCard = true;
+				} else if (r.shortName() == 'A' && ace > 0) {
+					ace++;
+					canMeldCard = true;
+				}
+
+				// if we can meld the i-th card
+				if (canMeldCard) {
+					// if the card is of rank 3,4,5,6, or 7
+					if (r.shortName() == '3' || r.shortName() == '4' || r.shortName() == '5'
+							|| r.shortName() == '6' || r.shortName() == '7') {
+						// add five points to round score
+						teamOneRoundScore += 5;
+						// remove the i-th card from c
+						c.remove(c.get(i));
+					}
+					// if the card is of rank 8,9,10,J,Q, or K
+					else if (r.shortName() == '8' || r.shortName() == '9' || r.shortName() == 'T'
+							|| r.shortName() == 'J' || r.shortName() == 'Q' || r.shortName() == 'K') {
+						// add 10 points to the round score
+						teamOneRoundScore += 10;
+						// remove the i-th card from c
+						c.remove(c.get(i));
+					}
+					// if the card is of rank Ace
+					else if (r.shortName() == 'A') {
+						// add 20 points to the round score
+						teamOneRoundScore += 20;
+						// remove the i-th card from c
+						c.remove(c.get(i));
+					}
+
+					// check each rank's melded piles to see if a Canasta is made and
+					// if a Canasta score was already added to the round score
+					// depending on whether CanastaCheckerOne array is a 0 or 1
+					if (three >= 7 && canastaCheckerOne[0] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[0] = 1;
+					}
+					else if (four >= 7 && canastaCheckerOne[1] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[1] = 1;
+					}
+					else if (five >= 7 && canastaCheckerOne[2] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[2] = 1;
+					}
+					else if (six >= 7 && canastaCheckerOne[3] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[3] = 1;
+					}
+					else if (seven >= 7 && canastaCheckerOne[4] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[4] = 1;
+					}
+					else if (eight >= 7 && canastaCheckerOne[5] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[5] = 1;
+					}
+					else if (nine >= 7 && canastaCheckerOne[6] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[6] = 1;
+					}
+					else if (ten >= 7 && canastaCheckerOne[7] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[7] = 1;
+					}
+					else if (jack>= 7 && canastaCheckerOne[8] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[8] = 1;
+					}
+					else if (queen >= 7 && canastaCheckerOne[9] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[0] = 1;
+					}
+					else if (king >= 7 && canastaCheckerOne[10] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[10] = 1;
+					}
+					else if (ace >= 7 && canastaCheckerOne[11] == 0) {
+						teamOneRoundScore += 300;
+						canastaCheckerOne[11] = 1;
+					}
+				} // end of canMeld if statement
+
+			}
+			// check what team the player is on
+			else if (playerNumber == 1 || playerNumber == 3){
+				// check what rank the i-th card is and check if the meld pile exists
+				// if it does exist, set the canMeldCard boolean to true
+				if (r.shortName() == '3' && oppThree > 0) {
+					oppThree++;
+					canMeldCard = true;
+				} else if (r.shortName() == '4' && oppFour > 0) {
+					oppFour++;
+					canMeldCard = true;
+				} else if (r.shortName() == '5' && oppFive > 0) {
+					oppFive++;
+					canMeldCard = true;
+				} else if (r.shortName() == '6' && oppSix > 0) {
+					oppSix++;
+					canMeldCard = true;
+				} else if (r.shortName() == '7' && oppSeven > 0) {
+					oppSeven++;
+					canMeldCard = true;
+				} else if (r.shortName() == '8' && oppEight > 0) {
+					oppEight++;
+					canMeldCard = true;
+				} else if (r.shortName() == '9' && oppNine > 0) {
+					oppNine++;
+					canMeldCard = true;
+				} else if (r.shortName() == 'T' && oppTen > 0) {
+					oppTen++;
+					canMeldCard = true;
+				} else if (r.shortName() == 'J' && oppJack > 0) {
+					oppJack++;
+					canMeldCard = true;
+				} else if (r.shortName() == 'Q' && oppQueen > 0) {
+					oppQueen++;
+					canMeldCard = true;
+				} else if (r.shortName() == 'K' && oppKing > 0) {
+					oppKing++;
+					canMeldCard = true;
+				} else if (r.shortName() == 'A' && oppAce > 0) {
+					oppAce++;
+					canMeldCard = true;
+				}
+
+				// if we can meld the i-th card
+				if (canMeldCard) {
+					// if the card is of rank 3,4,5,6, or 7
+					if (r.shortName() == '3' || r.shortName() == '4' || r.shortName() == '5'
+							|| r.shortName() == '6' || r.shortName() == '7') {
+						// add five points to the round score
+						teamTwoRoundScore += 5;
+						// remove the i-th card from c
+						c.remove(c.get(i));
+					}
+					// if the card is of rank 8,9,10,J,Q, or K
+					else if (r.shortName() == '8' || r.shortName() == '9' || r.shortName() == 'T'
+							|| r.shortName() == 'J' || r.shortName() == 'Q' || r.shortName() == 'K') {
+						// add 10 points to the round score
+						teamTwoRoundScore += 10;
+						// remove the i-th card from c
+						c.remove(c.get(i));
+					}
+					// if the card is of rank Ace
+					else if (r.shortName() == 'A') {
+						// add 20 points to the round score
+						teamTwoRoundScore += 20;
+						// remove the i-th card from c
+						c.remove(c.get(i));
+					}
+
+					// check each rank's melded piles to see if a Canasta is made and
+					// if a Canasta score was already added to the round score
+					// depending on whether CanastaCheckerTwo array is a 0 or 1
+					if (oppThree >= 7 && canastaCheckerTwo[0] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[0] = 1;
+					}
+					else if (oppFour >= 7 && canastaCheckerTwo[1] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[1] = 1;
+					}
+					else if (oppFive >= 7 && canastaCheckerTwo[2] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[2] = 1;
+					}
+					else if (oppSix >= 7 && canastaCheckerTwo[3] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[3] = 1;
+					}
+					else if (oppSeven >= 7 && canastaCheckerTwo[4] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[4] = 1;
+					}
+					else if (oppEight >= 7 && canastaCheckerTwo[5] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[5] = 1;
+					}
+					else if (oppNine >= 7 && canastaCheckerTwo[6] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[6] = 1;
+					}
+					else if (oppTen >= 7 && canastaCheckerTwo[7] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[7] = 1;
+					}
+					else if (oppJack>= 7 && canastaCheckerTwo[8] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[8] = 1;
+					}
+					else if (oppQueen >= 7 && canastaCheckerTwo[9] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[0] = 1;
+					}
+					else if (oppKing >= 7 && canastaCheckerTwo[10] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[10] = 1;
+					}
+					else if (oppAce >= 7 && canastaCheckerTwo[11] == 0) {
+						teamTwoRoundScore += 300;
+						canastaCheckerTwo[11] = 1;
+					}
+				}
+			}
+		}
+	}
+
+	/**
 	 * A method for the computer player to draw from the discard pile
 	 *
 	 * @param hand The arraylist being checked to see if it can be melded

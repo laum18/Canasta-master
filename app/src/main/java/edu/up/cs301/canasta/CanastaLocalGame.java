@@ -2,6 +2,8 @@ package edu.up.cs301.canasta;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import edu.up.cs301.card.Card;
 import edu.up.cs301.card.Rank;
 import edu.up.cs301.game.GamePlayer;
@@ -12,7 +14,7 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * The LocalGame class for a Canasta game.  Defines and enforces
  * the game rules; handles interactions between players.
  *
- * @author Steven R. Vegdahl, Nick Edwards, Aaron Banobi, Michele Lau, David Vandewark
+ * @author Steven R. Vegdahl, Nick Edwards, Aaron Banobi, Michelle Lau, David Vandewark
  * @version December 2016
  */
 
@@ -222,6 +224,16 @@ public class CanastaLocalGame extends LocalGame {
             state.getDeck(thisPlayerIdx + 2).peekAtCards(a.getPosition()).setSelected(a.getSelected());
 
             return true;
+        }
+        // if the computer tries to meld one card
+        else if (canastaMA instanceof CanastaComputerMeldCardAction) {
+            // check that the state's substage is 1
+            if (state.substage == 1) {
+                // create an arraylist with the player's deck
+                ArrayList<Card> deck = state.getDeck(thisPlayerIdx + 2).getCards();
+                // call the computerMeldCard method with deck and the player's number
+                state.computerMeldCard(deck, thisPlayerIdx);
+            }
         }
 
 
