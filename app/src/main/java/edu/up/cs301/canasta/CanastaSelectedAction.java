@@ -7,7 +7,7 @@ import edu.up.cs301.game.GamePlayer;
  * a selected card move.
  *
  * @author Nick Edwards, Aaron Banobi, Michelle Lau, and David Vandeward
- * @version December 8, 2016
+ * @version December 2016
  */
 public class CanastaSelectedAction extends CanastaMoveAction {
 

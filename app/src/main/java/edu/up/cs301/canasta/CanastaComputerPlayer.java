@@ -9,10 +9,9 @@ import edu.up.cs301.game.GameComputerPlayer;
 import edu.up.cs301.game.infoMsg.GameInfo;
 
 /**
- * This is a computer player that slaps at an average rate given
- * by the constructor parameter.
+ * This is a computer player
  * 
- * @author Steven R. Vegdahl
+ * @author Steven R. Vegdahl, Nick Edwards, Aaron Banobi, Michele Lau, David Vandewark
  * @version December 2016
  */
 public class CanastaComputerPlayer extends GameComputerPlayer {

@@ -1,3 +1,23 @@
 For our program, we downloaded Vegdhal's Slapjack game and used it as the base for our game, because it had the game framework
 and the card class. We also went in to see Vegdahl for numerous questions about bugs in our code, and on how to proceed with
 certain tasks.
+
+November 3, 2016    Meeting with Dr. Vegdahl to get the ball rolling
+    The purpose of this meeting was to see how to exactly start implementation of the code. We met with Dr. Vegdahl as
+    a team and discussed where to start. At this point we have already downloaded and changed the classes from the SlapJack
+    game that was given to us to use as a model, and changed it to a Canasta game.
+    During this meeting, we talked about actions, in particular, as that is the main detail needed to be coded. We focused
+    mainly on the moveAction and how to implement it. We also discussed the timeline of a single turn, from drawing a card
+    to making a meld to discarding.
+
+
+November 21, 2016   Meeting with Dr. Vegdahl to have some questions we developed while coding
+    The purpose of the meeting was to have some clarification on how to implement some things, and how to think about the logic of
+    other things. We were particularly stuck on how to actually tell how to know what card to select in order to perform an
+    action on it. Another thing we asked about was how to make our AI do something.
+
+
+December 7, 2016    Meeting with Dr. Vegdahl to help debug our network player
+    As the basic implementation of our game works, we moved to the network player as it was not playing properly. The problem was
+    that we had to make another action in itself because selecting a card did not update to the local game, so a selectCardAction was
+    made so that you can send that action over the network, and the local player can see that move and the state can also update.

@@ -8,7 +8,7 @@ import edu.up.cs301.game.GamePlayer;
  * a discard card move.
  *
  * @author Nick Edwards, Aaron Banobi, Michelle Lau, and David Vandeward
- * @version November 6, 2016
+ * @version November 2016
  */
 public class CanastaDiscardAction extends CanastaMoveAction {
 

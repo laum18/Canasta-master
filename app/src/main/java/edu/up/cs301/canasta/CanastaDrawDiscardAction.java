@@ -7,7 +7,7 @@ import edu.up.cs301.game.GamePlayer;
  * a draw discard move.
  *
  * @author Nick Edwards, Aaron Banobi, Michelle Lau, and David Vandeward
- * @version November 8, 2016
+ * @version November 2016
  */
 public class CanastaDrawDiscardAction extends CanastaMoveAction {
 

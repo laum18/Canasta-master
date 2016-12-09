@@ -11,8 +11,8 @@ import edu.up.cs301.game.infoMsg.GameInfo;
  * This is a smart computer player that can continue melding
  * cards and draw from the discard pile
  *
- * @author Michelle Lau
- * @version December 6, 2016
+ * @author Michelle Lau , Nick Edwards, Aaron Banobi, David Vandewark
+ * @version December 2016
  */
 public class HardComputerPlayer extends GameComputerPlayer {
 

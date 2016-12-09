@@ -13,7 +13,7 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * the game rules; handles interactions between players.
  *
  * @author Steven R. Vegdahl, Nick Edwards, Aaron Banobi, Michele Lau, David Vandewark
- * @version July 2013
+ * @version December 2016
  */
 
 public class CanastaLocalGame extends LocalGame {

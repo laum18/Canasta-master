@@ -14,7 +14,7 @@ import edu.up.cs301.game.infoMsg.GameState;
  * it, or to help figure out its next move.)
  *
  * @author Steven R. Vegdahl, Aaron Banobi, Nick Edwards, Michelle Lau, and David Vandewark
- * @version July 2013
+ * @version December 2016
  */
 public class CanastaState extends GameState {
 	private static final long serialVersionUID = -8269749892027578792L;
@@ -522,6 +522,7 @@ public class CanastaState extends GameState {
 
 	int count = 0;
 
+	//method to draw a card
 	public void drawCard(Card c) {
 		count++;
 		//Log.i("" +count, "" +count);
@@ -534,6 +535,7 @@ public class CanastaState extends GameState {
 		//return c;
 	}
 
+	//method to draw from the discard pile
 	public void drawDiscard(Card c, ArrayList<Card> list) {
 		Deck player = getDeck(toPlay + 2);
 		Deck discardDeck = getDeck(1);
@@ -810,7 +812,7 @@ public class CanastaState extends GameState {
 			}
 
 			// add meld pile to player's hand
-			// get tje size of the discard deck
+			// get the size of the discard deck
 			int discardSize = discardDeck.size();
 			// loop through the discard deck
 			for (int i = 0; i < discardSize; i++) {
@@ -1110,13 +1112,14 @@ public class CanastaState extends GameState {
 
 			}
 		}
-
+		//if there is no cards in a players hand, it ends the round
 		if(getDeck(toPlay+2).size() == 0){
 			System.out.println("Round Over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			newRound();
 		}
 	}
 
+	//computer meld method
 	public void computerMeld(ArrayList<Card> c, int playerNumber){
 
 		Deck player = getDeck(playerNumber + 2);
@@ -1257,6 +1260,7 @@ public class CanastaState extends GameState {
 				//player.removeCard(selected[i]);
 				if (toPlay() == 0 || toPlay() == 2) {
 					myTeamMeld.add(selected[i]);
+					//scoring
 					if (selected[i].getRank().shortName() == '3' || selected[i].getRank().shortName() == '4' ||
 							selected[i].getRank().shortName() == '5' || selected[i].getRank().shortName() == '6' ||
 							selected[i].getRank().shortName() == '7') {
@@ -1281,7 +1285,7 @@ public class CanastaState extends GameState {
 						player.removeCard(selected[i]);
 
 					}
-
+					//canasta checks
 					if (three >= 7 && canastaCheckerOne[0] == 0) {
 						teamOneRoundScore += 300;
 						canastaCheckerOne[0] = 1;
@@ -1412,6 +1416,7 @@ public class CanastaState extends GameState {
 
 			}
 		}
+		//check to see if the number of cards is zero
 		if(getDeck(0).size() == 0 || getDeck(toPlay+2).size() == 0){
 			toPlay = -1;
 			System.out.println("Round Over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -1995,6 +2000,7 @@ public class CanastaState extends GameState {
 		piles[4] = new Deck(); // player 2 deck (teammate)
 		piles[5] = new Deck(); // player 3 deck (right)
 
+		//initialize the values to 0 because there should not be any cards melded to begin with
 		three = 0;
 		four = 0;
 		five = 0;
@@ -2046,6 +2052,7 @@ public class CanastaState extends GameState {
 			}
 		}
 
+		//adding to the meldpile
 		piles[6] = new Deck();
 		piles[6].add(Card.fromString("3" + "D"));
 		piles[6].add(Card.fromString("4" + "D"));

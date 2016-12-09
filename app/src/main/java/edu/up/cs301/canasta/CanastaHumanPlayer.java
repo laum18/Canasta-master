@@ -30,13 +30,13 @@ import edu.up.cs301.game.infoMsg.IllegalMoveInfo;
 import edu.up.cs301.game.infoMsg.NotYourTurnInfo;
 
 /**
- * A GUI that allows a human to play Slapjack. Moves are made by clicking
+ * A GUI that allows a human to play Canasta. Moves are made by clicking
  * regions on a surface. Presently, it is laid out for landscape orientation.
  * If the device is held in portrait mode, the cards will be very long and
  * skinny.
  *
- * @author Steven R. Vegdahl
- * @version July 2013
+ * @author Steven R. Vegdahl, Nick Edwards, Aaron Banobi, Michele Lau, David Vandewark
+ * @version December 2016
  */
 public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, View.OnClickListener {
 
@@ -76,6 +76,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     private Button drawDiscardButton;
     private Button sortButton;
 
+    //Initialize TextViews for the different GUI texts
     TextView turn;
     TextView teamOneRound;
     TextView teamTwoRound;
@@ -162,26 +163,29 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         // remember the activity
         myActivity = activity;
 
+        //Lock the orientation of the screen to landscape
         myActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         // Load the layout resource for the new configuration
         activity.setContentView(R.layout.canasta_human_player);
 
         // link the animator (this object) to the animation surface
-        surface = (AnimationSurface) myActivity
-                .findViewById(R.id.animation_surface);
+        surface = (AnimationSurface) myActivity.findViewById(R.id.animation_surface);
         surface.setAnimator(this);
 
+        //link the various buttons to each id
         meldButton = (Button) activity.findViewById(R.id.meldButton);
         discardButton = (Button) activity.findViewById(R.id.discardButton);
         drawDiscardButton = (Button) activity.findViewById(R.id.drawDiscardButton);
         sortButton = (Button) activity.findViewById(R.id.sortButton);
 
+        //make the buttons listeners
         meldButton.setOnClickListener(this);
         discardButton.setOnClickListener(this);
         drawDiscardButton.setOnClickListener(this);
         sortButton.setOnClickListener(this);
 
+        //link the textViews
         turn = (TextView) activity.findViewById(R.id.turnIndicator);
         teamOneRound = (TextView) activity.findViewById(R.id.oneRoundText);
         teamTwoRound = (TextView) activity.findViewById(R.id.twoRoundText);
@@ -192,6 +196,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         playerNumber = (TextView) activity.findViewById(R.id.playerNum);
         newRound = (TextView) activity.findViewById(R.id.newRound);
 
+        //link team 1 meld pile numbers
         my3 = (TextView) activity.findViewById(R.id.myThree);
         my4 = (TextView) activity.findViewById(R.id.myFour);
         my5 = (TextView) activity.findViewById(R.id.myFive);
@@ -205,6 +210,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         myk = (TextView) activity.findViewById(R.id.myThirteen);
         mya = (TextView) activity.findViewById(R.id.myAce);
 
+        //link team 2 meld pile numbers
         opp3 = (TextView) activity.findViewById(R.id.oppThree);
         opp4 = (TextView) activity.findViewById(R.id.oppFour);
         opp5 = (TextView) activity.findViewById(R.id.oppFive);
@@ -218,9 +224,11 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         oppk = (TextView) activity.findViewById(R.id.oppThirteen);
         oppa = (TextView) activity.findViewById(R.id.oppAce);
 
-
+        //We set the view of the sort button to gone for now so that it is removed for now.
+        //Once the functionality works, the button will be visible and operational
         sortButton.setVisibility(View.GONE);
 
+        //Have to fix our round indicator as well
         newRound.setVisibility(View.GONE);
         // read in the card images
         Card.initImages(activity);
@@ -233,9 +241,11 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     }
 
     public void onClick(View v) {
+        //if meld button is pressed, send a CanastaMeldAction
         if (v == meldButton) {
             game.sendAction((new CanastaMeldAction(this)));
 
+            //if discard is clicked, discard a card
         } else if (v == discardButton) {
 
             //discard card
@@ -249,6 +259,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                 if (c.getSelected()) {
                     selected.add(c);
                 }
+                //discard a selected card and send the game action
                 if (selected.size() == 1) {
                     CanastaDiscardAction discard = new CanastaDiscardAction(this, selected.get(0));
                     game.sendAction(discard);
@@ -257,9 +268,10 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
             }
             surface.invalidate();
-        } else if (v == drawDiscardButton) {
-            game.sendAction((new CanastaDrawDiscardAction(this)));
+        } else if (v == drawDiscardButton) { //drawDiscard button click
+            game.sendAction((new CanastaDrawDiscardAction(this))); //send game action
         } /* TODO fix sort button
+            //sort button
             else if (v == sortButton) {
             state.setPlayerDeck(state.sortHand(state.getDeck(playerNum+2)));
 
@@ -298,12 +310,13 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         oppk.setText(Integer.toString(state.oppKing));
         oppa.setText(Integer.toString(state.oppAce));
 
+        //new round indicator
         if(state.roundStarting == true){
            newRound.setVisibility(View.VISIBLE);
             newRound.setText("!!!!!!!!!!!!!!");
-       }
+        }
 
-
+        //update scoring on the GUI
         teamOneRound.setText(" " + state.getTeamOneRoundScore());
         teamOneTotal.setText(" " + state.getTeamOneTotalScore());
         teamTwoRound.setText(" " + state.getTeamTwoRoundScore());
@@ -367,6 +380,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         // ignore if we have not yet received the game state
         if (state == null) return;
 
+        //This ensures that there are enough spaces in the meld piles
         Card[][] meldCard = new Card[12][8];
 
         // get the height and width of the animation surface
@@ -634,6 +648,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         }
     }
 
+    //draw the opponents meld piles from the first card, and offsetting the rest accordingly
     private void drawOppMeldPiles(Canvas g, Card[][] c) {
         int height = surface.getHeight() - 250;
         int width = surface.getWidth() - 550;
@@ -646,7 +661,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
             drawCard(g, rect, state.getDeck(6).peekAtCards(i));
         }
     }
-
+    //draw your meld piles from the first card, and offsetting the rest accordingly
     private void drawMyMeldPiles(Canvas g, Card[][] c) {
         int height = surface.getHeight() - 250;
         int width = surface.getWidth() - 550;

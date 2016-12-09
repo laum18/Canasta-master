@@ -3,7 +3,7 @@ package edu.up.cs301.canasta;
 import edu.up.cs301.game.GamePlayer;
 
 /**
- * A CanastaPlayAction is an action that represents playing a card on the "up"
+ * A CanastaPlayAction is an action that represents playing a card on the meld
  * pile.
  * 
  * @author Steven R. Vegdahl

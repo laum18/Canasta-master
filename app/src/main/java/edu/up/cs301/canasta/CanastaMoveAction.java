@@ -7,8 +7,8 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * A game-move object that a Canasta player sends to the game to make
  * a move.
  * 
- * @author Steven R. Vegdahl
- * @version 2 July 2001
+ * @author Steven R. Vegdahl, Nick Edwards, Aaron Banobi, Michele Lau, David Vandewark
+ * @version November 2016
  */
 public abstract class CanastaMoveAction extends GameAction {
 	

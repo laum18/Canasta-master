@@ -13,7 +13,7 @@ import android.graphics.Color;
  * this is the primary activity for Canasta game
  * 
  * @author Steven R. Vegdahl, Nick Edwards, Aaron Banobi, Michele Lau, David Vandewark
- * @version July 2013
+ * @version November 2016
  */
 public class CanastaMainActivity extends GameMainActivity {
 	

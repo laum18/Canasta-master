@@ -8,8 +8,8 @@ import edu.up.cs301.card.Card;
 /**
  * Deck class - represents a deck of cards (not necessarily a full one)
  * 
- * @author Steven R. Vegdahl
- * @version July 2013
+ * @author Steven R. Vegdahl, Nick Edwards, Aaron Banobi, Michele Lau, David Vandewark
+ * @version December 2016
  *
  */
 public class Deck implements Serializable {
@@ -54,14 +54,13 @@ public class Deck implements Serializable {
 	 * 		the deck
 	 */
 	public Deck add52() {
-		// add the cards
+		// add the cards, included the joker as 'R'
 		for (int i = 0; i <= 1; i++) {
 			for (char s : "SHDC".toCharArray()) {
 				for (char r : "RKQJT98765432A".toCharArray()) {
 					if(!((s=='S' || s=='H')&& r=='R')){
 						this.add(Card.fromString(""+r+s));
 					}
-					//this.add(Card.fromString(""+r+s));
 
 				}
 			}
@@ -252,10 +251,12 @@ public class Deck implements Serializable {
 		return rtnVal;
 	}
 
+	//remove card
 	public void removeCard(Card c) {
 		cards.remove(c);
 	}
 
+	//check to see if the player has a card
 	public boolean containsCard(Card c) {
 		if (cards.contains(c)) {
 			return true;
