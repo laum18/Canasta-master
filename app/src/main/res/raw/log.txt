@@ -1,0 +1,3 @@
+For our program, we downloaded Vegdhal's Slapjack game and used it as the base for our game, because it had the game framework
+and the card class. We also went in to see Vegdahl for numerous questions about bugs in our code, and on how to proceed with
+certain tasks.
