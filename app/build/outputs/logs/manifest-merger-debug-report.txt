@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 manifest
 ADDED from AndroidManifest.xml:1:1
-	android:screenOrientation
-		ADDED from AndroidManifest.xml:5:5
-	xmlns:android
-		ADDED from AndroidManifest.xml:1:11
 	package
 		ADDED from AndroidManifest.xml:2:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:5:5
 	android:versionName
 		ADDED from AndroidManifest.xml:4:5
 	android:versionCode
 		ADDED from AndroidManifest.xml:3:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
+	xmlns:android
+		ADDED from AndroidManifest.xml:1:11
 uses-sdk
 ADDED from AndroidManifest.xml:7:5
 MERGED from com.android.support:support-v4:21.0.0:15:5

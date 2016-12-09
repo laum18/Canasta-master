@@ -50,10 +50,10 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
     private final static float VERTICAL_BORDER_PERCENT = 40; // width of top/bottom borders
     private final static float OPP_VERTICAL_BORDER_PERCENT = 35; // width of border to first opponents hand
     private final static float PLAYER_HAND_VERTICAL_BORDER_PERCENT = -10; // width of border to player meld pile
-    private final static float TEAMMATE_HAND_VERTICAL_BORDER_PERCENT = 10;
+    private final static float TEAMMATE_HAND_VERTICAL_BORDER_PERCENT = 10; // width of border to teammate hand
 
-    private final static float MELD_LEFT_BORDER_PERCENT = 15;
-    private final static float MELD_TOP_BORDER_PERCENT = 15;
+    private final static float MELD_LEFT_BORDER_PERCENT = 15; // width of left border for the meld piles
+    private final static float MELD_TOP_BORDER_PERCENT = 15; //width of vertical border to meld pile
 
 
     // our game state
@@ -240,20 +240,24 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         }
     }
 
+    /**
+     * callback method: we have received a touch on the animation surface
+     *
+     * @param v the button clicked
+     */
     public void onClick(View v) {
-        //if meld button is pressed, send a CanastaMeldAction
+
+        //if meld button is clicked, send a CanastaMeldAction
         if (v == meldButton) {
             game.sendAction((new CanastaMeldAction(this)));
+        }
 
-            //if discard is clicked, discard a card
-        } else if (v == discardButton) {
-
-            //discard card
+        //if discard button is clicked, discard a card
+        else if (v == discardButton) {
             ArrayList<Card> selected = new ArrayList<Card>();
             ArrayList<Card> hand = state.getDeck(playerNum + 2).getCards();
             for (Card c : hand) {
                 if (c == null) {
-                    Log.i("", "Reached this point");
                     break;
                 }
                 if (c.getSelected()) {
@@ -267,10 +271,16 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                 }
 
             }
+            // redraw animation surface to display completion of action to the user
             surface.invalidate();
-        } else if (v == drawDiscardButton) { //drawDiscard button click
+        }
+
+        // if drawDiscard button is clicked
+        else if (v == drawDiscardButton) {
             game.sendAction((new CanastaDrawDiscardAction(this))); //send game action
-        } /* TODO fix sort button
+        }
+
+        /* TODO fix sort button
             //sort button
             else if (v == sortButton) {
             state.setPlayerDeck(state.sortHand(state.getDeck(playerNum+2)));
@@ -310,11 +320,12 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         oppk.setText(Integer.toString(state.oppKing));
         oppa.setText(Integer.toString(state.oppAce));
 
-        //new round indicator
+        //TODO: needs to be fixed
+        /*new round indicator
         if(state.roundStarting == true){
            newRound.setVisibility(View.VISIBLE);
             newRound.setText("!!!!!!!!!!!!!!");
-        }
+        }*/
 
         //update scoring on the GUI
         teamOneRound.setText(" " + state.getTeamOneRoundScore());
@@ -325,7 +336,6 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         discardSize.setText("" + state.getDeck(1).size());
         turn.setText("Player " + state.toPlay() + "'s turn");
         teamTwoTotal.setText(" " + state.getTeamTwoTotalScore());
-        //System.out.println("Team two round: "+state.getTeamTwoRoundScore());
 
         surface.invalidate();
     }
@@ -570,7 +580,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
         }
     }
 
-
+    /* method to draw selected cards bigger than non-selected cards */
     private void drawSelected(Canvas g, RectF topRect, float deltaX, float deltaY, int numCards, int player) {
         // loop through from back to front, drawing a card-face in each location
         for (int i = 0; i <= numCards - 1; i++) {
