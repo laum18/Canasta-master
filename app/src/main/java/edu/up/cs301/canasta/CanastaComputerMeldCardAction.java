@@ -9,7 +9,7 @@ import edu.up.cs301.game.GamePlayer;
  * A game-move object that a Canasta computer player sends to the game to make
  * a meld move.
  *
- * @author Nick Edwards, Aaron Banobi, Michelle Lau, and David Vandeward
+ * @author Nick Edwards, Aaron Banobi, Michelle Lau, and David Vandewark
  * @version November 4, 2016
  */
 public class CanastaComputerMeldCardAction extends CanastaMoveAction{

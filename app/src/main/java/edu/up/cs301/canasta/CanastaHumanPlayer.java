@@ -247,6 +247,11 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
      */
     public void onClick(View v) {
 
+        if (state.toPlay() != playerNum) {
+            surface.flash(Color.RED, 1);
+            return;
+        }
+
         //if meld button is clicked, send a CanastaMeldAction
         if (v == meldButton) {
             game.sendAction((new CanastaMeldAction(this)));
@@ -421,7 +426,11 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
             drawSelected(g, playerHandLocation, 0.075f * width, 0, state.getDeck(playerNum + 2).size(), 0);
 
         } else {
-            drawDiscardSelected(g, playerHandLocation, 0.055f * width, 0, state.getDeck(playerNum + 2).size(), 0);
+            if (state.getDeck(playerNum + 2).size() <= 16) {
+                drawDiscardSelected(g, playerHandLocation, 0.055f * width, 0, state.getDeck(playerNum + 2).size(), 0);
+            } else {
+                drawDiscardSelected(g, playerHandLocation, 0.035f * width, 0, state.getDeck(playerNum + 2).size(), 0);
+            }
         }
         //draw left opponent hand, face down
         RectF leftOpponentHand = leftOppHandFirstCardLocation();
@@ -622,7 +631,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
             float top = topRect.top + i * deltaY;
             // draw a card-face (hence null) into the appropriate rectangle
             drawCard(g,
-                    new RectF(left, top, left + topRect.width()-40, top + topRect.height()),
+                    new RectF(left, top, left + topRect.width() - 40, top + topRect.height()),
                     state.getDeck((player + playerNum) % 4 + 2).peekAtCards(i));
         }
     }
@@ -651,7 +660,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                     // draw a card-face (hence null) into the appropriate rectangle
 
                     drawCard(g,
-                            new RectF(left, top - 20, left + topRect.width()-40, top + topRect.height()),
+                            new RectF(left, top - 20, left + topRect.width() - 40, top + topRect.height()),
                             state.getDeck((player + playerNum) % 4 + 2).peekAtCards(i));
                 }
             }
@@ -711,7 +720,7 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
 
 
         // select card
-        for (int i = 0; i < state.getDeck(playerNum + 2).size(); i++) {
+        for (int i = state.getDeck(playerNum + 2).size()-1; i >=0 ; i--) {
             if (state.canDrawDiscard) {
                 RectF player = playerDiscardHandCardLocation(i);
                 if (player.contains(x, y)) {
@@ -720,10 +729,12 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                         //state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
                         CanastaSelectedAction selected = new CanastaSelectedAction(this, true, i);
                         game.sendAction(selected);
+                        break; //If two cards contain the touch point, only the right most card will be selected
                     } else {
                         //state.getDeck(playerNum + 2).peekAtCards(i).setSelected(false);
                         CanastaSelectedAction selected = new CanastaSelectedAction(this, false, i);
                         game.sendAction(selected);
+                        break; //If two cards contain the touch point, only the right most card will be selected
                     }
                 }
             }
@@ -735,10 +746,12 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
                         //state.getDeck(playerNum + 2).peekAtCards(i).setSelected(true);
                         CanastaSelectedAction selected = new CanastaSelectedAction(this, true, i);
                         game.sendAction(selected);
+                        break; //If two cards contain the touch point, only the right most card will be selected
                     } else {
                         //state.getDeck(playerNum + 2).peekAtCards(i).setSelected(false);
                         CanastaSelectedAction selected = new CanastaSelectedAction(this, false, i);
                         game.sendAction(selected);
+                        break; //If two cards contain the touch point, only the right most card will be selected
                     }
                 }
             }

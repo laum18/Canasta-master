@@ -161,6 +161,9 @@ public class CanastaState extends GameState {
 				piles[0].moveTopCardTo(piles[j + 2]);
 			}
 		}
+
+		piles[toPlay+2] = sortHand(piles[toPlay+2]);
+
 	}
 
 	/**
@@ -490,6 +493,9 @@ public class CanastaState extends GameState {
 	//removes the card from the players hand and adds it to the dicard pile
 	//also increments whose turn it is
 	public void discardCard(Card c) {
+		if (c == null) {
+			return;
+		}
 		Deck player = getDeck(toPlay + 2);
 		Deck discard = getDeck(1);
 		System.out.println(c +" is selected");

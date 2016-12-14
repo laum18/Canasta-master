@@ -73,8 +73,8 @@ public class HardComputerPlayer extends GameComputerPlayer {
             // send the drawDeck action to the game
             game.sendAction(drawDeck);
 
-            // delay half-second
-            sleep(500);
+            // delay one-quarter second
+            sleep(250);
 
             /* array list containing the cards from the players hand that will be melded,
 		    uses the findMeld method to find a possible meld in the players hand */
@@ -93,6 +93,8 @@ public class HardComputerPlayer extends GameComputerPlayer {
                         CanastaComputerMeldAction computerMeld = new CanastaComputerMeldAction(this, myMeldArray);
                         // send the computerMeld action to the game
                         game.sendAction(computerMeld);
+                        //delay half-second so human player can see that cards were melded
+                        sleep(500);
                     }
 
                     // when myMeldArray is not empty
@@ -103,8 +105,8 @@ public class HardComputerPlayer extends GameComputerPlayer {
                         myMeldArray.remove(0);
                     }
 
-                    //delay half-second
-                    sleep(500);
+                    //delay one-quarter second
+                    sleep(250);
 
                     // call findMeld to see if we can meld anymore cards
                     myMeldArray = findMeld(myDeck);
