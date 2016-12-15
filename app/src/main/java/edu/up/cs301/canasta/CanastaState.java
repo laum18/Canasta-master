@@ -459,7 +459,7 @@ public class CanastaState extends GameState {
 
 			// check what rank is and the melded pile for that rank exists
 			// if it does, set r to true
-			if (toPlay == 0 || toPlay == 2) {
+			if (toPlay == 0 || toPlay == 2) { // if team 1 making the meld, add to team 1 meld piles
 				if (rank.shortName() == '3' && three > 0) {
 					r = true;
 				} else if (rank.shortName() == '4' && four > 0) {
@@ -486,7 +486,7 @@ public class CanastaState extends GameState {
 					r = true;
 				}
 			}
-			else if(toPlay == 1 || toPlay == 3){
+			else if(toPlay == 1 || toPlay == 3){ // if team 2 making the meld, add to team 2 meld pile
 				if (rank.shortName() == '3' && oppThree > 0) {
 					r = true;
 				} else if (rank.shortName() == '4' && oppFour > 0) {
