@@ -14,7 +14,7 @@ public class CanastaPlayAction extends CanastaMoveAction
 	private static final long serialVersionUID = 3250639793499599047L;
 
 	/**
-     * Constructor for the SJPlayMoveAction class.
+     * Constructor for the CanastaPlayAction class.
      * 
      * @param player  the player making the move
      */

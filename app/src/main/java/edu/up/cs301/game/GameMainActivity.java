@@ -76,13 +76,6 @@ View.OnClickListener {
 	// has started
 	private boolean doingConfiguration = true;
 
-	private TextView teamOneRoundScore;
-	private TextView teamOneTotalScore;
-	private TextView teamTwoRoundScore;
-	private TextView teamTwoTotalScore;
-
-	private Button discard;
-
 	/**
 	 * contains the game configuration this activity will be used to initialize
 	 */
@@ -151,12 +144,12 @@ View.OnClickListener {
 	@Override
 	public final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		teamOneRoundScore = (TextView)findViewById(R.id.oneRoundText);
-		teamOneTotalScore = (TextView)findViewById(R.id.oneTotalText);
-		teamTwoRoundScore = (TextView)findViewById(R.id.twoRoundText);
-		teamTwoTotalScore = (TextView)findViewById(R.id.twoTotalText);
-		discard = (Button)findViewById(R.id.discardButton);
+//
+//		teamOneRoundScore = (TextView)findViewById(R.id.oneRoundText);
+//		teamOneTotalScore = (TextView)findViewById(R.id.oneTotalText);
+//		teamTwoRoundScore = (TextView)findViewById(R.id.twoRoundText);
+//		teamTwoTotalScore = (TextView)findViewById(R.id.twoTotalText);
+//		discard = (Button)findViewById(R.id.discardButton);
 
 		// Initialize the layout
 		setContentView(R.layout.game_config_main);
@@ -500,10 +493,10 @@ View.OnClickListener {
 		if (justStarted) {
 			return;
 		}
-		if (button == discard) {
-			Log.i("Button","clicked");
-			//Card c = ;
-		}
+//		if (button == discard) {
+//			Log.i("Button","clicked");
+//			//Card c = ;
+//		}
 		
 		// Add Player Button
 		if (button.getId() == R.id.addPlayerButton) {

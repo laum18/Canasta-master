@@ -11,7 +11,7 @@ import edu.up.cs301.game.infoMsg.GameInfo;
  * This is a smart computer player that can continue melding
  * cards and draw from the discard pile
  *
- * @author Michelle Lau , Nick Edwards, Aaron Banobi, David Vandewark
+ * @author Michelle Lau, Nick Edwards, Aaron Banobi, David Vandewark
  * @version December 2016
  */
 public class HardComputerPlayer extends GameComputerPlayer {
@@ -147,6 +147,8 @@ public class HardComputerPlayer extends GameComputerPlayer {
         ArrayList<Card> myHand = d.getCards();
         // declare an arraylist, meldArray, of card
         ArrayList<Card> meldArray;
+        int wildcards = 0;
+        int nonWilds = 0;
 
         // loop through myHand
         for (int i = 0; i < myHand.size(); i++) {
@@ -167,8 +169,19 @@ public class HardComputerPlayer extends GameComputerPlayer {
 
             // if set of three or more found
             if (meldArray.size() >= 3) {
+                for (int z = 0; z < meldArray.size(); z++) {
+                    if (meldArray.get(z).getRank() == Rank.TWO || meldArray.get(z).getRank() == Rank.RJOKER) {
+                        wildcards++;
+                    }
+                    else {
+                        nonWilds++;
+                    }
+                }
+                if (nonWilds >= wildcards) {
+                    return meldArray;
+                }
                 // return meldArray
-                return meldArray;
+//                return meldArray;
             }
         }
 

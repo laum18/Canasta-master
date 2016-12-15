@@ -2,7 +2,6 @@ package edu.up.cs301.game;
 
 import edu.up.cs301.game.actionMsg.GameAction;
 import edu.up.cs301.game.actionMsg.GameOverAckAction;
-import edu.up.cs301.game.actionMsg.RoundOverAckAction;
 import edu.up.cs301.game.actionMsg.MyNameIsAction;
 import edu.up.cs301.game.actionMsg.ReadyAction;
 import edu.up.cs301.game.actionMsg.TimerAction;
@@ -10,7 +9,6 @@ import edu.up.cs301.game.infoMsg.BindGameInfo;
 import edu.up.cs301.game.infoMsg.GameOverInfo;
 import edu.up.cs301.game.infoMsg.IllegalMoveInfo;
 import edu.up.cs301.game.infoMsg.NotYourTurnInfo;
-import edu.up.cs301.game.infoMsg.RoundOverInfo;
 import edu.up.cs301.game.infoMsg.StartGameInfo;
 import edu.up.cs301.game.util.GameTimer;
 import edu.up.cs301.game.util.Tickable;
@@ -249,13 +247,6 @@ public abstract class LocalGame implements Game, Tickable {
 					playerFinishedCount++;
 				}
 			}
-//			else if (action instanceof RoundOverAckAction && gameStage == GameStage.ROUND_OVER) {
-//				int playerIdx = getPlayerIdx(action.getPlayer());
-//				if (playerIdx >= 0 && !playersFinished[playerIdx]) {
-//					playersFinished[playerIdx] = true;
-//					playerFinishedCount++;
-//				}
-//			}
 		}
 	}
 	
@@ -290,10 +281,6 @@ public abstract class LocalGame implements Game, Tickable {
 		// changed. Send all players the updated state. 
 		sendAllUpdatedState();
 
-//		String roundMsg = checkIfRoundOver();
-//		if (roundMsg != null) {
-//			finishUpRound(roundMsg);
-//		}
 		// determine whether there is a winner; if so, finish up the game
 		String overMsg = checkIfGameOver();
 		if (overMsg != null) {
@@ -343,23 +330,6 @@ public abstract class LocalGame implements Game, Tickable {
 			p.sendInfo(new GameOverInfo(msg));
 		}
 	}
-
-//	private final void finishUpRound(String msg) {
-//
-//		// set the game-stage to ????
-//		gameStage = GameStage.ROUND_OVER;
-//
-//		// set up the array and count so that we can keep track of
-//		// whether everyone has replied
-//		playersFinished = new boolean[players.length];
-//		playerFinishedCount = 0;
-//
-//		// send all players a "round over" message
-//		for (GamePlayer p: players) {
-//			p.sendInfo(new RoundOverInfo(msg));
-//		}
-//
-//	}
 	
 	/**
 	 * Makes a move on behalf of a player.

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Steven R. Vegdahl
+ * @author Steven R. Vegdahl, Aaron Banobi, Nick Edwards, Michelle Lau, David Vandewark
  * @version July 2013
  */
 public enum Rank {

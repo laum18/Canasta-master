@@ -61,8 +61,8 @@ public class CanastaLocalGame extends LocalGame {
 
     /**
      * sends the updated state to the given player. In our case, we need to
-     * make a copy of the Deck, and null out all the cards except the top card
-     * in the middle deck, since that's the only one they can "see"
+     * make a copy of the Deck, and null out all the cards except the player's hand,
+     * since that's the only one they can "see"
      *
      * @param p the player to which the state is to be sent
      */
@@ -235,7 +235,6 @@ public class CanastaLocalGame extends LocalGame {
                 state.computerMeldCard(deck, thisPlayerIdx);
             }
         }
-
 
         // return true, because the move was successful if we get here
         return true;

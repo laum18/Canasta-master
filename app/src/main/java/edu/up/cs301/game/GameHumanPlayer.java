@@ -3,11 +3,9 @@ package edu.up.cs301.game;
 import edu.up.cs301.game.actionMsg.GameOverAckAction;
 import edu.up.cs301.game.actionMsg.MyNameIsAction;
 import edu.up.cs301.game.actionMsg.ReadyAction;
-import edu.up.cs301.game.actionMsg.RoundOverAckAction;
 import edu.up.cs301.game.infoMsg.BindGameInfo;
 import edu.up.cs301.game.infoMsg.GameInfo;
 import edu.up.cs301.game.infoMsg.GameOverInfo;
-import edu.up.cs301.game.infoMsg.RoundOverInfo;
 import edu.up.cs301.game.infoMsg.StartGameInfo;
 import edu.up.cs301.game.infoMsg.TimerInfo;
 import edu.up.cs301.game.util.GameTimer;
@@ -45,7 +43,6 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 	private GameMainActivity myActivity; // the current activity
 	private GameTimer myTimer = new GameTimer(this); // my player's timer
 	private boolean gameOver; // whether the game is over
-	private boolean roundOver; // whether the round is over
 
 	/**
 	 * constructor
@@ -58,8 +55,6 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 		
 		// mark game as not being over
 		this.gameOver = false;
-
-		this.roundOver = false;
 		
 		// get new handler for this thread
 		this.myHandler = new Handler();
@@ -319,12 +314,6 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 		MessageBox.popUpMessage(msg, myActivity);
 	}
 
-	protected void roundIsOver(String msg) {
-		// the default behavior is to put a pop-up for the user to see that tells
-		// the game's result
-		MessageBox.popUpMessage(msg, myActivity);
-	}
-	
 	/**
 	 * Tells whether this class requires a GUI to run
 	 * 

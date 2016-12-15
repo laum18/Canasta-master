@@ -22,7 +22,7 @@ import android.graphics.RectF;
  * method during initialization; the 52 image files need to be placed in the
  * res/drawable-hdpi project area.
  * 
- * @author Steven R. Vegdahl
+ * @author Steven R. Vegdahl, Aaron Banobi, Nick Edwards, Michelle Lau, David Vandewark
  * @version July 2013
  */
 public class Card implements Serializable {
@@ -233,15 +233,28 @@ public class Card implements Serializable {
     	}
     }
 
+	/**
+	 * A getter method to see if the card is selected
+	 * @return whether the card was selected
+     */
 	public Boolean getSelected() {
 		return selected;
 	}
 
+	/**
+	 * A setter method to set if the card was selected or not
+	 * @param b Set the selected instance variable to b
+     */
 	public void setSelected(Boolean b) {
 		selected = b;
 	}
 
 
+	/**
+	 * A getter method to get the value of a given rank
+	 * @param r The rank we are trying to get the value of
+	 * @return The value of the rank
+     */
 	public int getCardValue(Rank r) {
 		int cardValue = 0;
 		if (r.shortName() == '2') {
