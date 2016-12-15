@@ -416,7 +416,8 @@
         android:layout_alignTop="@+id/linearLayout2"
         android:layout_alignBottom="@+id/linearLayout2"
         android:layout_alignLeft="@+id/linearLayout3"
-        android:layout_alignStart="@+id/linearLayout3" />
+        android:layout_alignStart="@+id/linearLayout3"
+        android:textSize="18dp" />
 
     <TextView
         android:layout_width="wrap_content"
