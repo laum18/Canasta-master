@@ -487,4 +487,4 @@
         android:id="@+id/newRound"
         android:visibility="visible" />
 
-</RelativeLayout><!-- From: file:/Users/michellelau/Desktop/UP/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->
+</RelativeLayout><!-- From: file:/P:/cs%20301/Canasta-master/app/src/main/res/layout/canasta_human_player.xml -->

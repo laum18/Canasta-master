@@ -2,25 +2,25 @@
 <items version="2" >
 
     <item
-        jar="/Users/michellelau/Desktop/UP/Canasta-master/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
-        <dex dex="/Users/michellelau/Desktop/UP/Canasta-master/app/build/intermediates/pre-dexed/debug/classes-8e60cd4ef7fda1452b833d97517de6959ec9caa2.jar" />
-    </item>
-    <item
-        jar="/Users/michellelau/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
-        <dex dex="/Users/michellelau/Desktop/UP/Canasta-master/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-10b96abcc7ef2cdf8ee851157a42cc7b84fbae05.jar" />
-    </item>
-    <item
-        jar="/Users/michellelau/Desktop/UP/Canasta-master/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/jars/libs/internal_impl-21.0.0.jar"
+        jar="P:\cs 301\Canasta-master\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\jars\libs\internal_impl-21.0.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
-        <dex dex="/Users/michellelau/Desktop/UP/Canasta-master/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-2f6b7e33adba3210438b2934ef3440fcfe9b50aa.jar" />
+        <dex dex="P:\cs 301\Canasta-master\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-88789c8e8d20796f99be27bb0fa60c27b6ea4cb0.jar" />
+    </item>
+    <item
+        jar="C:\Users\Public\Documents\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
+        <dex dex="P:\cs 301\Canasta-master\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-babc2a690c200c45e70f1eb74eabf4980824849b.jar" />
+    </item>
+    <item
+        jar="P:\cs 301\Canasta-master\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
+        <dex dex="P:\cs 301\Canasta-master\app\build\intermediates\pre-dexed\debug\classes-b2ea9e50ca69c4aa1eb3ae3fab00663b8cef58db.jar" />
     </item>
 
 </items>

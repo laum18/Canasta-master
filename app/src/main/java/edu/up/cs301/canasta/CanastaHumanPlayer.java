@@ -426,11 +426,8 @@ public class CanastaHumanPlayer extends GameHumanPlayer implements Animator, Vie
             drawSelected(g, playerHandLocation, 0.075f * width, 0, state.getDeck(playerNum + 2).size(), 0);
 
         } else {
-            if (state.getDeck(playerNum + 2).size() <= 16) {
-                drawDiscardSelected(g, playerHandLocation, 0.055f * width, 0, state.getDeck(playerNum + 2).size(), 0);
-            } else {
-                drawDiscardSelected(g, playerHandLocation, 0.035f * width, 0, state.getDeck(playerNum + 2).size(), 0);
-            }
+            drawDiscardSelected(g, playerHandLocation, 0.055f * width, 0, state.getDeck(playerNum + 2).size(), 0);
+
         }
         //draw left opponent hand, face down
         RectF leftOpponentHand = leftOppHandFirstCardLocation();

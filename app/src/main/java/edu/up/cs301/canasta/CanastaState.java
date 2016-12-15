@@ -165,6 +165,7 @@ public class CanastaState extends GameState {
 			}
 		}
 
+		//sorts everyones hand at the begining of the game
 		piles[toPlay+2] = sortHand(piles[toPlay+2]);
 
 	}
